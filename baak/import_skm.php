@@ -98,24 +98,23 @@ if (!isset($_SESSION['username'])) {
                     Nama Dosen
                   </th>
                   <th>
-                    NIDN<br>
-                    NIP
+                    Mata Kuliah
                   </th>
                   <th>
-                    MATKUL
+                    Prodi
                   </th>
                   <th>
-                    PRODI
+                    Kelas
                   </th>
                   <th>
-                    KELAS
-                  </th>
-                  <th>
-                    SKS MATKUL
+                    SKS Mata Kuliah
                   </th>
                   
                   <th>
-                    SKS
+                    SKS Paralel
+                  </th>
+                  <th>
+                    Action
                   </th>
                 </tr>
               </thead>
@@ -129,12 +128,12 @@ if (!isset($_SESSION['username'])) {
                 ?>
                     <tr>
                       <td><?php echo $no++; ?></td>
-                      <td><?php echo $d['nm_dosen']; ?></td>
-                      <td><?php echo $d['nidn']; ?><br><?php echo $d['nip_dis']; ?><br><?php echo $d['thn_akademik']; ?></td>
-                      <td><?php echo $d['perihal']; ?></td>
-                      <td><?php echo $d['no_sk']; ?><br>
-                      <?php echo $d['lampiran_sp']; ?></td>
-                      <td><?php echo "<a href='edit_status.php?id_sk_mengajar=".$d['id_sk_mengajar']."' class='badge bg-". $warna."'>". $status."</a>";?></td>
+                      <td><?php echo $d['nm_dosen']; ?><br><?php echo $d['nidn']; ?><br><?php echo $d['nip_dis']; ?><br>
+                      <td><?php echo $d['matkul1']; ?><br><?php echo $d['matkul2']; ?><br><?php echo $d['matkul3']; ?><br><?php echo $d['matkul4']; ?><br><?php echo $d['matkul5']; ?><br><?php echo $d['matkul6']; ?><br><?php echo $d['matkul7']; ?><br><?php echo $d['matkul8']; ?><br><?php echo $d['matkul9']; ?><br><?php echo $d['matkul10']; ?></td>
+                      <td><?php echo $d['prodi1']; ?><br><?php echo $d['prodi2']; ?><br><?php echo $d['prodi3']; ?><br><?php echo $d['prodi4']; ?><br><?php echo $d['prodi5']; ?><br><?php echo $d['prodi6']; ?><br><?php echo $d['prodi7']; ?><br><?php echo $d['prodi8']; ?><br><?php echo $d['prodi9']; ?><br><?php echo $d['prodi10']; ?></td>
+                      <td><?php echo $d['kelas1']; ?><br><?php echo $d['kelas2']; ?><br><?php echo $d['kelas3']; ?><br><?php echo $d['kelas4']; ?><br><?php echo $d['kelas5']; ?><br><?php echo $d['kelas6']; ?><br><?php echo $d['kelas7']; ?><br><?php echo $d['kelas8']; ?><br><?php echo $d['kelas9']; ?><br><?php echo $d['kelas10']; ?></td>
+                      <td><?php echo $d['sks_matkul1']; ?><br><?php echo $d['sks_matkul2']; ?><br><?php echo $d['sks_matkul3']; ?><br><?php echo $d['sks_matkul4']; ?><br><?php echo $d['sks_matkul5']; ?><br><?php echo $d['sks_matkul6']; ?><br><?php echo $d['sks_matkul7']; ?><br><?php echo $d['sks_matkul8']; ?><br><?php echo $d['sks_matkul9']; ?><br><?php echo $d['sks_matkul10']; ?></td>
+                      <td><?php echo $d['sks1']; ?><br><?php echo $d['sks2']; ?><br><?php echo $d['sks3']; ?><br><?php echo $d['sks4']; ?><br><?php echo $d['sks5']; ?><br><?php echo $d['sks6']; ?><br><?php echo $d['sks7']; ?><br><?php echo $d['sks8']; ?><br><?php echo $d['sks9']; ?><br><?php echo $d['sks10']; ?></td>
                       
                       <td>
                         <div><a class="btn-sm btn-outline-success" href="accept_baak.php?id_sk_mengajar=<?php echo $d['id_sk_mengajar']; ?>"><i class="fas fa-check"></i> ACCEPT</a></div>
