@@ -32,7 +32,7 @@ function tambah($data){
 	}
 	$id_sk_mengajar = htmlspecialchars($data["id_sk_mengajar"]);
 	$nip 			= htmlspecialchars($data["nip"]);
-	$nm_jurusan  	= htmlspecialchars($data["nm_jurusan"]);
+	$id_jurusan  	= htmlspecialchars($data["id_jurusan"]);
 	$tgl_sp 		= htmlspecialchars($data["tgl_sp"]);
 	$thn_akademik 	= htmlspecialchars($data["thn_akademik"]);
 	$semester  		= htmlspecialchars($data["semester"]);
@@ -40,7 +40,7 @@ function tambah($data){
 	$status  		= htmlspecialchars($data["status"]);
 	$no_sk  		= htmlspecialchars($data["no_sk"]);
 
-	$query = "INSERT INTO tb_sk_mengajar VALUES ('$id_sk_mengajar','$nip', '$nm_jurusan', '$tgl_sp', '$thn_akademik', '$semester', '$perihal', '$lampiran_sp', '$status', '$no_sk')";
+	$query = "INSERT INTO tb_sk_mengajar VALUES ('$id_sk_mengajar', '$nip', '$id_jurusan', '$tgl_sp', '$thn_akademik', '$semester', '$perihal', '$lampiran_sp', '$status', '$no_sk')";
 	mysqli_query($conn,$query);
 	return mysqli_affected_rows($conn);
 }
@@ -82,8 +82,7 @@ function upload(){
 			//lolos pengecekan
 			//nama baru
 
-	$nama_folder = preg_replace("([^\w\s\d\-_~,;:\[\]\(\].]|[\.]{2,})", '',  $_SESSION["username"]); 
-	$namaFileBaru = ("Lamp_SKM_".$nama_folder);
+	$namaFileBaru = uniqid();
 	$namaFileBaru .= '.';
 	$namaFileBaru .=$ekstensifile_transaksi;
 	

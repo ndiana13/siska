@@ -17,29 +17,7 @@ if (!isset($_SESSION['username'])) {
 }
 require 'function_verifikasi.php';
 
-if ( isset($_POST["submit"]))
-{
-        //cek data berhasil tambah atau tidak
-  if  (tambah($_POST)>0){
 
-
-    echo "
-    <script>
-    alert('Data Berhasil Ditambahkan');
-    document.location.href='tb_verifikasi.php';
-    </script>
-    ";
-  }else {
-
-    echo "
-    <script>
-    alert('Data Gagal Ditambahkan');
-     document.location.href='tb_verifikasi.php';
-    </script>
-    ";
-
-  }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">

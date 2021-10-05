@@ -133,10 +133,9 @@ if ( isset($_POST["submit1"])) {
                 </div>
                 <div class="modal-body">
                   <form method="POST" class="forms-sample" enctype="multipart/form-data">
-                    <input type="hidden" class="form-control" placeholder="id_sk_mengajar" name="id_sk_mengajar" id="id_sk_mengajar"  />
-                   <input type="hidden" class="form-control" placeholder="id_sk_mengajar" name="status" id="status"  value="0" />
-                   <input type="hidden" class="form-control" placeholder="id_sk_mengajar" name="no_sk" id="status"/>
-
+                    <input type="hidden"class="form-control" placeholder="id_sk_mengajar" name="id_sk_mengajar" id="id_sk_mengajar">
+                   <input type="hidden" class="form-control" name="status" id="status"  value="0">
+                   <input type="hidden" class="form-control" name="no_sk" id="no_sk">
                     <div class="form-group">
                      <label for="">NIP/NPAK</label>
                        <?php
@@ -154,7 +153,7 @@ if ( isset($_POST["submit1"])) {
                     </div>
                     <div class="form-group">
                       <label for="">Nama Jurusan</label>
-                      <select class="form-control" id="nm_jurusan" name="nm_jurusan">
+                      <select class="form-control" id="id_jurusan" name="id_jurusan">
                        <?php 
                         $kon = mysqli_connect("localhost",'root',"","siska");
                         if (!$kon){
@@ -182,8 +181,8 @@ if ( isset($_POST["submit1"])) {
                     <div class="form-group">
                       <label for="">Semester</label>
                        <select class="form-control" id="semester" name="semester">
-                          <option>Ganjil</option>
-                          <option>Genap</option>
+                          <option value="Ganjil">Ganjil</option>
+                          <option value="Genap">Genap</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -298,7 +297,7 @@ if ( isset($_POST["submit1"])) {
                                         <input type="hidden" name="id_sk_mengajar" value="<?= $d["id_sk_mengajar"];?>">
                                         <div class="form-group">
                                           <label for="">Id Surat</label>
-                                          <input type="text" disabled="" class="form-control"  required id="id_sk_mengajar" name="id_sk_mengajar_edit" value="<?= $d["id_sk_mengajar"];?>">
+                                          <input type="text" disabled="" class="form-control"  required id="id_sk_mengajar" name="id_sk_mengajar" value="<?= $d["id_sk_mengajar"];?>">
                                         </div>
                                         <div class="form-group">
                                           <label for="">NIP</label>

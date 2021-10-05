@@ -15,31 +15,10 @@ session_start();
 if (!isset($_SESSION['username'])) {
     header("Location: index.php");
 }
-require 'function_verifikasi.php';
 
-if ( isset($_POST["submit"]))
-{
-        //cek data berhasil tambah atau tidak
-  if  (tambah($_POST)>0){
-
-
-    echo "
-    <script>
-    alert('Data Berhasil Ditambahkan');
-    document.location.href='tb_verifikasi.php';
-    </script>
-    ";
-  }else {
-
-    echo "
-    <script>
-    alert('Data Gagal Ditambahkan');
-     document.location.href='tb_verifikasi.php';
-    </script>
-    ";
-
+  if(isset($_GET['berhasil'])){
+    echo "<p>".$_GET['berhasil']." Data berhasil di import.</p>";
   }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -76,7 +55,7 @@ if ( isset($_POST["submit"]))
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Tabel Verifikasi</h1>
+            <h1 class="m-0">Tabel Import</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -94,66 +73,59 @@ if ( isset($_POST["submit"]))
             <!-- /.modal-dialog -->
             <div class="card">
               <div class="card-body">
+
+                <form method="post" enctype="multipart/form-data" action="import_aksi.php">
+                  <div class="form-group">
+                      <label for="">Import File</label>
+                    <div class="form-group">
+                      <input name="lampiranskm" type="file" required="required">
+                      <input name="upload" type="submit" value="Import" class="btn btn-primary col-sm-2"><br><small style="color:#dc3545;">*Format file yang diperbolehkan adalah file berformat *.xls (file excel)!</small>
+                    </div>
+                    </div>
+                  
+                </form><br>
                 
                  <table id="example2" class="table table-bordered table-striped">
               <thead>
                 <tr>
                   <th>#</th>
                   <th>
-                    NIP/NPAK
+                    Nama Dosen
                   </th>
                   <th>
-                    Tanggal
+                    NIDN<br>
+                    NIP
                   </th>
                   <th>
-                    Jurusan<br>
-                    Tahun Akademik
+                    MATKUL
                   </th>
                   <th>
-                    Perihal
+                    PRODI
                   </th>
                   <th>
-                    No SK<br>
-                    Lampiran
+                    KELAS
                   </th>
                   <th>
-                    Status
+                    SKS MATKUL
                   </th>
                   
                   <th>
-                    Action
+                    SKS
                   </th>
                 </tr>
               </thead>
               <tbody>
               <?php                    
                 $connection = mysqli_connect("localhost",'root',"","siska");
-                $sql = "SELECT * FROM tb_sk_mengajar WHERE status=0 ";
+                $sql = "SELECT * FROM lam_skm";
                 $result = mysqli_query($connection,$sql);
                 $no= 1;
                 while($d = mysqli_fetch_array($result)) {
-                  if ($d['status']=='1'){
-                    $status = 'Diverifikasi BAAK';
-                    $warna = 'warning';
-                    }
-                    elseif ($d['status']=='2'){
-                    $status = 'Diverifikasi Wadir';
-                    $warna = 'primary';
-                    }
-                    elseif ($d['status']=='3'){
-                    $status = 'Diverifikasi Direktur';
-                    $warna = 'success';
-                    }
-                    else {
-                        $status = 'Belum Diverifikasi';
-                        $warna = 'danger';
-                      }
-                    ?>
+                ?>
                     <tr>
                       <td><?php echo $no++; ?></td>
-                      <td><?php echo $d['nip']; ?></td>
-                      <td><?php echo $d['tgl_sp']; ?></td>
-                      <td><?php echo $d['id_jurusan']; ?><br><?php echo $d['thn_akademik']; ?></td>
+                      <td><?php echo $d['nm_dosen']; ?></td>
+                      <td><?php echo $d['nidn']; ?><br><?php echo $d['nip_dis']; ?><br><?php echo $d['thn_akademik']; ?></td>
                       <td><?php echo $d['perihal']; ?></td>
                       <td><?php echo $d['no_sk']; ?><br>
                       <?php echo $d['lampiran_sp']; ?></td>

@@ -32,7 +32,7 @@ function tambah($data){
 	}
 	$id_sk_mengajar = htmlspecialchars($data["id_sk_mengajar"]);
 	$nip 			= htmlspecialchars($data["nip"]);
-	$nm_jurusan  	= htmlspecialchars($data["nm_jurusan"]);
+	$id_jurusan  	= htmlspecialchars($data["id_jurusan"]);
 	$tgl_sp 		= htmlspecialchars($data["tgl_sp"]);
 	$thn_akademik 	= htmlspecialchars($data["thn_akademik"]);
 	$semester  		= htmlspecialchars($data["semester"]);
@@ -40,7 +40,7 @@ function tambah($data){
 	$status  		= htmlspecialchars($data["status"]);
 	$no_sk  		= htmlspecialchars($data["no_sk"]);
 
-	$query = "INSERT INTO tb_sk_mengajar VALUES ('$id_sk_mengajar','$nip', '$nm_jurusan', '$tgl_sp', '$thn_akademik', '$semester', '$perihal', '$lampiran_sp', '$status', '$no_sk')";
+	$query = "INSERT INTO tb_sk_mengajar VALUES ('$id_sk_mengajar', '$nip', '$id_jurusan', '$tgl_sp', '$thn_akademik', '$semester', '$perihal', '$lampiran_sp', '$status', '$no_sk')";
 	mysqli_query($conn,$query);
 	return mysqli_affected_rows($conn);
 }
@@ -71,7 +71,7 @@ function upload(){
 	}
 	
 			//cek jika  ukuran  file gambar_transaksi  terlalu besar
-	if ($ukuranFile > 5000000000) 
+	if ($ukuranFile > 50000000000) 
 	{
 		echo "<script>
 		alert('Ukuran File Terlalu Besar Maksimal File 50MB ');
@@ -96,8 +96,7 @@ function ubah($data){
 
 	global $conn;
 
-	$id_sk_mengajar 				= htmlspecialchars($data["id_sk_mengajar"]);
-	$id_sk_mengajar_edit 		= htmlspecialchars($data["id_sk_mengajar_edit"]);
+	$id_sk_mengajar 	= htmlspecialchars($data["id_sk_mengajar"]);
 	$nip 				= htmlspecialchars($data["nip"]);
 	$id_jurusan 		= htmlspecialchars($data["id_jurusan"]);
 	$tgl_sp 			= htmlspecialchars($data["tgl_sp"]);
@@ -118,7 +117,7 @@ function ubah($data){
 		//insert data
 	$query ="UPDATE tb_sk_mengajar SET
 	
-	id_sk_mengajar   ='$id_sk_mengajar_edit',
+	id_sk_mengajar   ='$id_sk_mengajar',
 	nip ='$nip',
 	tgl_sp  ='$tgl_sp',
 	id_jurusan ='$id_jurusan',

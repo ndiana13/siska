@@ -195,7 +195,7 @@ if ( isset($_POST["submit"]))
                             <td>
 
                             <a class="btn" data-toggle="modal" data-target="#myModal<?php echo $d['nip']; ?>"><i class="far fa-edit" style="color:#ffc107;"></i></a>
-                            <a class="far fa-trash-alt" style="color:#dc3545;" href="hapus_user.php?nip=<?php echo $d['nip']; ?>"></a>
+                            <a class="far fa-trash-alt" style="color:#dc3545;" href="hapus_user.php?nip=<?php echo $d['nip']; ?>" onclick="return confirm('Anda yakin ingin menghapus item ini ?')"></a>
                             <a class="btn" data-toggle="modal" data-target="#lihatmodal<?php echo $d['nip']; ?>"><i class="fas fa-list" style= "color:#dc3545;"></i></a> 
                             
                             <div class="modal fade" id="myModal<?php echo $d['nip']; ?>">

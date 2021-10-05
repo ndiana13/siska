@@ -68,12 +68,6 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="tb_profil.php" class="nav-link">
-              <i class="nav-icon fas fa-user"></i>
-              <p>Profil</p>
-            </a>
-          </li>
-          <li class="nav-item">
             <a href="../login/logout.php" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>Logout</p>
