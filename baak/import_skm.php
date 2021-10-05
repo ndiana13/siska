@@ -17,7 +17,12 @@ if (!isset($_SESSION['username'])) {
 }
 
   if(isset($_GET['berhasil'])){
-    echo "<p>".$_GET['berhasil']." Data berhasil di import.</p>";
+   echo "
+    <script>
+    alert('Data Berhasil Ditambahkan');
+    document.location.href='import_skm.php';
+    </script>
+    ";
   }
 ?>
 <!DOCTYPE html>
@@ -117,7 +122,7 @@ if (!isset($_SESSION['username'])) {
               <tbody>
               <?php                    
                 $connection = mysqli_connect("localhost",'root',"","siska");
-                $sql = "SELECT * FROM lam_skm";
+                $sql = "select * from lam_skm";
                 $result = mysqli_query($connection,$sql);
                 $no= 1;
                 while($d = mysqli_fetch_array($result)) {
