@@ -13,7 +13,7 @@
  
  
    // proses membaca isi file yang akan didownload dari folder 'data'
-   $fp  = fopen("data/".$data['lampiran_sp'], 'd');
+   $fp  = fopen("data/".$data['lampiran_sp'], 'data');
    $content = fread($fp, filesize('data/'.$data['lampiran_sp']));
    fclose($fp);
  

@@ -3,22 +3,17 @@ include '../login/config.php';
 $id_sk_mengajar = $_GET['id_sk_mengajar'];
 $query     =mysqli_query($conn, "SELECT * FROM tb_sk_mengajar WHERE id_sk_mengajar='$id_sk_mengajar'");
 $result    =mysqli_fetch_array($query);
-if ($result['id_jurusan'] =='TI'){
-	$nm_jurusan = 'Teknik Informatika';
+if ($result['id_jurusan']){
+	$kon = mysqli_connect("localhost",'root',"","siska");
+    if (!$kon){
+    		die("Koneksi database gagal:".mysqli_connect_error());
+    }
+    $sql="select * from tb_jurusan";
+    $hasil=mysqli_query($kon,$sql);
+    while ($data = mysqli_fetch_array($hasil)) {
+    $nm_jurusan = $data['nm_jurusan'];
 }
-elseif ($result['id_jurusan']=='TM'){
-	$nm_jurusan = 'Teknik Mesin';
 }
-elseif ($result['id_jurusan']=='TE'){
-	$nm_jurusan = 'Teknik Elektronika';
-}
-elseif ($result['id_jurusan']=='TPPL'){
-	$nm_jurusan = 'Teknik Pengendalian Pencemaran Lingkungan';
-}
-else {
-	$nm_jurusan = 'BELUM ADA JURUSAN !!!';
-}
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -36,9 +31,8 @@ else {
 			text-align: justify;
 			font-size: 16px;
 		}
-		table tr td {
-			font-size: 16px;
-		}
+
+		
 
 	</style>
 </head>
@@ -78,7 +72,7 @@ else {
 				</td>			
 			</tr>
 		</table>
-		<table width="700">
+		<table width="600">
 			<tr>
 				<td>
 				<center>
@@ -242,6 +236,15 @@ else {
 		$r    =mysqli_fetch_array($sql);?><?php echo $r['username'];?></span><br><?php echo $r['nip'];?></td>
 			</tr>
 	     </table>
+	     <div style="page-break-before:always;">
+	     	<table width="700">
+				<tr style="font-size: 12px;">
+				<td width="400"></td>
+				<td width="400">Lampiran Keputusan Direktur Politeknik Negeri Cilacap<br>Nomor &nbsp;&nbsp;: <?php echo $result['no_sk'];?><br>Tanggal &nbsp;: <?php echo $result['tgl_sp'];?><br>Tentang : <?php echo $result['perihal'];?> Semester <?php echo $result['semester'];?> Jurusan <?php echo "<a>". $nm_jurusan."</a>";?> Tahun Ajaran <?php echo $result['thn_akademik'];?>
+				<td>
+				</tr>
+			</table>
+	     </div>
 
 </body>
 </html>
