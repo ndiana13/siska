@@ -239,7 +239,7 @@ if ( isset($_POST["submit1"])) {
               <tbody>
               <?php                    
                 $connection = mysqli_connect("localhost",'root',"","siska");
-                $sql = "SELECT * FROM tb_sk_mengajar ORDER BY id_sk_mengajar ";
+                $sql = "SELECT * FROM tb_sk_mengajar";
                 $result = mysqli_query($connection,$sql);
                 $no= 1;
                 while($d = mysqli_fetch_array($result)) {
@@ -276,7 +276,7 @@ if ( isset($_POST["submit1"])) {
                       <td>
                           <a class="btn-sm btn-outline-warning" data-toggle="modal" data-target="#myModal<?php echo $d['id_sk_mengajar']; ?>"><i class="far fa-edit"></i> Edit</a>
                           <a class="btn-sm btn-outline-danger" href="hapus_sp_mengajar.php?id_sk_mengajar=<?php echo $d['id_sk_mengajar']; ?>" onclick="return confirm('Anda yakin ingin menghapus item ini ?'"><i class="far fa-trash-alt"></i> Hapus</a>
-                          <a class="btn-sm btn-outline-info" href="download_lampiran.php?id_sk_mengajar=<?php echo $d['id_sk_mengajar']; ?>"><i class="far fa-file"></i> Lampiran</a>
+                          <a class="btn-sm btn-outline-info" href="lampiran/skmengajar/<?php echo $d['lampiran_sp']; ?>"><i class="far fa-file"></i> Lampiran</a>
                           <a class="btn-sm btn-outline-success"href="cetak_sk_mengajar.php?id_sk_mengajar=<?php echo $d['id_sk_mengajar']; ?>" target="_BLANK"><i class="fas fa-print"></i> SK</a>
 
                           <div class="modal fade" id="myModal<?php echo $d['id_sk_mengajar']; ?>">
