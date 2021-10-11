@@ -2,7 +2,7 @@
  include '../login/config.php';
 session_start();
  
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['nama'])) {
     header("Location: index.php");
 }
 
@@ -68,7 +68,7 @@ $jumlah_sk_doswal = mysqli_num_rows($data_sk_doswal);
         <div class="row mb-2">
           
           <div class="col-sm-6">
-            <h1 class="m-0">Selamat Datang, <?php echo $_SESSION['username'];?> di SISKA PNC</h1>
+            <h1 class="m-0">Selamat Datang, <?php echo $_SESSION['nama'];?> di SISKA PNC</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -131,26 +131,24 @@ $jumlah_sk_doswal = mysqli_num_rows($data_sk_doswal);
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-4 col-6">
           <!-- Profile Image -->
           <div class="card card-primary">
             <div class="card-header">
                 <h3 class="card-title">Profil</h3>
               </div>
             <div class="card-body box-profile">
-
-
-              <h3 class="profile-username text-center"><?php echo $_SESSION['username']; ?></h3>
-
-
-
+             <div class="text-center">
+                <img class="profile-user-img img-fluid img-circle" src="../AdminLTE/dist/img/<?= $_SESSION['foto'];?>" alt="User profile picture">
+              </div>
+              <h3 class="profile-username text-center"><?php echo $_SESSION['nama'] ?></h3>
               <ul class="list-group list-group-unbordered mb-3">
                 <li class="list-group-item">
                   <b>NIP/NPAK</b> <a class="float-right"><?php
                   include '../login/config.php';
                   $username = $_SESSION['username'];
 
-                  $sql = "SELECT nip FROM tb_user WHERE username='$username'"; 
+                  $sql = "SELECT nip FROM tb_pengguna WHERE username='$username'"; 
                   $result = mysqli_query($conn, $sql);
                   while ($row = $result->fetch_assoc()) {
                     echo $row['nip']."<br>";
@@ -164,7 +162,7 @@ $jumlah_sk_doswal = mysqli_num_rows($data_sk_doswal);
                   include '../login/config.php';
                   $username = $_SESSION['username'];
 
-                  $sql = "SELECT username FROM tb_user WHERE username='$username'"; 
+                  $sql = "SELECT username FROM tb_pengguna WHERE username='$username'"; 
                   $result = mysqli_query($conn, $sql);
                   while ($row = $result->fetch_assoc()) {
                     echo $row['username']."<br>";
@@ -177,7 +175,7 @@ $jumlah_sk_doswal = mysqli_num_rows($data_sk_doswal);
                   include '../login/config.php';
                   $username = $_SESSION['username'];
 
-                  $sql = "SELECT no_hp FROM tb_user WHERE username='$username'"; 
+                  $sql = "SELECT no_hp FROM tb_pengguna WHERE username='$username'"; 
                   $result = mysqli_query($conn, $sql);
                   while ($row = $result->fetch_assoc()) {
                     echo $row['no_hp']."<br>";
@@ -186,25 +184,11 @@ $jumlah_sk_doswal = mysqli_num_rows($data_sk_doswal);
                   ?></a>
                 </li>
                 <li class="list-group-item">
-                  <b>Jabatan</b> <a class="float-right"><?php
-                  include '../login/config.php';
-                  $username = $_SESSION['username'];
-
-                  $sql = "SELECT jabatan FROM tb_user WHERE username='$username'"; 
-                  $result = mysqli_query($conn, $sql);
-                  while ($row = $result->fetch_assoc()) {
-                    echo $row['jabatan']."<br>";
-                  }
-
-                  ?></a>
-                </li>
-
-                <li class="list-group-item">
                   <b>Email</b> <a class="float-right"><?php
                   include '../login/config.php';
                   $username = $_SESSION['username'];
 
-                  $sql = "SELECT email FROM tb_user WHERE username='$username'"; 
+                  $sql = "SELECT email FROM tb_pengguna WHERE username='$username'"; 
                   $result = mysqli_query($conn, $sql);
                   while ($row = $result->fetch_assoc()) {
                     echo $row['email']."<br>";
@@ -220,7 +204,7 @@ $jumlah_sk_doswal = mysqli_num_rows($data_sk_doswal);
             <!-- /.card -->
           </div>
             <!-- About Me Box -->
-            <div class="col-lg-9 col-6">
+            <div class="col-lg-8 col-6">
             <div class="card">
               <div class="card-header p-2">
                 <ul class="nav nav-pills">

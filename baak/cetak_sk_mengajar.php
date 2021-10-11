@@ -238,11 +238,76 @@ if ($result['id_jurusan']){
 	     </table>
 	     <div style="page-break-before:always;">
 	     	<table width="700">
-				<tr style="font-size: 12px;">
-				<td width="400"></td>
-				<td width="400">Lampiran Keputusan Direktur Politeknik Negeri Cilacap<br>Nomor &nbsp;&nbsp;: <?php echo $result['no_sk'];?><br>Tanggal &nbsp;: <?php echo $result['tgl_sp'];?><br>Tentang : <?php echo $result['perihal'];?> Semester <?php echo $result['semester'];?> Jurusan <?php echo "<a>". $nm_jurusan."</a>";?> Tahun Ajaran <?php echo $result['thn_akademik'];?>
-				<td>
+				<tr style="font-size: 10px;">
+					<td width="300"></td>
+					<td width="400">Lampiran Keputusan Direktur Politeknik Negeri Cilacap</td>
 				</tr>
+				<tr style="font-size: 10px;">
+					<td width="400"></td>
+					<td width="30">Nomor &nbsp;&nbsp;&nbsp;: <?php echo $result['no_sk'];?></td>
+				</tr>
+				<tr style="font-size: 10px;">
+					<td width="300"></td>
+					<td>Tanggal &nbsp;&nbsp;: <?php echo $result['tgl_sp'];?></td>
+				</tr>
+				<tr style="font-size: 10px;">
+					<td width="300"></td>
+					<td>Tentang : <?php echo $result['perihal'];?> Semester <?php echo $result['semester'];?> Jurusan <?php echo "<a>". $nm_jurusan."</a>";?> Tahun Akademik <?php echo $result['thn_akademik'];?>
+					<td>
+				</tr>
+			</table><br><br>		
+			<table width="700">
+				<tr>
+					<td width="500">
+					<center>
+						<font size="1" style="text-transform:uppercase;" >DAFTAR NAMA-NAMA DOSEN / TENAGA PENGAJAR YANG DIBERI BEBAN TUGAS MENGAJAR DAN MENGUJI<br>
+						PADA JURUSAN <?php echo "<a>". $nm_jurusan."</a>";?> SEMESTER <?php echo $result['semester'];?><br>
+						TAHUN AKADEMIK <?php echo $result['thn_akademik'];?>
+						</font>
+					</center>
+					</td>			
+				</tr>
+			</table>
+			<table border="1" colspan="2">
+				<tbody>
+				<tr style="font-size: 9px; text-align: center;">
+					<td width="10">NO</td>
+					<td width="200">NAMA DOSEN</td>
+					<td width="200">MATA KULIAH</td>
+					<td width="50">PRODI</td>
+					<td width="40">KELAS</td>
+					<td width="40">SKS Mata Kuliah</td>
+					<td width="50">SKS Paralel</td>		
+				</tr>
+				<tr style="font-size: 9px; text-align: center;">
+					<td width="10">I</td>
+					<td width="200">II</td>
+					<td width="200">III</td>
+					<td width="50">IV</td>
+					<td width="40">V</td>
+					<td width="40">VI</td>
+					<td width="50">VII</td>
+				</tr>
+				<?php
+						$connection = mysqli_connect("localhost",'root',"","siska");
+		                $sql = "SELECT * FROM lam_skm";
+		                $result = mysqli_query($connection,$sql);
+		                $no= 1;
+		                while($d = mysqli_fetch_array($result)) {
+					?>
+				<tr style="font-size: 9px;">
+					<td style="text-align: center;"><?php echo $no++; ?></td>
+					<td><?php echo $d['nm_dosen']; ?><br><?php echo $d['nidn']; ?><br><?php echo $d['nip_dis']; ?><br>
+                      <td><?php echo $d['matkul1']; ?><br><?php echo $d['matkul2']; ?><br><?php echo $d['matkul3']; ?><br><?php echo $d['matkul4']; ?><br><?php echo $d['matkul5']; ?><br><?php echo $d['matkul6']; ?><br><?php echo $d['matkul7']; ?><br><?php echo $d['matkul8']; ?><br><?php echo $d['matkul9']; ?><br><?php echo $d['matkul10']; ?></td>
+                      <td><?php echo $d['prodi1']; ?><br><?php echo $d['prodi2']; ?><br><?php echo $d['prodi3']; ?><br><?php echo $d['prodi4']; ?><br><?php echo $d['prodi5']; ?><br><?php echo $d['prodi6']; ?><br><?php echo $d['prodi7']; ?><br><?php echo $d['prodi8']; ?><br><?php echo $d['prodi9']; ?><br><?php echo $d['prodi10']; ?></td>
+                      <td><?php echo $d['kelas1']; ?><br><?php echo $d['kelas2']; ?><br><?php echo $d['kelas3']; ?><br><?php echo $d['kelas4']; ?><br><?php echo $d['kelas5']; ?><br><?php echo $d['kelas6']; ?><br><?php echo $d['kelas7']; ?><br><?php echo $d['kelas8']; ?><br><?php echo $d['kelas9']; ?><br><?php echo $d['kelas10']; ?></td>
+                      <td><?php echo $d['sks_matkul1']; ?><br><?php echo $d['sks_matkul2']; ?><br><?php echo $d['sks_matkul3']; ?><br><?php echo $d['sks_matkul4']; ?><br><?php echo $d['sks_matkul5']; ?><br><?php echo $d['sks_matkul6']; ?><br><?php echo $d['sks_matkul7']; ?><br><?php echo $d['sks_matkul8']; ?><br><?php echo $d['sks_matkul9']; ?><br><?php echo $d['sks_matkul10']; ?></td>
+                      <td><?php echo $d['sks1']; ?><br><?php echo $d['sks2']; ?><br><?php echo $d['sks3']; ?><br><?php echo $d['sks4']; ?><br><?php echo $d['sks5']; ?><br><?php echo $d['sks6']; ?><br><?php echo $d['sks7']; ?><br><?php echo $d['sks8']; ?><br><?php echo $d['sks9']; ?><br><?php echo $d['sks10']; ?></td>
+				</tr>
+			</tbody>
+			<?php
+				}
+			?>
 			</table>
 	     </div>
 
