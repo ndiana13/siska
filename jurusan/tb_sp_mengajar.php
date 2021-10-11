@@ -273,13 +273,13 @@ if ( isset($_POST["submit1"])) {
                       <td><?php echo $d['tgl_sp']; ?></td>
                       <td><?php echo $d['id_jurusan']; ?><br><?php echo $d['thn_akademik']; ?></td>
                       <td><?php echo $d['perihal']; ?></td>
-                      <td><?php echo "<a href='edit_status.php?id_sk_mengajar=".$d['id_sk_mengajar']."' class='badge bg-". $warna."'>". $status."</a>";?>
+                      <td><?php echo "<a class='badge bg-". $warna."'>". $status."</a>";?>
                       <td><?php echo $d['no_sk']; ?><br>
                       <?php echo $d['lampiran_sp']; ?></td>
                       <td>
                           <a class="btn btn-outline-warning" data-toggle="modal" data-target="#myModal<?php echo $d['id_sk_mengajar']; ?>"><i class="far fa-edit"></i> Edit</a>
                           <a class="btn btn-outline-danger" href="hapus_sp_mengajar.php?id_sk_mengajar=<?php echo $d['id_sk_mengajar']; ?>" onclick="return confirm('Anda yakin ingin menghapus item ini ?')"><i class="far fa-trash-alt"></i> Hapus</a>
-                          <a class="btn btn-outline-info" href="download_lampiran.php?id_sk_mengajar=<?php echo $d['id_sk_mengajar']; ?>"><i class="far fa-file"></i> Lampiran</a>
+                          <a class="btn btn-outline-info" href="lampiran/skmengajar/<?php echo $d['lampiran_sp']; ?>"><i class="far fa-file"></i> Lampiran</a>
                           <a class="btn btn-outline-success"href="cetak_sk_mengajar.php?id_sk_mengajar=<?php echo $d['id_sk_mengajar']; ?>" target="_BLANK"><i class="fas fa-print"></i> SK</a>
 
                           <div class="modal fade" id="myModal<?php echo $d['id_sk_mengajar']; ?>">
