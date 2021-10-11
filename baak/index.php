@@ -1,5 +1,6 @@
 <?php 
- include '../login/config.php';
+include '../login/config.php';
+include 'function_user.php';
 session_start();
  
 if (!isset($_SESSION['nama'])) {
@@ -8,20 +9,20 @@ if (!isset($_SESSION['nama'])) {
 
 ?>
 <?php
-$data_sk_mengajar = mysqli_query($conn,"SELECT * FROM tb_sk_mengajar");
-$jumlah_sk_mengajar = mysqli_num_rows($data_sk_mengajar);
+$rowata_sk_mengajar = mysqli_query($conn,"SELECT * FROM tb_sk_mengajar");
+$jumlah_sk_mengajar = mysqli_num_rows($rowata_sk_mengajar);
 ?>
 
 <?php
 
-$data_sk_magang = mysqli_query($conn, "SELECT * FROM tb_sk_magang");
-$jumlah_sk_magang = mysqli_num_rows($data_sk_magang);
+$rowata_sk_magang = mysqli_query($conn, "SELECT * FROM tb_sk_magang");
+$jumlah_sk_magang = mysqli_num_rows($rowata_sk_magang);
 ?>
 
 <?php
 
-$data_sk_doswal = mysqli_query($conn,"SELECT * FROM tb_sk_doswal");
-$jumlah_sk_doswal = mysqli_num_rows($data_sk_doswal);
+$rowata_sk_doswal = mysqli_query($conn,"SELECT * FROM tb_sk_doswal");
+$jumlah_sk_doswal = mysqli_num_rows($rowata_sk_doswal);
 ?>
 
 <!DOCTYPE html>
@@ -196,9 +197,119 @@ $jumlah_sk_doswal = mysqli_num_rows($data_sk_doswal);
 
                   ?></a>
                 </li>
-                   <a href="edit_profil.php" class="btn btn-primary btn-block"><b>Edit Profil</b></a>
+                   <a  class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal<?php echo $_SESSION['username']; ?>"><b>Edit Profil</b></a>
                 </ul>
               </div>
+              <?php $sql = "SELECT * FROM tb_pengguna WHERE username='$username'"; 
+                $result = mysqli_query($conn, $sql);
+                while ($row = $result->fetch_assoc()) {
+                  if ($row['level']== 0) {
+                    $t_level = 'Jurusan';
+                  }
+                  elseif ($row['level']== 1) {
+                    $t_level = 'BAAK';
+                  }
+                  elseif ($row['level']== 2) {
+                    $t_level = 'Bagian Umum';
+                  }
+                  elseif ($row['level']== 3) {
+                    $t_level = 'Wakil Direktur';
+                  }
+                  elseif ($row['level']== 4) {
+                    $t_level = 'Direktur';
+                  }
+                  else{
+                  $t_level = 'PIlihan Tidak Ada';
+                  }
+
+                  if ( isset($_POST["submit"])) {
+                    //cek data berhasil ubah atau tidak
+                    if  (ubah($_POST)>0){
+                      echo "
+                      <script>
+                      alert('data berhasil diubah');
+                      document.location.href='index.php';
+                      </script>
+                      ";
+                    }else {
+                    echo "
+                      <script>
+                      alert('data gagal diubah');
+                      document.location.href='index.php';
+                      </script>
+                      ";
+                    }
+                  }
+               ?>
+              <div class="modal fade" id="myModal<?php echo $_SESSION['username']; ?>">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h4 class="modal-title">Edit Data User</h4>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <form method="POST" class="forms-sample" enctype="multipart/form-data">
+                                        <div class="card-body">
+                                        <input type="hidden" name="nip" value="<?= $row["nip"];?>">
+                                         <input type="hidden" name="fotoLama" value="<?= $row["foto"];?>">
+                                        <div class="form-group">
+                                          <label for="">NIP/NPAK</label>
+                                          <input type="text" class="form-control"  required id="nip_edit" name="nip_edit" value="<?= $row["nip"];?>">
+                                        </div>
+                                        <div class="form-group">
+                                          <label for="">Username</label>
+                                          <input type="text" class="form-control"  required id="username" name="username" value="<?= $row["username"];?>">
+                                        </div>
+                                        <div class="form-group">
+                                          <label for="">Password</label>
+                                          <input type="text" class="form-control"  required id="password" name="password" value="<?= $row["password"];?>">
+                                        </div>
+                                        <div class="form-group">
+                                          <label for="">Email</label>
+                                         <input type="text" class="form-control"  required id="email" name="email" value="<?= $row["email"];?>">
+                                        </div>
+                                        <div class="form-group">
+                                          <label for="">Nama Lengkap</label>
+                                          <input type="text" class="form-control"  required id="nama_lengkap" name="nama_lengkap" value="<?= $row["nama_lengkap"];?>">
+                                        </div>
+                                        <div class="form-group">
+                                          <label for="">No HP</label>
+                                          <input type="text" class="form-control"  required id="no_hp" name="no_hp" value="<?= $row["no_hp"];?>">
+                                        </div>
+                                        <div class="form-group">
+                                          <label for="">Level</label>
+                                          <div class="form-group">
+                                            <select class="form-control" name="level" required>
+                                              <option hidden selected><?= $t_level ?></option>
+                                              <option value="0">Jurusan</option>
+                                              <option value="1">BAAK</option>
+                                              <option value="2">Bagian Umum</option>
+                                              <option value="3">Wakil Direktur</option>
+                                              <option value="4">Direktur</option>
+                                            </select>
+                                          </div>
+                                          <div class="form-group">
+                                          <label for="">Foto</label><br>
+                                          <img src="../AdminLTE/dist/img/<?= $row['foto'];?>"  width="100" height="100"><br><br>
+                                          <input type="file" name="foto" value="<?= $row["foto"];?>">
+                                        </div>
+                                        </div>
+                                        <div class="modal-footer justify-content-between">
+                                          <button type="button" class="btn btn-secondary col-md-3" data-dismiss="modal">Close</button>
+                                          <button type="submit" class="btn btn-primary col-md-3" id="submit" name="submit" >Simpan</button>
+                                        </div>
+                                      </div>
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <?php
+                        }
+                        ?>
               <!-- /.card-body -->
             </div>
             <!-- /.card -->

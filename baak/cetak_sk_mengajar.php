@@ -77,7 +77,7 @@ if ($result['id_jurusan']){
 				<td>
 				<center>
 					<font size="3" style="text-transform:uppercase;"><?php echo $result['perihal'];?><br></font>
-					<font size="3"style="text-transform:uppercase;">PADA JURUSAN <?php echo "<a>". $nm_jurusan."</a>";?> SEMESTER <?php echo $result['semester'];?><br>SEMESTER <?php echo $result['thn_akademik'];?><br></font>
+					<font size="3"style="text-transform:uppercase;">PADA JURUSAN <?php echo "<a>". $nm_jurusan."</a>";?> SEMESTER <?php echo $result['semester'];?><br>TAHUN AKADEMIK <?php echo $result['thn_akademik'];?><br></font>
 				</center>
 				</td>
 			</tr>
@@ -149,21 +149,6 @@ if ($result['id_jurusan']){
 				<td width="20"><span></span><td>
 				<td width="30">7.</td>
 				<td width="450">Peraturan Menteri Keuangan Nomor 32/PMK.02/2018 tentang Standar Biaya Masukan Tahun Anggaran 2020.</td>
-			</tr>
-			
-		</table>
-		<table>
-			<tr class="text2">
-				<td width="110">Menimbang</td>
-				<td width="20"><span>:</span><td>
-				<td width="30">a.</td>
-				<td width="450">bahwa dalam rangka melaksanakan Tri Darma Perguruan Tinggi dilingkungan Politeknik Negeri Cilacap, perlu diatur beban tugas dosen/tenaga pengajar;</td>
-			</tr>
-			<tr class="text2">
-				<td width="110"></td>
-				<td width="20"><span></span><td>
-				<td width="30">b.</td>
-				<td width="450">bahwa sehubungan dengan butir a diatas, perlu ditetapkan Surat Keputusan Direktur Politeknik Negeri Cilacap.</td>
 			</tr>
 			
 		</table>

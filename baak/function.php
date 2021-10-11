@@ -131,37 +131,6 @@ function ubah($data){
 	mysqli_query($conn,$query);
 	return mysqli_affected_rows($conn);
 }
-function ubah_profil($data){
-
-	global $conn;
-
-	$nip 			=htmlspecialchars($data["nip"]);
-	$nip_edit 		=htmlspecialchars($data["nip_edit"]);
-	$username       = htmlspecialchars($data['username']);
-	$password 		= htmlspecialchars($data['password']);
-	$email  		= htmlspecialchars($data['email']);
-	$jabatan        = htmlspecialchars($data['jabatan']);
-	$no_hp         	= htmlspecialchars($data['no_hp']);
-	$level         	= htmlspecialchars($data['level']);
-		
-
-	
-		//insert data
-	$query ="UPDATE tb_user SET
-	
-	nip 		='$nip_edit',
-	username 	='$username',
-	password	='$password',
-	email 		='$email',
-	jabatan 	='$jabatan',
-	no_hp 		='$no_hp',
-	level 		='$level'
-	
-	WHERE nip= '$nip'
-	";
-	mysqli_query($conn,$query);
-	return mysqli_affected_rows($conn);
-}
 
 function hapus($id_sk_mengajar) {
 	global $conn;

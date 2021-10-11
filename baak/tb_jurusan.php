@@ -139,8 +139,8 @@ if ( isset($_POST["submit"]))
                             <td><?php echo $d['id_jurusan']; ?></td>
                             <td><?php echo $d['nm_jurusan']; ?></td>
                             <td class="text-center">
-                            <a class="btn" data-toggle="modal" data-target="#myModal<?php echo $d['id_jurusan']; ?>"><i class="far fa-edit" style="color:#ffc107;"></i></a>
-                            <a class="far fa-trash-alt" style="color:#dc3545;" href="hapus_tb_jurusan.php?id_jurusan=<?php echo $d['id_jurusan']; ?>"></a>
+                            <a class="btn btn-outline-warning" data-toggle="modal" data-target="#myModal<?php echo $d['id_jurusan']; ?>"><i class="far fa-edit"></i> Edit</a>
+                            <a class="btn btn-outline-danger" href="hapus_tb_jurusan.php?id_jurusan=<?php echo $d['id_jurusan']; ?>"onclick="return confirm('Anda yakin ingin menghapus item ini ?')"><i class="far fa-trash-alt"></i> Hapus</a>
                             <a>
                             
                             </td>
