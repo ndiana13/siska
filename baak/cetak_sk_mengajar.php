@@ -14,6 +14,7 @@ if ($result['id_jurusan']){
     $nm_jurusan = $data['nm_jurusan'];
 }
 }
+error_reporting(0);
 ?>
 <!DOCTYPE html>
 <html>
@@ -243,7 +244,7 @@ if ($result['id_jurusan']){
 			</table><br><br>		
 			<table width="700">
 				<tr>
-					<td width="500">
+					<td width="700">
 					<center>
 						<font size="1" style="text-transform:uppercase;" >DAFTAR NAMA-NAMA DOSEN / TENAGA PENGAJAR YANG DIBERI BEBAN TUGAS MENGAJAR DAN MENGUJI<br>
 						PADA JURUSAN <?php echo "<a>". $nm_jurusan."</a>";?> SEMESTER <?php echo $result['semester'];?><br>
@@ -253,8 +254,19 @@ if ($result['id_jurusan']){
 					</td>			
 				</tr>
 			</table>
-			<table border="1" colspan="2">
+			<table border="2" width="700">
 				<tbody>
+				<?php
+					$connection = mysqli_connect("localhost",'root',"","siska");
+		            $sql = "SELECT * FROM lam_skm ORDER BY id";
+		            $result = mysqli_query($connection,$sql);
+		            $no= 1;
+		            while($d = mysqli_fetch_array($result)) {
+		            $jml_sks_a[] = $d['sks_matkul1']+$d['sks_matkul2']+$d['sks_matkul3']+$d['sks_matkul4']+$d['sks_matkul5']+$d['sks_matkul6']+$d['sks_matkul7']+$d['sks_matkul8']+$d['sks_matkul9']+$d['sks_matkul10'];
+		            $jml_sks_b[] = $d['sks1']+$d['sks2']+$d['sks3']+$d['sks4']+$d['sks5']+$d['sks6']+$d['sks7']+$d['sks8']+$d['sks9']+$d['sks10'];
+		            $total_sks_a = array_sum($jml_sks_a);
+		            $total_sks_b = array_sum($jml_sks_b);
+				?>
 				<tr style="font-size: 9px; text-align: center;">
 					<td width="10">NO</td>
 					<td width="200">NAMA DOSEN</td>
@@ -273,13 +285,6 @@ if ($result['id_jurusan']){
 					<td width="40">VI</td>
 					<td width="50">VII</td>
 				</tr>
-				<?php
-						$connection = mysqli_connect("localhost",'root',"","siska");
-		                $sql = "SELECT * FROM lam_skm";
-		                $result = mysqli_query($connection,$sql);
-		                $no= 1;
-		                while($d = mysqli_fetch_array($result)) {
-					?>
 				<tr style="font-size: 9px;">
 					<td style="text-align: center;"><?php echo $no++; ?></td>
 					<td><?php echo $d['nm_dosen']; ?><br><?php echo $d['nidn']; ?><br><?php echo $d['nip_dis']; ?><br>
@@ -288,6 +293,14 @@ if ($result['id_jurusan']){
                       <td><?php echo $d['kelas1']; ?><br><?php echo $d['kelas2']; ?><br><?php echo $d['kelas3']; ?><br><?php echo $d['kelas4']; ?><br><?php echo $d['kelas5']; ?><br><?php echo $d['kelas6']; ?><br><?php echo $d['kelas7']; ?><br><?php echo $d['kelas8']; ?><br><?php echo $d['kelas9']; ?><br><?php echo $d['kelas10']; ?></td>
                       <td><?php echo $d['sks_matkul1']; ?><br><?php echo $d['sks_matkul2']; ?><br><?php echo $d['sks_matkul3']; ?><br><?php echo $d['sks_matkul4']; ?><br><?php echo $d['sks_matkul5']; ?><br><?php echo $d['sks_matkul6']; ?><br><?php echo $d['sks_matkul7']; ?><br><?php echo $d['sks_matkul8']; ?><br><?php echo $d['sks_matkul9']; ?><br><?php echo $d['sks_matkul10']; ?></td>
                       <td><?php echo $d['sks1']; ?><br><?php echo $d['sks2']; ?><br><?php echo $d['sks3']; ?><br><?php echo $d['sks4']; ?><br><?php echo $d['sks5']; ?><br><?php echo $d['sks6']; ?><br><?php echo $d['sks7']; ?><br><?php echo $d['sks8']; ?><br><?php echo $d['sks9']; ?><br><?php echo $d['sks10']; ?></td>
+				</tr>
+				<tr style="font-size: 9px; text-align: center;">
+					<td width="10"></td>
+					<td width="200"></td>
+					<td width="200"></td>
+					<td colspan="2">Jumlah SKS</td>
+					<td width="40"><?php echo "$total_sks_a";?></td>
+					<td width="50"><?php echo "$total_sks_b";?></td>
 				</tr>
 			</tbody>
 			<?php
