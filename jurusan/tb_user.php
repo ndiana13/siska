@@ -1,12 +1,8 @@
 <?php
- include '../login/config.php';
-session_start();
- 
-if (!isset($_SESSION['username'])) {
-    header("Location: index.php");
-}
 error_reporting();
 require 'function_user.php';
+
+$user = query("SELECT * FROM tb_user");
 
 if ( isset($_POST["submit"]))
 {
@@ -57,7 +53,7 @@ if ( isset($_POST["submit"]))
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
       <?php    include '../AdminLTE/header.php'; ?>
-      <?php    include '../AdminLTE/sidebar1.php'; ?>
+      <?php    include '../AdminLTE/sidebar.php'; ?>
       
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -115,8 +111,8 @@ if ( isset($_POST["submit"]))
                       <input type="text" class="form-control" id="email" name="email" placeholder="">
                     </div>
                     <div class="form-group">
-                      <label for="">Nama Lengkap</label>
-                      <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" placeholder="">
+                      <label for="">Jabatan</label>
+                      <input type="text" class="form-control" id="jabatan" name="jabatan" placeholder="">
                     </div>
                     <div class="form-group">
                       <label for="">No HP</label>
@@ -134,12 +130,7 @@ if ( isset($_POST["submit"]))
                           <option value="4">Direktur</option>
                         </select>
                       </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="">Foto</label><br>
-                      <input type="file" id="foto" name="foto" placeholder=""><br>
-                     <small style="color:#dc3545;"> Format foto .jpg, .jpeg atau .png dengan ukuran max 5MB</small>
-                    </div>   
+                    </div>    
                     <div class="modal-footer justify-content-between">
                       <button type="button" class="btn btn-secondary col-md-3" data-dismiss="modal">Close</button>
                       <button type="submit" class="btn btn-primary col-md-3" id="submit" name="submit" >Simpan</button>
@@ -155,7 +146,8 @@ if ( isset($_POST["submit"]))
                     <tr>
                       <th>NO</th>
                       <th>NIP</th>
-                      <th>NAMA</th>
+                      <th>USERNAME</th>
+                      <th>JABATAN</th>
                       <th>EMAIL</th>
                       <th>NO HP</th>
                       <th>LEVEL</th>
@@ -183,35 +175,21 @@ if ( isset($_POST["submit"]))
                       }
                     } 
                         $no = 1;
-                        $data = mysqli_query($conn,"SELECT * FROM tb_pengguna");
+                        $data = mysqli_query($conn,"select * from tb_user");
                         while($d = mysqli_fetch_array($data)){
-                          if ($d['level']== 0) {
-                            $t_level = 'Jurusan';
-                          }
-                          elseif ($d['level']== 1) {
-                            $t_level = 'BAAK';
-                          }
-                          elseif ($d['level']== 2) {
-                            $t_level = 'Bagian Umum';
-                          }
-                          elseif ($d['level']== 3) {
-                            $t_level = 'Wakil Direktur';
-                          }
-                          elseif ($d['level']== 4) {
-                            $t_level = 'Direktur';
-                          }
                           ?>
                           <tr>
                             <td class="text-center"><?php echo $no++; ?></td>
                             <td class="text-center"><?php echo $d['nip']; ?></td>
-                            <td class="text-center"><?php echo $d['nama_lengkap']; ?></td>
+                            <td class="text-center"><?php echo $d['username']; ?></td>
+                            <td class="text-center"><?php echo $d['jabatan']; ?></td>
                             <td class="text-center"><?php echo $d['email']; ?></td>
                             <td class="text-center"><?php echo $d['no_hp']; ?></td>
                             <td class="text-center"><?php echo $d['level']; ?></td>
                             <td>
 
                             <a class="btn" data-toggle="modal" data-target="#myModal<?php echo $d['nip']; ?>"><i class="far fa-edit" style="color:#ffc107;"></i></a>
-                            <a class="far fa-trash-alt" style="color:#dc3545;" href="hapus_user.php?nip=<?php echo $d['nip']; ?>" onclick="return confirm('Anda yakin ingin menghapus item ini ?')"></a>
+                            <a class="far fa-trash-alt" style="color:#dc3545;" href="hapus_user.php?nip=<?php echo $d['nip']; ?>"></a>
                             <a class="btn" data-toggle="modal" data-target="#lihatmodal<?php echo $d['nip']; ?>"><i class="fas fa-list" style= "color:#dc3545;"></i></a> 
                             
                             <div class="modal fade" id="myModal<?php echo $d['nip']; ?>">
@@ -227,7 +205,6 @@ if ( isset($_POST["submit"]))
                                       <form method="POST" class="forms-sample" enctype="multipart/form-data">
                                         <div class="card-body">
                                         <input type="hidden" name="nip" value="<?= $d["nip"];?>">
-                                         <input type="hidden" name="fotoLama" value="<?= $d["foto"];?>">
                                         <div class="form-group">
                                           <label for="">NIP/NPAK</label>
                                           <input type="text" class="form-control"  required id="nip_edit" name="nip_edit" value="<?= $d["nip"];?>">
@@ -245,8 +222,8 @@ if ( isset($_POST["submit"]))
                                          <input type="text" class="form-control"  required id="email" name="email" value="<?= $d["email"];?>">
                                         </div>
                                         <div class="form-group">
-                                          <label for="">Nama Lengkap</label>
-                                          <input type="text" class="form-control"  required id="nama_lengkap" name="nama_lengkap" value="<?= $d["nama_lengkap"];?>">
+                                          <label for="">Jabatan</label>
+                                          <input type="text" class="form-control"  required id="jabatan" name="jabatan" value="<?= $d["jabatan"];?>">
                                         </div>
                                         <div class="form-group">
                                           <label for="">No HP</label>
@@ -256,7 +233,7 @@ if ( isset($_POST["submit"]))
                                           <label for="">Level</label>
                                           <div class="form-group">
                                             <select class="form-control" name="level" required>
-                                              <option hidden selected value="<?= $d['level'];?>"><?= $t_level ?></option>
+                                              <option hidden selected><?= $d["level"]; ?></option>
                                               <option value="0">Jurusan</option>
                                               <option value="1">BAAK</option>
                                               <option value="2">Bagian Umum</option>
@@ -264,11 +241,6 @@ if ( isset($_POST["submit"]))
                                               <option value="4">Direktur</option>
                                             </select>
                                           </div>
-                                          <div class="form-group">
-                                          <label for="">Foto</label><br>
-                                          <img src="../AdminLTE/dist/img/<?= $d['foto'];?>"  width="100" height="100"><br><br>
-                                          <input type="file" name="foto" value="<?= $d["foto"];?>">
-                                        </div>
                                         </div>
                                         <div class="modal-footer justify-content-between">
                                           <button type="button" class="btn btn-secondary col-md-3" data-dismiss="modal">Close</button>
@@ -291,12 +263,11 @@ if ( isset($_POST["submit"]))
                                     </div>
                                     <div class="modal-body">
                                       <div class="card-body box-profile">
-                                        <div class="text-center">
-                                          <img class="profile-user-img img-fluid img-circle" src="../AdminLTE/dist/img/<?=$d['foto'];?>" alt="User profile picture">
-                                        </div>
-                                        <h3 class="profile-username text-center"><?php echo $d['nama_lengkap']?></h3>
+                                        <div class="text-center"></div>
 
-                                        <p class="text-muted text-center"><?php echo $d['email']?></p>
+                                        <h3 class="profile-username text-center"><?php echo $d['username']?></h3>
+
+                                        <p class="text-muted text-center"><?php echo $d['jabatan']?></p>
 
                                         <ul class="list-group list-group-unbordered mb-3">
                                           <li class="list-group-item">

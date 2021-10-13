@@ -1,6 +1,3 @@
-<!-- import excel ke mysql -->
-<!-- www.malasngoding.com -->
-
 <?php 
 // menghubungkan dengan koneksi
 include '../login/config.php';

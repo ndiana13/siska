@@ -22,8 +22,7 @@ error_reporting(0);
 	<title></title>
 	<style type="text/css">
 		table {
-			border-style: double;
-			border-width: 4px;
+			border-width: 0.1px;
 			border-color: white;
 		}
 
@@ -254,7 +253,7 @@ error_reporting(0);
 					</td>			
 				</tr>
 			</table>
-			<table border="2" width="700">
+			<table border="1" cellspacing="0"  width="700">
 				<tbody>
 				<?php
 					$connection = mysqli_connect("localhost",'root',"","siska");
@@ -286,23 +285,34 @@ error_reporting(0);
 					<td width="50">VII</td>
 				</tr>
 				<tr style="font-size: 9px;">
-					<td style="text-align: center;"><?php echo $no++; ?></td>
-					<td><?php echo $d['nm_dosen']; ?><br><?php echo $d['nidn']; ?><br><?php echo $d['nip_dis']; ?><br>
-                      <td><?php echo $d['matkul1']; ?><br><?php echo $d['matkul2']; ?><br><?php echo $d['matkul3']; ?><br><?php echo $d['matkul4']; ?><br><?php echo $d['matkul5']; ?><br><?php echo $d['matkul6']; ?><br><?php echo $d['matkul7']; ?><br><?php echo $d['matkul8']; ?><br><?php echo $d['matkul9']; ?><br><?php echo $d['matkul10']; ?></td>
-                      <td><?php echo $d['prodi1']; ?><br><?php echo $d['prodi2']; ?><br><?php echo $d['prodi3']; ?><br><?php echo $d['prodi4']; ?><br><?php echo $d['prodi5']; ?><br><?php echo $d['prodi6']; ?><br><?php echo $d['prodi7']; ?><br><?php echo $d['prodi8']; ?><br><?php echo $d['prodi9']; ?><br><?php echo $d['prodi10']; ?></td>
-                      <td><?php echo $d['kelas1']; ?><br><?php echo $d['kelas2']; ?><br><?php echo $d['kelas3']; ?><br><?php echo $d['kelas4']; ?><br><?php echo $d['kelas5']; ?><br><?php echo $d['kelas6']; ?><br><?php echo $d['kelas7']; ?><br><?php echo $d['kelas8']; ?><br><?php echo $d['kelas9']; ?><br><?php echo $d['kelas10']; ?></td>
-                      <td><?php echo $d['sks_matkul1']; ?><br><?php echo $d['sks_matkul2']; ?><br><?php echo $d['sks_matkul3']; ?><br><?php echo $d['sks_matkul4']; ?><br><?php echo $d['sks_matkul5']; ?><br><?php echo $d['sks_matkul6']; ?><br><?php echo $d['sks_matkul7']; ?><br><?php echo $d['sks_matkul8']; ?><br><?php echo $d['sks_matkul9']; ?><br><?php echo $d['sks_matkul10']; ?></td>
-                      <td><?php echo $d['sks1']; ?><br><?php echo $d['sks2']; ?><br><?php echo $d['sks3']; ?><br><?php echo $d['sks4']; ?><br><?php echo $d['sks5']; ?><br><?php echo $d['sks6']; ?><br><?php echo $d['sks7']; ?><br><?php echo $d['sks8']; ?><br><?php echo $d['sks9']; ?><br><?php echo $d['sks10']; ?></td>
-				</tr>
-				<tr style="font-size: 9px; text-align: center;">
-					<td width="10"></td>
-					<td width="200"></td>
+					<td style="text-align: center;" rowspan="3"><?php echo $no++; ?></td>
+					<td rowspan="3"><?php echo $d['nm_dosen']; ?><br><?php echo $d['nidn']; ?><br><?php echo $d['nip_dis']; ?></td>
+                    <td><?php echo $d['matkul1']; ?></td>
+                    <td><?php echo $d['prodi1']; ?></td>
+                    <td><?php echo $d['kelas1']; ?></td>
+                    <td><?php echo $d['sks_matkul1']; ?></td>
+                    <td><?php echo $d['sks1']; ?></td>
+                </tr>
+                <?php
+                $matkul2 = $d['matkul2'];
+                if (!empty($matkul2)){
+                	echo "
+                	<tr style='font-size: 9px;'>
+                    <td>".$d['matkul2']."</td>
+                    <td>".$d['prodi2']."</td>
+                    <td>".$d['kelas2']."</td>
+                    <td>".$d['sks_matkul2']."</td>
+                    <td>".$d['sks2']."</td>
+                </tr>";
+                }
+                ?>
+                <tr style="font-size: 9px; text-align: center;">
 					<td width="200"></td>
 					<td colspan="2">Jumlah SKS</td>
 					<td width="40"><?php echo "$total_sks_a";?></td>
 					<td width="50"><?php echo "$total_sks_b";?></td>
 				</tr>
-			</tbody>
+            	</tbody>
 			<?php
 				}
 			?>
