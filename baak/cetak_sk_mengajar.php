@@ -3,6 +3,36 @@ include '../login/config.php';
 $id_sk_mengajar = $_GET['id_sk_mengajar'];
 $query     =mysqli_query($conn, "SELECT * FROM tb_sk_mengajar WHERE id_sk_mengajar='$id_sk_mengajar'");
 $result    =mysqli_fetch_array($query);
+
+   $y = substr($result['tgl_sp'],0,4);
+   $m = substr($result['tgl_sp'],5,2);
+   $d = substr($result['tgl_sp'],8,2);
+
+   if($m == "01"){
+       $nm = "Januari";
+   } elseif($m == "02"){
+       $nm = "Februari";
+   } elseif($m == "03"){
+       $nm = "Maret";
+   } elseif($m == "04"){
+       $nm = "April";
+   } elseif($m == "05"){
+       $nm = "Mei";
+   } elseif($m == "06"){
+       $nm = "Juni";
+   } elseif($m == "07"){
+       $nm = "Juli";
+   } elseif($m == "08"){
+       $nm = "Agustus";
+   } elseif($m == "09"){
+       $nm = "September";
+   } elseif($m == "10"){
+       $nm = "Oktober";
+   } elseif($m == "11"){
+       $nm = "November";
+   } elseif($m == "12"){
+       $nm = "Desember";
+  }
 if ($result['id_jurusan']){
 	$kon = mysqli_connect("localhost",'root',"","siska");
     if (!$kon){
@@ -13,6 +43,7 @@ if ($result['id_jurusan']){
     while ($data = mysqli_fetch_array($hasil)) {
     $nm_jurusan = $data['nm_jurusan'];
 }
+   
 }
 error_reporting(0);
 ?>
@@ -22,14 +53,14 @@ error_reporting(0);
 	<title></title>
 	<style type="text/css">
 		table {
-			border-width: 0.1px;
+			border-width: 1px;
 			border-color: white;
 		}
 
 		table tr,td .text2 {
 			vertical-align: top!important;
 			text-align: justify;
-			font-size: 16px;
+			font-size: 17px;
 		}
 
 		
@@ -42,7 +73,7 @@ error_reporting(0);
 			<tr>
 				<td><img src="../AdminLTE/dist/img/pnc.png" width="80" height="80"></td>
 				<td><center>
-					<font size="4"> KEMENTRIAN RISET, TEKNOLOGI, DAN PENDIDIKAN TINGGI<br></font>
+					<font size="4"> KEMENTRIAN PENDIDIKAN, KEBUDAYAAN, RISET, DAN TEKNOLOGI<br></font>
 					<font size="4"><strong>POLITEKNIK NEGERI CILACAP</strong><br></font>
 					<font size="2">Jalan Dr.Soetomo No.1 Sidakaya-CILACAP 53212 Jawa Tengah<br>
 						Telepon: (0282)533329, Faksimile: (0282)537992<br>
@@ -50,7 +81,7 @@ error_reporting(0);
 				</center></td>			
 			</tr>
 			<tr>
-				<td colspan="4"><hr></td>
+				<td colspan="2"><hr size="3px"></td>
 			</tr>
 		</table>
 		<table width="700">
@@ -214,7 +245,7 @@ error_reporting(0);
 		<table width="700">
 			<tr>
 				<td width="350"><br><br><br><br></td>
-				<td>Ditetapkan di Cilacap<br><?php echo date("d-m-Y") ?><br>DIREKTUR POLITEKNIK NEGERI<br>CILACAP<br>
+				<td>Ditetapkan di Cilacap<br><?php echo  "<a>". $d." ". $nm. " ". $y. "</a>" ?><br>DIREKTUR POLITEKNIK NEGERI<br>CILACAP<br>
 				<br><br><br><br><span style="text-transform:uppercase;text-align: center;"><?php 
 		$direktur = "SELECT * FROM tb_user WHERE level=3";
 		$sql     =mysqli_query($conn,$direktur);
@@ -233,11 +264,11 @@ error_reporting(0);
 				</tr>
 				<tr style="font-size: 10px;">
 					<td width="300"></td>
-					<td>Tanggal &nbsp;&nbsp;: <?php echo $result['tgl_sp'];?></td>
+					<td>Tanggal &nbsp;&nbsp;: <?php echo  "<a>". $d." ". $nm. " ". $y. "</a>" ?></td>
 				</tr>
 				<tr style="font-size: 10px;">
 					<td width="300"></td>
-					<td>Tentang : <?php echo $result['perihal'];?> Semester <?php echo $result['semester'];?> Jurusan <?php echo "<a>". $nm_jurusan."</a>";?> Tahun Akademik <?php echo $result['thn_akademik'];?>
+					<td>Tentang  &nbsp;: <?php echo $result['perihal'];?> Semester <?php echo $result['semester'];?> Jurusan <?php echo "<a>". $nm_jurusan."</a>";?> Tahun Akademik <?php echo $result['thn_akademik'];?>
 					<td>
 				</tr>
 			</table><br><br>		
@@ -285,8 +316,8 @@ error_reporting(0);
 					<td width="50">VII</td>
 				</tr>
 				<tr style="font-size: 9px;">
-					<td style="text-align: center;" rowspan="3"><?php echo $no++; ?></td>
-					<td rowspan="3"><?php echo $d['nm_dosen']; ?><br><?php echo $d['nidn']; ?><br><?php echo $d['nip_dis']; ?></td>
+					<td style="text-align: center;" rowspan="10"><?php echo $no++; ?></td>
+					<td rowspan="10"><?php echo $d['nm_dosen']; ?><br><?php echo $d['nidn']; ?><br><?php echo $d['nip_dis']; ?></td>
                     <td><?php echo $d['matkul1']; ?></td>
                     <td><?php echo $d['prodi1']; ?></td>
                     <td><?php echo $d['kelas1']; ?></td>
@@ -294,17 +325,118 @@ error_reporting(0);
                     <td><?php echo $d['sks1']; ?></td>
                 </tr>
                 <?php
-                $matkul2 = $d['matkul2'];
-                if (!empty($matkul2)){
-                	echo "
-                	<tr style='font-size: 9px;'>
-                    <td>".$d['matkul2']."</td>
-                    <td>".$d['prodi2']."</td>
-                    <td>".$d['kelas2']."</td>
-                    <td>".$d['sks_matkul2']."</td>
-                    <td>".$d['sks2']."</td>
-                </tr>";
-                }
+	                $matkul2 = $d['matkul2'];
+	                $matkul3 = $d['matkul3'];
+	                $matkul4 = $d['matkul4'];
+	                $matkul5 = $d['matkul5'];
+	                $matkul6 = $d['matkul6'];
+	                $matkul7 = $d['matkul7'];
+	                $matkul8 = $d['matkul8'];
+	                $matkul9 = $d['matkul9'];
+	                $matkul10 = $d['matkul10'];
+
+	                if (!empty($matkul2)){
+	                	echo "
+	                	<tr style='font-size: 9px;'>
+	                    <td>".$d['matkul2']."</td>
+	                    <td>".$d['prodi2']."</td>
+	                    <td>".$d['kelas2']."</td>
+	                    <td>".$d['sks_matkul2']."</td>
+	                    <td>".$d['sks2']."</td>
+	                	</tr>";
+	                	if (!empty($matkul3)){
+
+	                	echo "
+	                	<tr style='font-size: 9px;'>
+	                    <td>".$d['matkul3']."</td>
+	                    <td>".$d['prodi3']."</td>
+	                    <td>".$d['kelas3']."</td>
+	                    <td>".$d['sks_matkul3']."</td>
+	                    <td>".$d['sks3']."</td>
+	                	</tr>";
+		                	if (!empty($matkul4)){
+
+		                	echo "
+		                	<tr style='font-size: 9px;'>
+		                    <td>".$d['matkul4']."</td>
+		                    <td>".$d['prodi4']."</td>
+		                    <td>".$d['kelas4']."</td>
+		                    <td>".$d['sks_matkul4']."</td>
+		                    <td>".$d['sks4']."</td>
+		                	</tr>";
+		                	
+			                	if (!empty($matkul5)){
+
+			                	echo "
+			                	<tr style='font-size: 9px;'>
+			                    <td>".$d['matkul5']."</td>
+			                    <td>".$d['prodi5']."</td>
+			                    <td>".$d['kelas5']."</td>
+			                    <td>".$d['sks_matkul5']."</td>
+			                    <td>".$d['sks5']."</td>
+			                	</tr>";
+				                	if (!empty($matkul6)){
+
+				                	echo "
+				                	<tr style='font-size: 9px;'>
+				                    <td>".$d['matkul6']."</td>
+				                    <td>".$d['prodi6']."</td>
+				                    <td>".$d['kelas6']."</td>
+				                    <td>".$d['sks_matkul6']."</td>
+				                    <td>".$d['sks6']."</td>
+				                	</tr>";
+				                	
+					                	if (!empty($matkul7)){
+
+					                	echo "
+					                	<tr style='font-size: 9px;'>
+					                    <td>".$d['matkul7']."</td>
+					                    <td>".$d['prodi7']."</td>
+					                    <td>".$d['kelas7']."</td>
+					                    <td>".$d['sks_matkul7']."</td>
+					                    <td>".$d['sks7']."</td>
+					                	</tr>";
+						                	if (!empty($matkul8)){
+
+						                	echo "
+						                	<tr style='font-size: 9px;'>
+						                    <td>".$d['matkul8']."</td>
+						                    <td>".$d['prodi8']."</td>
+						                    <td>".$d['kelas8']."</td>
+						                    <td>".$d['sks_matkul8']."</td>
+						                    <td>".$d['sks8']."</td>
+						                	</tr>";
+						                	
+							                	if (!empty($matkul9)){
+
+							                	echo "
+							                	<tr style='font-size: 9px;'>
+							                    <td>".$d['matkul9']."</td>
+							                    <td>".$d['prodi9']."</td>
+							                    <td>".$d['kelas9']."</td>
+							                    <td>".$d['sks_matkul9']."</td>
+							                    <td>".$d['sks9']."</td>
+							                	</tr>";
+								                	if (!empty($matkul9)){
+
+								                	echo "
+								                	<tr style='font-size: 9px;'>
+								                    <td>".$d['matkul9']."</td>
+								                    <td>".$d['prodi9']."</td>
+								                    <td>".$d['kelas9']."</td>
+								                    <td>".$d['sks_matkul9']."</td>
+								                    <td>".$d['sks10']."</td>
+								                	</tr>";
+								                	}
+							                	}
+							                }
+					                	}
+					                }
+					            }
+					        }
+					    }
+					}
+
                 ?>
                 <tr style="font-size: 9px; text-align: center;">
 					<td width="200"></td>
