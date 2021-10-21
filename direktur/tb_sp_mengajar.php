@@ -91,7 +91,7 @@ if ( isset($_POST["submit1"])) {
 <div class="wrapper">
 
       <?php    include "../AdminLTE/header.php"; ?>
-      <?php    include "../AdminLTE/sidebar2.php"; ?>
+      <?php    include "../AdminLTE/sidebar.php"; ?>
       
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -132,9 +132,9 @@ if ( isset($_POST["submit1"])) {
                 </div>
                 <div class="modal-body">
                   <form method="POST" class="forms-sample" enctype="multipart/form-data">
-                    <input type="hidden" class="form-control" placeholder="id_sk_mengajar" name="id_sk_mengajar" id="id_sp"  />
-                   <input type="hidden" class="form-control" placeholder="id_sk_mengajar" name="status" id="status"  value="0" />
-                   <input type="hidden" class="form-control" placeholder="id_sk_mengajar" name="no_sk" id="status"/>
+                    <input type="hidden" class="form-control" placeholder="id_sk_mengajar" name="id_sk_mengajar" id="id_sk_mengajar"  >
+                   <input type="hidden" class="form-control" placeholder="id_sk_mengajar" name="status" id="status"  value="0" >
+                   <input type="hidden" class="form-control" placeholder="id_sk_mengajar" name="no_sk" id="no_sk">
 
                     <div class="form-group">
                      <label for="">NIP/NPAK</label>
@@ -144,11 +144,11 @@ if ( isset($_POST["submit1"])) {
                         if (!$kon){
                             die("Koneksi database gagal:".mysqli_connect_error());
                         }
-                        $sql="select * from tb_user";
+                        $sql="select * from tb_pengguna";
                         $hasil=mysqli_query($kon,$sql);
                         while ($data = mysqli_fetch_array($hasil)) {
                        ?>
-                        <option value="<?php echo $data['nip'];?>"><?php echo $data['nip'];?></option>
+                        <option value="<?php echo $data['nip'];?>"><?php echo "<a>" .$data['nip'] ." (" .$data['nama_lengkap'] .")"."</a>";?></option>
                           <?php 
                               }
                           ?>
@@ -156,7 +156,7 @@ if ( isset($_POST["submit1"])) {
                     </div>
                     <div class="form-group">
                       <label for="">Nama Jurusan</label>
-                      <select class="form-control" id="nm_jurusan" name="nm_jurusan">
+                      <select class="form-control" id="id_jurusan" name="id_jurusan">
                        <?php 
                         $kon = mysqli_connect("localhost",'root',"","siska");
                         if (!$kon){
@@ -165,6 +165,7 @@ if ( isset($_POST["submit1"])) {
                         $sql="select * from tb_jurusan";
                         $hasil=mysqli_query($kon,$sql);
                         while ($data = mysqli_fetch_array($hasil)) {
+
                        ?>
                         <option value="<?php echo $data['id_jurusan'];?>"><?php echo $data['nm_jurusan'];?></option>
                           <?php 
@@ -184,7 +185,7 @@ if ( isset($_POST["submit1"])) {
                     <div class="form-group">
                       <label for="">Semester</label>
                        <select class="form-control" id="semester" name="semester">
-                          <option>Ganjil</option>
+                          <option>Gasal</option>
                           <option>Genap</option>
                         </select>
                     </div>
@@ -195,7 +196,7 @@ if ( isset($_POST["submit1"])) {
                     <div class="form-group">
                       <label for="">Lampiran</label>
                     <div class="form-group">
-                      <input type="file" id="lampiran_sp" name="lampiran_sp"><br><small style="color:#dc3545;">*Format file yang diperbolehkan adalah file berformat *.csv (file excel)!</small>
+                      <input type="file" id="lampiran_sp" name="lampiran_sp"><br><small style="color:#dc3545;">*Format file yang diperbolehkan adalah file berformat *.xls (file excel)!</small>
                     </div>
                     </div>
                     <div class="modal-footer justify-content-between">
@@ -239,21 +240,24 @@ if ( isset($_POST["submit1"])) {
               <tbody>
               <?php                    
                 $connection = mysqli_connect("localhost",'root',"","siska");
-                $sql = "SELECT * FROM tb_sk_mengajar ORDER BY id_sk_mengajar ";
+                $sql = "SELECT * FROM tb_sk_mengajar";
                 $result = mysqli_query($connection,$sql);
                 $no= 1;
                 while($d = mysqli_fetch_array($result)) {
                   if ($d['status']=='1'){
                     $status = 'Diverifikasi BAAK';
                     $warna = 'warning';
+                    $tgl = $d['tgl_verif1'];
                     }
                     elseif ($d['status']=='2'){
                     $status = 'Diverifikasi Wadir';
                     $warna = 'primary';
+                    $tgl = $d['tgl_verif2'];
                     }
                     elseif ($d['status']=='3'){
                     $status = 'Diverifikasi Direktur';
                     $warna = 'success';
+                    $tgl = $d['tgl_verif3'];
                     }
                     elseif ($d['status']=='4'){
                     $status = 'Ditolak';
@@ -270,13 +274,13 @@ if ( isset($_POST["submit1"])) {
                       <td><?php echo $d['tgl_sp']; ?></td>
                       <td><?php echo $d['id_jurusan']; ?><br><?php echo $d['thn_akademik']; ?></td>
                       <td><?php echo $d['perihal']; ?></td>
-                      <td><?php echo "<a class='badge bg-". $warna."'>". $status."</a>";?>
+                      <td><?php echo "<a class='badge bg-". $warna."'>". $status."</a>";?><br><?php echo "<a>" .$tgl. "<a>"?>
                       <td><?php echo $d['no_sk']; ?><br>
                       <?php echo $d['lampiran_sp']; ?></td>
                       <td>
                           <a class="btn btn-outline-warning" data-toggle="modal" data-target="#myModal<?php echo $d['id_sk_mengajar']; ?>"><i class="far fa-edit"></i> Edit</a>
-                          <a class="btn btn-outline-danger" href="hapus_sp_mengajar.php?id_sk_mengajar=<?php echo $d['id_sk_mengajar']; ?>" onclick="return confirm('Anda yakin ingin menghapus item ini ?'"><i class="far fa-trash-alt"></i> Hapus</a>
-                          <a class="btn btn-outline-info" href="download_lampiran.php?id_sk_mengajar=<?php echo $d['id_sk_mengajar']; ?>"><i class="far fa-file"></i> Lampiran</a>
+                          <a class="btn btn-outline-danger" href="hapus_sp_mengajar.php?id_sk_mengajar=<?php echo $d['id_sk_mengajar']; ?>"onclick="return confirm('Anda yakin ingin menghapus item ini ?')"><i class="far fa-trash-alt"></i> Hapus</a>
+                          <a class="btn btn-outline-info" href="lampiran/skmengajar/<?php echo $d['lampiran_sp']; ?>"><i class="far fa-file"></i> Lampiran</a>
                           <a class="btn btn-outline-success"href="cetak_sk_mengajar.php?id_sk_mengajar=<?php echo $d['id_sk_mengajar']; ?>" target="_BLANK"><i class="fas fa-print"></i> SK</a>
 
                           <div class="modal fade" id="myModal<?php echo $d['id_sk_mengajar']; ?>">
@@ -292,7 +296,7 @@ if ( isset($_POST["submit1"])) {
                                       <form action="" method="POST" class="forms-sample" enctype="multipart/form-data">
                                         <input type="hidden" name="lampiran_sp_lama" value="<?= $d["lampiran_sp"];?>">
                                         <input type="hidden" name="id_sk_mengajar" value="<?= $d["id_sk_mengajar"];?>">
-                                        <div class="form-group">
+                                        <div class="form-group" hidden="">
                                           <label for="">Id Surat</label>
                                           <input type="text" class="form-control"  required id="id_sk_mengajar" name="id_sk_mengajar_edit" value="<?= $d["id_sk_mengajar"];?>">
                                         </div>
@@ -304,12 +308,12 @@ if ( isset($_POST["submit1"])) {
                                           <label for="">Tanggal Pengajuan</label>
                                           <input type="date" class="form-control"  required id="tgl_sp" name="tgl_sp" value="<?= $d["tgl_sp"];?>">
                                         </div>
-                                        <div class="form-group">
+                                        <div>
                                           <label for="">Id Jurusan</label>
                                             <select class="form-control" id="id_jurusan" name="id_jurusan">
-                                              <option hidden selected><?= $d["id_jurusan"]; ?></option>
-                                             <?php 
-                                              $kon = mysqli_connect("localhost",'root',"","sisk");
+                                              <option hidden selected value="<?= $d["id_jurusan"]; ?>"><?= $d["id_jurusan"]; ?></option>
+                                             <?php
+                                              $kon = mysqli_connect("localhost",'root',"","siska");
                                               if (!$kon){
                                                   die("Koneksi database gagal:".mysqli_connect_error());
                                               }
@@ -317,7 +321,7 @@ if ( isset($_POST["submit1"])) {
                                               $hasil=mysqli_query($kon,$sql);
                                               while ($data = mysqli_fetch_array($hasil)) {
                                              ?>
-                                              <option value="<?php echo $data['id_jurusan'];?>"><?php echo $data['nm_jurusan'];?></option>
+                                              <option value="<?= $data['id_jurusan'];?>"><?php echo $data['nm_jurusan'];?></option>
                                                 <?php 
                                                     }
                                                 ?>
@@ -332,7 +336,7 @@ if ( isset($_POST["submit1"])) {
                                               <div class="form-group">
                                               <select class="form-control" name="semester" required id="semester">
                                                 <option hidden selected><?= $d["semester"]; ?></option>
-                                                <option value="Ganjil">Ganjil</option>
+                                                <option value="Gasal">Gasal</option>
                                                 <option value="Genap">Genap</option>
                                               </select>
                                             </div>
@@ -341,11 +345,11 @@ if ( isset($_POST["submit1"])) {
                                           <label for="">Perihal</label>
                                           <input type="text" class="form-control"  required id="perihal" name="perihal" value="<?= $d["perihal"];?>">
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group" hidden="">
                                           <label for="">Status</label>
                                           <input type="text" class="form-control"  required id="status" name="status" value="<?= $d["status"];?>">
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group" hidden="">
                                           <label for="">NO SK</label>
                                           <input type="text" class="form-control" name="no_sk" value="<?= $d["no_sk"];?>">
                                         </div>

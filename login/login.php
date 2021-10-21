@@ -44,7 +44,7 @@ if (isset($_POST['submit'])) {
           header("Location: ../direktur/index.php");
         }     
     }else {
-        echo "<script>alert('Email atau password Anda salah. Silahkan coba lagi!')</script>";
+        echo "<script>alert('Username atau password Anda salah. Silahkan coba lagi!')</script>";
     }
 }
  

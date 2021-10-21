@@ -274,7 +274,7 @@ if ( isset($_POST["submit1"])) {
                       <td><?php echo $d['tgl_sp']; ?></td>
                       <td><?php echo $d['id_jurusan']; ?><br><?php echo $d['thn_akademik']; ?></td>
                       <td><?php echo $d['perihal']; ?></td>
-                      <td><?php echo "<a class='badge bg-". $warna."'>". $status."</a>";?><br><?php echo "<a>" .$tgl. "<a>"?>
+                      <td><?php echo "<a a href= '#' class='badge bg-". $warna."'>". $status."</a>";?><br><?php echo "<a>" .$tgl. "<a>"?>
                       <td><?php echo $d['no_sk']; ?><br>
                       <?php echo $d['lampiran_sp']; ?></td>
                       <td>
