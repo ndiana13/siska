@@ -4,9 +4,9 @@ $id_sk_mengajar = $_GET['id_sk_mengajar'];
 $query     =mysqli_query($conn, "SELECT * FROM tb_sk_mengajar WHERE id_sk_mengajar='$id_sk_mengajar'");
 $result    =mysqli_fetch_array($query);
 
-   $y = substr($result['tgl_sp'],0,4);
-   $m = substr($result['tgl_sp'],5,2);
-   $d = substr($result['tgl_sp'],8,2);
+   $y = substr($result['tgl_verif3'],0,4);
+   $m = substr($result['tgl_verif3'],5,2);
+   $h = substr($result['tgl_verif3'],8,2);
 
    if($m == "01"){
        $nm = "Januari";
@@ -223,7 +223,7 @@ error_reporting(0);
 			<tr class="text2">
 				<td width="110">KEDUA</td>
 				<td width="20"><span>:</span><td>
-				<td width="480">Menetapkan nama-nama yang terdapat pada lampiran surat keputusan ini, sebagai dosen/tenaga pengajar yang diberi tugas mengajar/menguji untuk Semester <?php echo $result['semester'];?> Tahun Akademik <?php echo $result['thn_akademik'];?>.</td>
+				<td width="480">Tugas mengajar/menguji dosen tercantum dalam lampiran keputusan ini yang terdapat pada kolom 1 nomor, kolom 2 nama dosen, kolom 3 nama matakuliah, kolom 4 program studi, kolom 5 kelas, kolom 6 SKS matakuliah dan kolom 7 SKS pararel.</td>
 			</tr>
 			<tr class="text2">
 				<td width="110">KETIGA</td>
@@ -245,11 +245,11 @@ error_reporting(0);
 		<table width="700">
 			<tr>
 				<td width="350"><br><br><br><br></td>
-				<td>Ditetapkan di Cilacap<br><?php echo  "<a>". $d." ". $nm. " ". $y. "</a>" ?><br>DIREKTUR POLITEKNIK NEGERI<br>CILACAP<br>
+				<td>Ditetapkan di Cilacap<br><?php echo  "<a>". $h." ". $nm. " ". $y. "</a>" ?><br>DIREKTUR POLITEKNIK NEGERI<br>CILACAP<br>
 				<br><br><br><br><span style="text-transform:uppercase;text-align: center;"><?php 
-		$direktur = "SELECT * FROM tb_user WHERE level=3";
+		$direktur = "SELECT * FROM tb_pengguna WHERE level=3";
 		$sql     =mysqli_query($conn,$direktur);
-		$r    =mysqli_fetch_array($sql);?><?php echo $r['username'];?></span><br><?php echo $r['nip'];?></td>
+		$r    =mysqli_fetch_array($sql);?><?php echo $r['nama_lengkap'];?></span><br><?php echo $r['nip'];?></td>
 			</tr>
 	     </table>
 	     <div style="page-break-before:always;">
@@ -264,11 +264,11 @@ error_reporting(0);
 				</tr>
 				<tr style="font-size: 10px;">
 					<td width="300"></td>
-					<td>Tanggal &nbsp;&nbsp;: <?php echo  "<a>". $d." ". $nm. " ". $y. "</a>" ?></td>
+					<td>Tanggal &nbsp;&nbsp;: <?php echo  "<a>". $h." ". $nm. " ". $y. "</a>" ?></td>
 				</tr>
 				<tr style="font-size: 10px;">
 					<td width="300"></td>
-					<td>Tentang  &nbsp;: <?php echo $result['perihal'];?> Semester <?php echo $result['semester'];?> Jurusan <?php echo "<a>". $nm_jurusan."</a>";?> Tahun Akademik <?php echo $result['thn_akademik'];?>
+					<td>Tentang : <?php echo $result['perihal'];?> Semester <?php echo $result['semester'];?> Jurusan <?php echo "<a>". $nm_jurusan."</a>";?> Tahun Akademik <?php echo $result['thn_akademik'];?>
 					<td>
 				</tr>
 			</table><br><br>		
@@ -284,11 +284,17 @@ error_reporting(0);
 					</td>			
 				</tr>
 			</table>
-			<table border="1" cellspacing="0"  width="700">
+			<table border="1" cellspacing="0"  width="680">
 				<tbody>
 				<?php
 					$connection = mysqli_connect("localhost",'root',"","siska");
-		            $sql = "SELECT * FROM lam_skm ORDER BY id";
+					if ($result['id_jurusan']== 'TE') {
+						$sql = "SELECT * FROM lam_skm ORDER BY id";
+					}
+					elseif ($result['id_jurusan']=='TM') {
+						$sql = "SELECT * FROM lam_skm1 ORDER BY id";
+					}
+		           
 		            $result = mysqli_query($connection,$sql);
 		            $no= 1;
 		            while($d = mysqli_fetch_array($result)) {
@@ -299,30 +305,30 @@ error_reporting(0);
 				?>
 				<tr style="font-size: 9px; text-align: center;">
 					<td width="10">NO</td>
-					<td width="200">NAMA DOSEN</td>
-					<td width="200">MATA KULIAH</td>
-					<td width="50">PRODI</td>
+					<td width="150">NAMA DOSEN</td>
+					<td width="150">MATA KULIAH</td>
+					<td width="40">PRODI</td>
 					<td width="40">KELAS</td>
 					<td width="40">SKS Mata Kuliah</td>
-					<td width="50">SKS Paralel</td>		
+					<td width="40">SKS Paralel</td>		
 				</tr>
 				<tr style="font-size: 9px; text-align: center;">
 					<td width="10">I</td>
-					<td width="200">II</td>
-					<td width="200">III</td>
-					<td width="50">IV</td>
+					<td width="150">II</td>
+					<td width="150">III</td>
+					<td width="40">IV</td>
 					<td width="40">V</td>
 					<td width="40">VI</td>
-					<td width="50">VII</td>
+					<td width="40">VII</td>
 				</tr>
 				<tr style="font-size: 9px;">
 					<td style="text-align: center;" rowspan="10"><?php echo $no++; ?></td>
 					<td rowspan="10"><?php echo $d['nm_dosen']; ?><br><?php echo $d['nidn']; ?><br><?php echo $d['nip_dis']; ?></td>
                     <td><?php echo $d['matkul1']; ?></td>
-                    <td><?php echo $d['prodi1']; ?></td>
-                    <td><?php echo $d['kelas1']; ?></td>
-                    <td><?php echo $d['sks_matkul1']; ?></td>
-                    <td><?php echo $d['sks1']; ?></td>
+                    <td style="text-align: center;"><?php echo $d['prodi1']; ?></td>
+                    <td style="text-align: center;"><?php echo $d['kelas1']; ?></td>
+                    <td style="text-align: center;"><?php echo $d['sks_matkul1']; ?></td>
+                    <td style="text-align: center;"><?php echo $d['sks1']; ?></td>
                 </tr>
                 <?php
 	                $matkul2 = $d['matkul2'];
@@ -339,30 +345,30 @@ error_reporting(0);
 	                	echo "
 	                	<tr style='font-size: 9px;'>
 	                    <td>".$d['matkul2']."</td>
-	                    <td>".$d['prodi2']."</td>
-	                    <td>".$d['kelas2']."</td>
-	                    <td>".$d['sks_matkul2']."</td>
-	                    <td>".$d['sks2']."</td>
+	                    <td style='text-align: center'>".$d['prodi2']."</td>
+	                    <td style='text-align: center'>".$d['kelas2']."</td>
+	                    <td style='text-align: center'>".$d['sks_matkul2']."</td>
+	                    <td style='text-align: center'>".$d['sks2']."</td>
 	                	</tr>";
 	                	if (!empty($matkul3)){
 
 	                	echo "
 	                	<tr style='font-size: 9px;'>
 	                    <td>".$d['matkul3']."</td>
-	                    <td>".$d['prodi3']."</td>
-	                    <td>".$d['kelas3']."</td>
-	                    <td>".$d['sks_matkul3']."</td>
-	                    <td>".$d['sks3']."</td>
+	                    <td style='text-align: center'>".$d['prodi3']."</td>
+	                    <td style='text-align: center'>".$d['kelas3']."</td>
+	                    <td style='text-align: center'>".$d['sks_matkul3']."</td>
+	                    <td style='text-align: center'>".$d['sks3']."</td>
 	                	</tr>";
 		                	if (!empty($matkul4)){
 
 		                	echo "
 		                	<tr style='font-size: 9px;'>
 		                    <td>".$d['matkul4']."</td>
-		                    <td>".$d['prodi4']."</td>
-		                    <td>".$d['kelas4']."</td>
-		                    <td>".$d['sks_matkul4']."</td>
-		                    <td>".$d['sks4']."</td>
+		                    <td style='text-align: center'>".$d['prodi4']."</td>
+		                    <td style='text-align: center'>".$d['kelas4']."</td>
+		                    <td style='text-align: center'>".$d['sks_matkul4']."</td>
+		                    <td style='text-align: center'>".$d['sks4']."</td>
 		                	</tr>";
 		                	
 			                	if (!empty($matkul5)){
@@ -370,20 +376,20 @@ error_reporting(0);
 			                	echo "
 			                	<tr style='font-size: 9px;'>
 			                    <td>".$d['matkul5']."</td>
-			                    <td>".$d['prodi5']."</td>
-			                    <td>".$d['kelas5']."</td>
-			                    <td>".$d['sks_matkul5']."</td>
-			                    <td>".$d['sks5']."</td>
+			                    <td style='text-align: center'>".$d['prodi5']."</td>
+			                    <td style='text-align: center'>".$d['kelas5']."</td>
+			                    <td style='text-align: center'>".$d['sks_matkul5']."</td>
+			                    <td style='text-align: center'>".$d['sks5']."</td>
 			                	</tr>";
 				                	if (!empty($matkul6)){
 
 				                	echo "
 				                	<tr style='font-size: 9px;'>
 				                    <td>".$d['matkul6']."</td>
-				                    <td>".$d['prodi6']."</td>
-				                    <td>".$d['kelas6']."</td>
-				                    <td>".$d['sks_matkul6']."</td>
-				                    <td>".$d['sks6']."</td>
+				                    <td style='text-align: center'>".$d['prodi6']."</td>
+				                    <td style='text-align: center'>".$d['kelas6']."</td>
+				                    <td style='text-align: center'>".$d['sks_matkul6']."</td>
+				                    <td style='text-align: center'>".$d['sks6']."</td>
 				                	</tr>";
 				                	
 					                	if (!empty($matkul7)){
@@ -391,20 +397,20 @@ error_reporting(0);
 					                	echo "
 					                	<tr style='font-size: 9px;'>
 					                    <td>".$d['matkul7']."</td>
-					                    <td>".$d['prodi7']."</td>
-					                    <td>".$d['kelas7']."</td>
-					                    <td>".$d['sks_matkul7']."</td>
-					                    <td>".$d['sks7']."</td>
+					                    <td style='text-align: center'>".$d['prodi7']."</td>
+					                    <td style='text-align: center'>".$d['kelas7']."</td>
+					                    <td style='text-align: center'>".$d['sks_matkul7']."</td>
+					                    <td style='text-align: center'>".$d['sks7']."</td>
 					                	</tr>";
 						                	if (!empty($matkul8)){
 
 						                	echo "
 						                	<tr style='font-size: 9px;'>
 						                    <td>".$d['matkul8']."</td>
-						                    <td>".$d['prodi8']."</td>
-						                    <td>".$d['kelas8']."</td>
-						                    <td>".$d['sks_matkul8']."</td>
-						                    <td>".$d['sks8']."</td>
+						                    <td style='text-align: center'>".$d['prodi8']."</td>
+						                    <td style='text-align: center'>".$d['kelas8']."</td>
+						                    <td style='text-align: center'>".$d['sks_matkul8']."</td>
+						                    <td style='text-align: center'>".$d['sks8']."</td>
 						                	</tr>";
 						                	
 							                	if (!empty($matkul9)){
@@ -412,20 +418,20 @@ error_reporting(0);
 							                	echo "
 							                	<tr style='font-size: 9px;'>
 							                    <td>".$d['matkul9']."</td>
-							                    <td>".$d['prodi9']."</td>
-							                    <td>".$d['kelas9']."</td>
-							                    <td>".$d['sks_matkul9']."</td>
-							                    <td>".$d['sks9']."</td>
+							                    <td style='text-align: center'>".$d['prodi9']."</td>
+							                    <td style='text-align: center'>".$d['kelas9']."</td>
+							                    <td style='text-align: center'>".$d['sks_matkul9']."</td>
+							                    <td style='text-align: center'>".$d['sks9']."</td>
 							                	</tr>";
 								                	if (!empty($matkul9)){
 
 								                	echo "
 								                	<tr style='font-size: 9px;'>
 								                    <td>".$d['matkul9']."</td>
-								                    <td>".$d['prodi9']."</td>
-								                    <td>".$d['kelas9']."</td>
-								                    <td>".$d['sks_matkul9']."</td>
-								                    <td>".$d['sks10']."</td>
+								                    <td style='text-align: center'>".$d['prodi9']."</td>
+								                    <td style='text-align: center'>".$d['kelas9']."</td>
+								                    <td style='text-align: center'>".$d['sks_matkul9']."</td>
+								                    <td style='text-align: center'>".$d['sks10']."</td>
 								                	</tr>";
 								                	}
 							                	}
@@ -449,6 +455,17 @@ error_reporting(0);
 				}
 			?>
 			</table>
+			<br><br><br>
+			<table width="700">
+				<tr>
+					<td width="420"><br><br><br><br></td>
+					<td style="font-size: 12px;"> Ditetapkan di Cilacap<br><?php echo  "<a>". $h." ". $nm. " ". $y. "</a>" ?><br>DIREKTUR POLITEKNIK NEGERI<br>CILACAP<br>
+					<br><br><br><br><span style="text-transform:uppercase;text-align: center;"><?php 
+					$direktur = "SELECT * FROM tb_pengguna WHERE level=3";
+					$sql     =mysqli_query($conn,$direktur);
+					$r    =mysqli_fetch_array($sql);?><?php echo $r['nama_lengkap'];?></span><br><?php echo $r['nip'];?></td>
+						</tr>
+		     </table>
 	     </div>
 
 </body>

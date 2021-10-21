@@ -251,16 +251,16 @@ if ( isset($_POST["submit1"])) {
                 $no= 1;
                 while($d = mysqli_fetch_array($result)) {
                   if ($d['status']=='1'){
-                    $status = 'Diverifikasi BAAK';
-                    $warna = 'warning';
+                      $status = 'Diverifikasi BAAK';
+                      $warna = 'warning';
                     }
                     elseif ($d['status']=='2'){
-                    $status = 'Diverifikasi Wadir';
-                    $warna = 'primary';
+                      $status = 'Diverifikasi Wadir';
+                      $warna = 'primary';
                     }
                     elseif ($d['status']=='3'){
-                    $status = 'Diverifikasi Direktur';
-                    $warna = 'success';
+                      $status = 'Diverifikasi Direktur';
+                      $warna = 'success';
                     }
                     else {
                         $status = 'Belum Diverifikasi';

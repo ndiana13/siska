@@ -141,11 +141,10 @@ function hapus($id_sk_mengajar) {
 }
 
 function acc_wadir($id_sk_mengajar) {
-	global $conn;
-	
+	global $conn;	
+	$tgl = date('Y-m-d');
 
-		//insert data
-	$query ="UPDATE tb_sk_mengajar SET status = '2' WHERE id_sk_mengajar = $id_sk_mengajar
+	$query ="UPDATE tb_sk_mengajar SET status = '2', tgl_verif2 = '$tgl'  WHERE id_sk_mengajar = $id_sk_mengajar
 	";
 
 	mysqli_query($conn,$query);

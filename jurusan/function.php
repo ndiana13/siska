@@ -88,7 +88,7 @@ function upload(){
 	$namaFileBaru .=$ekstensifile_transaksi;
 	
 	
-	move_uploaded_file($tmpName,'lampiran/skmengajar/'.$namaFileBaru);
+	move_uploaded_file($tmpName,'../baak/lampiran/skmengajar/'.$namaFileBaru);
 	return $namaFileBaru;
 }
 

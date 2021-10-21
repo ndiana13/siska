@@ -40,7 +40,7 @@ function tambah($data){
 	$status  		= htmlspecialchars($data["status"]);
 	$no_sk  		= htmlspecialchars($data["no_sk"]);
 
-	$query = "INSERT INTO tb_sk_mengajar VALUES ('$id_sk_mengajar', '$nip', '$id_jurusan', '$tgl_sp', '$thn_akademik', '$semester', '$perihal', '$lampiran_sp', '$status', '$no_sk')";
+	$query = "INSERT INTO tb_sk_mengajar VALUES ('$id_sk_mengajar', '$nip', '$id_jurusan', '$tgl_sp', '$thn_akademik', '$semester', '$perihal', '$lampiran_sp', '$status', 'NULL', 'NULL', 'NULL', '$no_sk')";
 	mysqli_query($conn,$query);
 	return mysqli_affected_rows($conn);
 }
@@ -95,7 +95,7 @@ function ubah($data){
 
 	global $conn;
 
-	$id_sk_mengajar 				= htmlspecialchars($data["id_sk_mengajar"]);
+	$id_sk_mengajar 			= htmlspecialchars($data["id_sk_mengajar"]);
 	$id_sk_mengajar_edit 		= htmlspecialchars($data["id_sk_mengajar_edit"]);
 	$nip 				= htmlspecialchars($data["nip"]);
 	$id_jurusan 		= htmlspecialchars($data["id_jurusan"]);
@@ -141,16 +141,13 @@ function hapus($id_sk_mengajar) {
 
 function acc_baak($id_sk_mengajar) {
 	global $conn;
+	$tgl = date('Y-m-d');
 	
-
-		//insert data
-	$query ="UPDATE tb_sk_mengajar SET status = '1' WHERE id_sk_mengajar = $id_sk_mengajar
+	$query ="UPDATE tb_sk_mengajar SET status = '1', tgl_verif1= '$tgl' WHERE id_sk_mengajar = $id_sk_mengajar
 	";
 
 	mysqli_query($conn,$query);
 	return mysqli_affected_rows($conn);	
-	
-	return mysqli_affected_rows($conn);
 }
 function dec_baak($id_sk_mengajar) {
 	global $conn;
@@ -162,6 +159,10 @@ function dec_baak($id_sk_mengajar) {
 
 	mysqli_query($conn,$query);
 	return mysqli_affected_rows($conn);	
+}
+function hapus_lam_skm(){
+	global $conn;
+	mysqli_query($conn,"DELETE FROM lam_skm");
 	
 	return mysqli_affected_rows($conn);
 }

@@ -6,7 +6,8 @@ $pass = "";
 $database = "siska";
 
 $conn = mysqli_connect($server, $user, $pass, $database);
-
+$sql = "select * from lam_skm";
+$result = mysqli_query($conn,$sql);
 if (!$conn) {
     die("<script>alert('Connection Failed.')</script>");
 }
@@ -78,19 +79,18 @@ if (!isset($_SESSION['username'])) {
             <!-- /.modal-dialog -->
             <div class="card">
               <div class="card-body">
-
                 <form method="post" enctype="multipart/form-data" action="import_aksi.php">
                   <div class="form-group">
-                      <label for="">Import File</label>
-                    <div class="form-group">
+                    <label for="">Import File</label>
                       <input name="lampiranskm" type="file" required="required">
                       <input name="upload" type="submit" value="Import" class="btn btn-primary col-sm-2"><br><small style="color:#dc3545;">*Format file yang diperbolehkan adalah file berformat *.xls (file excel)!</small>
-                    </div>
-                    </div>
-                  
-                </form><br>
-                
-                 <table id="example1" class="table table-bordered table-striped">
+                  </div>
+                  <div class="form-group">
+                  <label>Hapus Seluruh Data</label><br><a class="btn btn-danger col-sm-2" href="hapus_isi_lampiran.php"onclick="return confirm('Anda yakin ingin menghapus item ini ?')"> Hapus</a>
+                    &nbsp;&nbsp;&nbsp;<small style="color:#dc3545;">*Jika ingin menghapus seluruh data dalam Lampiran klik button Hapus ! </small>     
+                  </div>    
+                </form>               
+              <table id="example1" class="table table-bordered table-striped">
               <thead>
                 <tr>
                   <th>#</th>
@@ -136,8 +136,8 @@ if (!isset($_SESSION['username'])) {
                       <td><?php echo $d['sks1']; ?><br><?php echo $d['sks2']; ?><br><?php echo $d['sks3']; ?><br><?php echo $d['sks4']; ?><br><?php echo $d['sks5']; ?><br><?php echo $d['sks6']; ?><br><?php echo $d['sks7']; ?><br><?php echo $d['sks8']; ?><br><?php echo $d['sks9']; ?><br><?php echo $d['sks10']; ?></td>
                       
                       <td>
-                        <div><a class="btn-sm btn-outline-success" href="accept_baak.php?id_sk_mengajar=<?php echo $d['id_sk_mengajar']; ?>"><i class="fas fa-check"></i> ACCEPT</a></div>
-                        <div><a class="btn-sm btn-outline-danger" onclick="return confirm('Anda yakin ingin menolak item ini ?'" href="decline_baak.php?id_sk_mengajar=<?php echo $d['id_sk_mengajar']; ?>" ><i class="fas fa-times"></i> DECLINE</a></div> 
+                        <a class="btn btn-outline-warning" data-toggle="modal" data-target="#myModal<?php echo $d['id']; ?>"><i class="far fa-edit"></i> Edit</a>
+                        <a class="btn btn-outline-danger" href="hapus_lampiran.php?id=<?php echo $d['id']; ?>"onclick="return confirm('Anda yakin ingin menghapus item ini ?')"><i class="far fa-trash-alt"></i> Hapus</a>
                           
                       </td>
                     </tr>

@@ -280,7 +280,7 @@ $jumlah_sk_doswal = mysqli_num_rows($rowata_sk_doswal);
                                           <label for="">Level</label>
                                           <div class="form-group">
                                             <select class="form-control" name="level" required>
-                                              <option hidden selected><?= $t_level ?></option>
+                                              <option hidden selected value="<?= $row["level"];?>"><?= $t_level ?></option>
                                               <option value="0">Jurusan</option>
                                               <option value="1">BAAK</option>
                                               <option value="2">Bagian Umum</option>
@@ -330,19 +330,14 @@ $jumlah_sk_doswal = mysqli_num_rows($rowata_sk_doswal);
                       <p><ol>
                         <li>Pegawai terdaftar sebagai pegawai di Politeknik Negeri Cilacap</li>
                         <li>Lampiran yang akan dilampirkan di SK Magang/SK Mengajar/SK Dosen Wali (Format lampiran dalam bentuk .xls)</li>
-                      </ol>
-                    </p>
+                         <a class="btn btn-primary" href="../AdminLTE/coba.xls"><i class="far fa-file"></i> Contoh Format Lampiran Surat Keputusan Mengajar</a>
+                      </ol></p>
+                    </div>
                   </div>
                 </div>
-                <!-- /.row -->
-              </div>
-              <!-- /.col -->
             </div>
-            <!-- /.row -->
           </div>
         </div>
-        
-          <!-- ./col -->
         </div>
       </div>
       <!-- /.container-fluid -->

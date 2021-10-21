@@ -142,16 +142,14 @@ function hapus($id_sk_mengajar) {
 
 function acc_direktur($id_sk_mengajar) {
 	global $conn;
-	
+	$tgl = date('Y-m-d');
 
-		//insert data
-	$query ="UPDATE tb_sk_mengajar SET status = '3' WHERE id_sk_mengajar = $id_sk_mengajar
+	$query ="UPDATE tb_sk_mengajar SET status = '3', tgl_verif3= '$tgl' WHERE id_sk_mengajar = $id_sk_mengajar
 	";
 
 	mysqli_query($conn,$query);
 	return mysqli_affected_rows($conn);	
 	
-	return mysqli_affected_rows($conn);
 }
 function dec_direktur($id_sk_mengajar) {
 	global $conn;
@@ -163,8 +161,6 @@ function dec_direktur($id_sk_mengajar) {
 
 	mysqli_query($conn,$query);
 	return mysqli_affected_rows($conn);	
-	
-	return mysqli_affected_rows($conn);
 }
 
 ?>

@@ -1,5 +1,5 @@
 <?php
-error_reporting();
+error_reporting(0);
  include '../login/config.php';
 session_start();
  
@@ -96,7 +96,7 @@ if (!isset($_SESSION['username'])) {
               <tbody>
               <?php
                 $no =1;                   
-                $data = mysqli_query($conn,"SELECT * FROM log_tb_sk_mengajar where status_baru=1");
+                $data = mysqli_query($conn,"SELECT * FROM tb_log_sk_mengajar where status_baru=1");
                 while($d = mysqli_fetch_array($data)){
                   if ($d['status_lama']=='1'){
                     $status = 'Diverifikasi BAAK';
@@ -134,7 +134,7 @@ if (!isset($_SESSION['username'])) {
                     <tr>
                       <td><?php echo $no++; ?></td>
                       <td><?php echo $d['id_sk_mengajar']; ?></td>
-                      <td><?php echo $d['waktu']; ?></td>
+                      <td><?php echo $d['tanggal']; ?></td>
                       <td><?php echo "<a class='badge bg-". $warna."'>". $status."</a>";?>
                       <td><?php echo "<a class='badge bg-". $warna1."'>". $status_baru."</a>";?>
                           

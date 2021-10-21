@@ -210,9 +210,9 @@ if ( isset($_POST["submit"]))
                             <td class="text-center"><?php echo $d['level']; ?></td>
                             <td>
 
-                            <a class="btn" data-toggle="modal" data-target="#myModal<?php echo $d['nip']; ?>"><i class="far fa-edit" style="color:#ffc107;"></i></a>
-                            <a class="far fa-trash-alt" style="color:#dc3545;" href="hapus_user.php?nip=<?php echo $d['nip']; ?>" onclick="return confirm('Anda yakin ingin menghapus item ini ?')"></a>
-                            <a class="btn" data-toggle="modal" data-target="#lihatmodal<?php echo $d['nip']; ?>"><i class="fas fa-list" style= "color:#dc3545;"></i></a> 
+                            <a class="btn btn-outline-warning" data-toggle="modal" data-target="#myModal<?php echo $d['nip']; ?>"><i class="far fa-edit"></i> Edit</a>
+                            <a class="btn btn-outline-danger" href="hapus_user.php?nip=<?php echo $d['nip']; ?>" onclick="return confirm('Anda yakin ingin menghapus item ini ?')"><i class="far fa-trash-alt"></i> Hapus</a>
+                            <a class="btn btn-outline-info" data-toggle="modal" data-target="#lihatmodal<?php echo $d['nip']; ?>"><i class="fas fa-list"></i> Detail</a> 
                             
                             <div class="modal fade" id="myModal<?php echo $d['nip']; ?>">
                                 <div class="modal-dialog">

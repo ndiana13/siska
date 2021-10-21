@@ -96,7 +96,7 @@ require 'function_verifikasi.php';
                   <th>
                     Status
                   </th>
-                  <th>Menu
+                  <th>Detail SK
                   </th>
                   <th>
                     Action
