@@ -30,17 +30,17 @@ function tambah($data){
 	if(!$lampiran_sp){
 		return false;
 	}
-	$id_sk_mengajar = htmlspecialchars($data["id_sk_mengajar"]);
+	$id_sk_doswal = htmlspecialchars($data["id_sk_doswal"]);
 	$nip 			= htmlspecialchars($data["nip"]);
 	$id_jurusan  	= htmlspecialchars($data["id_jurusan"]);
-	$tgl_sp 		= htmlspecialchars($data["tgl_sp"]);
+	$tgl_sp_doswal 	= htmlspecialchars($data["tgl_sp_doswal"]);
 	$thn_akademik 	= htmlspecialchars($data["thn_akademik"]);
 	$semester  		= htmlspecialchars($data["semester"]);
 	$perihal  		= htmlspecialchars($data["perihal"]);
 	$status  		= htmlspecialchars($data["status"]);
 	$no_sk  		= htmlspecialchars($data["no_sk"]);
 
-	$query = "INSERT INTO tb_sk_mengajar VALUES ('$id_sk_mengajar', '$nip', '$id_jurusan', '$tgl_sp', '$thn_akademik', '$semester', '$perihal', '$lampiran_sp', '$status', 'NULL', 'NULL', 'NULL', '$no_sk')";
+	$query = "INSERT INTO tb_sk_doswal VALUES ('$id_sk_doswal', '$nip', '$id_jurusan', '$tgl_sp_doswal', '$thn_akademik', '$semester', '$perihal', '$lampiran_sp', '$status', 'NULL', 'NULL', 'NULL', '$no_sk')";
 	mysqli_query($conn,$query);
 	return mysqli_affected_rows($conn);
 }
@@ -51,7 +51,6 @@ function upload(){
 	$error      = $_FILES['lampiran_sp']['error'];
 	$tmpName    = $_FILES['lampiran_sp']['tmp_name'];
 	
-			//cek apakah tidak ada gambar yang di upload
 	if($error === 4) {
 		echo "<script>
 		alert('Pilih file terlebih dahulu!');
@@ -86,8 +85,7 @@ function upload(){
 	$namaFileBaru .= '.';
 	$namaFileBaru .=$ekstensifile_transaksi;
 	
-	
-	move_uploaded_file($tmpName,'lampiran/skmengajar/'.$namaFileBaru);
+	move_uploaded_file($tmpName,'../baak/lampiran/skdoswal/'.$namaFileBaru);
 	return $namaFileBaru;
 }
 
@@ -95,17 +93,16 @@ function ubah($data){
 
 	global $conn;
 
-	$id_sk_mengajar 			= htmlspecialchars($data["id_sk_mengajar"]);
-	$id_sk_mengajar_edit 		= htmlspecialchars($data["id_sk_mengajar_edit"]);
-	$nip 						= htmlspecialchars($data["nip"]);
-	$id_jurusan 				= htmlspecialchars($data["id_jurusan"]);
-	$tgl_sp 					= htmlspecialchars($data["tgl_sp"]);
-	$thn_akademik 				= htmlspecialchars($data["thn_akademik"]);
-	$semester  					= htmlspecialchars($data["semester"]);
-	$perihal  					= htmlspecialchars($data["perihal"]);
-	$lampiran_sp_lama 			= htmlspecialchars($data["lampiran_sp_lama"]);
-	$status  					= htmlspecialchars($data["status"]);
-	$no_sk  					= htmlspecialchars($data["no_sk"]);
+	$id_sk_doswal   	= htmlspecialchars($data["id_sk_doswal  "]);
+	$nip 				= htmlspecialchars($data["nip"]);
+	$id_jurusan 		= htmlspecialchars($data["id_jurusan"]);
+	$tgl_sp_doswal 		= htmlspecialchars($data["tgl_sp_doswal"]);
+	$thn_akademik 		= htmlspecialchars($data["thn_akademik"]);
+	$semester  			= htmlspecialchars($data["semester"]);
+	$perihal  			= htmlspecialchars($data["perihal"]);
+	$lampiran_sp_lama 	= htmlspecialchars($data["lampiran_sp_lama"]);
+	$status  			= htmlspecialchars($data["status"]);
+	$no_sk  			= htmlspecialchars($data["no_sk"]);
 		//cek apakah user pilih gambar baru atau tidak
 	if($_FILES['lampiran_sp']['error'] === 4){
 		$lampiran_sp  = $lampiran_sp_lama;
@@ -117,9 +114,9 @@ function ubah($data){
 		//insert data
 	$query ="UPDATE tb_sk_mengajar SET
 	
-	id_sk_mengajar   ='$id_sk_mengajar_edit',
+	id_sk_doswal     ='$id_sk_doswal  ',
 	nip ='$nip',
-	tgl_sp  ='$tgl_sp',
+	tgl_sp_doswal  ='$tgl_sp_doswal',
 	id_jurusan ='$id_jurusan',
 	thn_akademik ='$thn_akademik',
 	semester ='$semester',
@@ -127,42 +124,46 @@ function ubah($data){
 	lampiran_sp   ='$lampiran_sp',
 	status = '$status',
 	no_sk = '$no_sk'
-	WHERE id_sk_mengajar = $id_sk_mengajar";
+	WHERE id_sk_doswal   = $id_sk_doswal  ";
 	mysqli_query($conn,$query);
 	return mysqli_affected_rows($conn);
 }
 
-function hapus($id_sk_mengajar) {
-	global $conn;
-	mysqli_query($conn,"DELETE FROM tb_sk_mengajar WHERE id_sk_mengajar = $id_sk_mengajar");
-	
-	return mysqli_affected_rows($conn);
-}
+function ubah_profil($data){
 
-function acc_baak($id_sk_mengajar) {
 	global $conn;
-	$tgl = date('Y-m-d');
-	
-	$query ="UPDATE tb_sk_mengajar SET status = '1', tgl_verif1= '$tgl' WHERE id_sk_mengajar = $id_sk_mengajar
-	";
 
-	mysqli_query($conn,$query);
-	return mysqli_affected_rows($conn);	
-}
-function dec_baak($id_sk_mengajar) {
-	global $conn;
-	
+	$nip 			=htmlspecialchars($data["nip"]);
+	$nip_edit 		=htmlspecialchars($data["nip_edit"]);
+	$username       = htmlspecialchars($data['username']);
+	$password 		= htmlspecialchars($data['password']);
+	$email  		= htmlspecialchars($data['email']);
+	$jabatan        = htmlspecialchars($data['jabatan']);
+	$no_hp         	= htmlspecialchars($data['no_hp']);
+	$level         	= htmlspecialchars($data['level']);
+		
 
+	
 		//insert data
-	$query ="UPDATE tb_sk_mengajar SET status = '4' WHERE id_sk_mengajar = $id_sk_mengajar
+	$query ="UPDATE tb_user SET
+	
+	nip 		='$nip_edit',
+	username 	='$username',
+	password	='$password',
+	email 		='$email',
+	jabatan 	='$jabatan',
+	no_hp 		='$no_hp',
+	level 		='$level'
+	
+	WHERE nip= '$nip'
 	";
-
 	mysqli_query($conn,$query);
-	return mysqli_affected_rows($conn);	
+	return mysqli_affected_rows($conn);
 }
-function hapus_lam_skm(){
+
+function hapus($id_sk_doswal  ) {
 	global $conn;
-	mysqli_query($conn,"DELETE FROM lam_skm");
+	mysqli_query($conn,"DELETE FROM tb_sk_mengajar WHERE id_sk_doswal   = $id_sk_doswal  ");
 	
 	return mysqli_affected_rows($conn);
 }

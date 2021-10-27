@@ -41,7 +41,7 @@ if ($result['id_jurusan']){
     $sql="select * from tb_jurusan";
     $hasil=mysqli_query($kon,$sql);
     while ($data = mysqli_fetch_array($hasil)) {
-    $nm_jurusan = $data['nm_jurusan'];
+    $nm_jurusan = $data['nm_jurusan'];		
 }
    
 }
@@ -288,20 +288,26 @@ error_reporting(0);
 				<tbody>
 				<?php
 					$connection = mysqli_connect("localhost",'root',"","siska");
-					if ($result['id_jurusan']== 'TE') {
+					if ($result['id_jurusan']== 'TI') {
 						$sql = "SELECT * FROM lam_skm ORDER BY id";
 					}
 					elseif ($result['id_jurusan']=='TM') {
-						$sql = "SELECT * FROM lam_skm1 ORDER BY id";
+						$sql = "SELECT * FROM lam_skm_tm ORDER BY id";
 					}
+					elseif ($result['id_jurusan']=='TE') {
+						$sql = "SELECT * FROM lam_skm_te ORDER BY id";
+					}
+					elseif ($result['id_jurusan']=='TPPL') {
+						$sql = "SELECT * FROM lam_skm_tppl ORDER BY id";
+					}
+		           
+		           
 		           
 		            $result = mysqli_query($connection,$sql);
 		            $no= 1;
 		            while($d = mysqli_fetch_array($result)) {
-		            $jml_sks_a[] = $d['sks_matkul1']+$d['sks_matkul2']+$d['sks_matkul3']+$d['sks_matkul4']+$d['sks_matkul5']+$d['sks_matkul6']+$d['sks_matkul7']+$d['sks_matkul8']+$d['sks_matkul9']+$d['sks_matkul10'];
-		            $jml_sks_b[] = $d['sks1']+$d['sks2']+$d['sks3']+$d['sks4']+$d['sks5']+$d['sks6']+$d['sks7']+$d['sks8']+$d['sks9']+$d['sks10'];
-		            $total_sks_a = array_sum($jml_sks_a);
-		            $total_sks_b = array_sum($jml_sks_b);
+		            $jml_sks_a = $d['sks_matkul1']+$d['sks_matkul2']+$d['sks_matkul3']+$d['sks_matkul4']+$d['sks_matkul5']+$d['sks_matkul6']+$d['sks_matkul7']+$d['sks_matkul8']+$d['sks_matkul9']+$d['sks_matkul10'];
+		            $jml_sks_b = $d['sks1']+$d['sks2']+$d['sks3']+$d['sks4']+$d['sks5']+$d['sks6']+$d['sks7']+$d['sks8']+$d['sks9']+$d['sks10'];
 				?>
 				<tr style="font-size: 9px; text-align: center;">
 					<td width="10">NO</td>
@@ -447,8 +453,8 @@ error_reporting(0);
                 <tr style="font-size: 9px; text-align: center;">
 					<td width="200"></td>
 					<td colspan="2">Jumlah SKS</td>
-					<td width="40"><?php echo "$total_sks_a";?></td>
-					<td width="50"><?php echo "$total_sks_b";?></td>
+					<td width="40"><?php echo "$jml_sks_a";?></td>
+					<td width="50"><?php echo "$jml_sks_b";?></td>
 				</tr>
             	</tbody>
 			<?php

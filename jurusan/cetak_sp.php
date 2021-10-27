@@ -4,33 +4,33 @@ $id_sp = $_GET['id_sp'];
 $query     =mysqli_query($conn, "SELECT * FROM tb_pengajuan WHERE id_sp='$id_sp'");
 $result    =mysqli_fetch_array($query);
 
-   $y = substr($result['tgl_direktur'],0,4);
-   $m = substr($result['tgl_direktur'],5,2);
-   $h = substr($result['tgl_direktur'],8,2);
+   $t = substr($result['tgl_sp'],0,4);
+   $b = substr($result['tgl_sp'],5,2);
+   $h = substr($result['tgl_sp'],8,2);
 
-   if($m == "01"){
+   if($b == "01"){
        $nm = "Januari";
-   } elseif($m == "02"){
+   } elseif($b == "02"){
        $nm = "Februari";
-   } elseif($m == "03"){
+   } elseif($b == "03"){
        $nm = "Maret";
-   } elseif($m == "04"){
+   } elseif($b == "04"){
        $nm = "April";
-   } elseif($m == "05"){
+   } elseif($b == "05"){
        $nm = "Mei";
-   } elseif($m == "06"){
+   } elseif($b == "06"){
        $nm = "Juni";
-   } elseif($m == "07"){
+   } elseif($b == "07"){
        $nm = "Juli";
-   } elseif($m == "08"){
+   } elseif($b == "08"){
        $nm = "Agustus";
-   } elseif($m == "09"){
+   } elseif($b == "09"){
        $nm = "September";
-   } elseif($m == "10"){
+   } elseif($b == "10"){
        $nm = "Oktober";
-   } elseif($m == "11"){
+   } elseif($b == "11"){
        $nm = "November";
-   } elseif($m == "12"){
+   } elseif($b == "12"){
        $nm = "Desember";
   }
 if ($result['id_jurusan']){
@@ -40,9 +40,9 @@ if ($result['id_jurusan']){
    	}
 	$jurusan = $result['id_jurusan'];
     $sql="SELECT nm_jurusan FROM tb_jurusan WHERE id_jurusan ='$jurusan'";
-    $hasil=mysqli_query($kon,$sql);
-    while ($data = mysqli_fetch_array($hasil)) {
-    $nm_jurusan = $data['nm_jurusan']; 
+    $dasil=mysqli_query($kon,$sql);
+    while ($dataata = mysqli_fetch_array($dasil)) {
+    $nm_jurusan = $dataata['nm_jurusan']; 
 }
 }
 error_reporting(0);
@@ -58,9 +58,8 @@ error_reporting(0);
 		}
 
 		table tr,td .text2 {
-			vertical-align: top!important;
 			text-align: justify;
-			font-size: 17px;
+			font-size: 16px;
 		}
 
 		
@@ -71,214 +70,158 @@ error_reporting(0);
 	<center>
 		<table width="700">
 			<tr>
-				<td><img src="../AdminLTE/dist/img/pnc.png" width="80" height="80"></td>
+				<td><img src="../AdminLTE/dist/img/pnc.png" width="100" height="`100"></td>
 				<td><center>
-					<font size="4"> KEMENTRIAN PENDIDIKAN, KEBUDAYAAN, RISET, DAN TEKNOLOGI<br></font>
-					<font size="4"><strong>POLITEKNIK NEGERI CILACAP</strong><br></font>
+					<font size="5">KEMENTRIAN PENDIDIKAN, DAN KEBUDAYAAN<br></font>
+					<font size="4">POLITEKNIK NEGERI CILACAP<br></font>
+					<font size="4" style="text-transform:uppercase;"><strong><?php echo "<a>".$nm_jurusan."</a>"?></strong><br></font>
 					<font size="2">Jalan Dr.Soetomo No.1 Sidakaya-CILACAP 53212 Jawa Tengah<br>
 						Telepon: (0282)533329, Faksimile: (0282)537992<br>
 						Laman: www.politeknikcilacap.ac.id Email: poltec@politeknikcilacap.ac.id</font>
 				</center></td>			
 			</tr>
 			<tr>
-				<td colspan="2"><hr size="3px"></td>
+				<td colspan="2"><hr size="1px" color="black"></td>
 			</tr>
 		</table>
+	</center>
 		<table width="700">
-			<tr>
-				<td>
-				<center>
-					<font size="3">KEPUTUSAN DIREKTUR POLITEKNIK NEGERI CILACAP<br>
-						NOMOR : <?php echo $result['no_sk'];?></font>
-				</center>
-				</td>			
+			<td width="500"></td>
+			<td>
+				<?php echo  "<a>". $h." ". $nm. " ". $t. "</a>" ?>
+			</td>
 			</tr>
-		</table>
-		<table width="700">
-			<tr>
-				<td>
-				<center>
-					<font size="3">TENTANG</font>
-				</center>
-				</td>			
-			</tr>
-		</table>
-		<table width="600">
-			<tr>
-				<td>
-				<center>
-					<font size="3" style="text-transform:uppercase;"><?php echo $result['perihal'];?><br></font>
-					<font size="3"style="text-transform:uppercase;">PADA JURUSAN <?php echo "<a>". $nm_jurusan."</a>";?> SEMESTER <?php echo $result['semester'];?><br>TAHUN AKADEMIK <?php echo $result['thn_akademik'];?><br></font>
-				</center>
-				</td>
-			</tr>
-		</table>
-		<table width="700">
-			<tr>
-				<td>
-				<center>
-					<font size="3" >DIREKTUR POLITEKNIK NEGERI CILACAP<br></font>
-				</center>
-				</td>
-			</tr>
-		</table>
-		</center>
+		</table>		
 		<table>
 			<tr class="text2">
-				<td width="110">Menimbang</td>
+				<td width="40"></td>
+				<td width="70">Nomor</td>
 				<td width="20"><span>:</span><td>
-				<td width="30">a.</td>
-				<td width="450">bahwa dalam rangka melaksanakan Tri Darma Perguruan Tinggi dilingkungan Politeknik Negeri Cilacap, perlu diatur beban tugas dosen/tenaga pengajar;</td>
+				<td width="300"><?php echo $result['no_sp'];?></td>
 			</tr>
 			<tr class="text2">
-				<td width="110"></td>
-				<td width="20"><span></span><td>
-				<td width="30">b.</td>
-				<td width="450">bahwa sehubungan dengan butir a diatas, perlu ditetapkan Surat Keputusan Direktur Politeknik Negeri Cilacap.</td>
+				<td width="40"></td>
+				<td width="70">Lampiran</td>
+				<td width="20"><span>:</span><td>
+				<td width="300"><?php echo $result['lampiran'];?><td>
 			</tr>
-			
+			<tr class="text2">
+				<td width="40"></td>
+				<td width="70">Hal</td>
+				<td width="20"><span>:</span><td>
+				<td width="300"><?php echo $result['perihal'];?><td>
+			</tr>
+			<tr class="text2">
+				<td width="40"></td>
+				<td width="70"></td>
+				<td width="20"><td>
+				<td width="300">Semester <?php echo $result['semester'];?> TA <?php echo $result['thn_akademik'];?><td>
+			</tr>
+				
 		</table>
+		<br><br>
 		<table>
 			<tr class="text2">
-				<td width="110">Mengingat</td>
-				<td width="20"><span>:</span><td>
-				<td width="30">1.</td>
-				<td width="450">Undang-Undang Republik Indonesia Nomor 20 Tahun 2003 tentang Sistem Pendidikan Nasional;</td>
+				<td width="40"></td>
+				<td width="400">Kepada Yth.<br>
+				Ka.Subbag. Akademik dan Kemahasiswaan<br>
+				Politeknik Negeri Cilacap<br>
+				Di Tempat</td>
+			</tr>			
+		</table>
+		<?php
+		if($result['jns_sp']=='skdoswal'){
+		?>
+		<table>
+			<tr class="text2">
+				<td width="40"></td>
+				<td width="600"><br><br>Dengan hormat,</td>
 			</tr>
 			<tr class="text2">
-				<td width="110"></td>
-				<td width="20"><span></span><td>
-				<td width="30">2.</td>
-				<td width="450">Undang-Undang Republik Indonesia Nomor 14 Tahun 2005 tentang Guru dan Dosen;</td>
+				<td width="40"></td>
+				<td width="600"><br>Sehubungan dengan pelaksanaan perkuliahan pada semester <?php echo $result['semester'];?> Tahun Akademik <?php echo $result['thn_akademik'];?>, kami bermaksud mengajukan permohonan <?php echo $result['perihal'];?> dengan nama dosen-dosen terlampir.</td>
 			</tr>
 			<tr class="text2">
-				<td width="110"></td>
-				<td width="20"><span></span><td>
-				<td width="30">3.</td>
-				<td width="450">Undang-Undang Republik Indonesia Nomor 12 Tahun 2012 tentang Pendidikan Tinggi;</td>
-			</tr>
-			<tr class="text2">
-				<td width="110"></td>
-				<td width="20"><span></span><td>
-				<td width="30">4.</td>
-				<td width="450">Peraturan Pemerintah Nomor 4 Tahun 2014  tentang Penyelenggaraan Pendidikan Tinggi dan Pengelolaan Perguruan tinggi;</td>
-			</tr>
-			<tr class="text2">
-				<td width="110"></td>
-				<td width="20"><span></span><td>
-				<td width="30">5.</td>
-				<td width="450">Peraturan Menteri Pendidikan dan Kebudayaan Nomor 102 Tahun 2014 tentang Pendirian, Organisasi dan Tata Kerja Politeknik Negeri Cilacap;</td>
-			</tr>
-			<tr class="text2">
-				<td width="110"></td>
-				<td width="20"><span></span><td>
-				<td width="30">6.</td>
-				<td width="450">Peraturan Menteri Riset, Teknologi dan Pendidikan Tinggi Nomor 44 Tahun 2015 tentang Standar Nasional Pendidikan Tinggi;</td>
-			</tr>
-			<tr class="text2">
-				<td width="110"></td>
-				<td width="20"><span></span><td>
-				<td width="30">7.</td>
-				<td width="450">Peraturan Menteri Keuangan Nomor 32/PMK.02/2018 tentang Standar Biaya Masukan Tahun Anggaran 2020.</td>
-			</tr>
-			
+				<td width="40"></td>
+				<td width="600"><br>Demikian surat permohoonan ini saya buat, atas perhatian dan kerjasamanya kami ucapkan terima kasih.</td>
+			</tr>			
 		</table>
 		<table>
 			<tr class="text2">
-				<td width="110">Memperhatikan</td>
-				<td width="20"><span>:</span><td>
-				<td width="30">1.</td>
-				<td width="450">Kalender Akademik Politeknik Negeri Cilacap Tahun Akademik <?php echo $result['thn_akademik'];?>;</td>
+				<td width="420"></td>
+				<td><br><br><br><br>Jurusan <?php echo "<a>" .$nm_jurusan."</a>"?><br>Ketua</td>
 			</tr>
 			<tr class="text2">
-				<td width="110"></td>
-				<td width="20"><span></span><td>
-				<td width="30">2.</td>
-				<td width="450">Surat Ketua Jurusan tentang Permohonan Surat Keputusan Beban Tugas Tenaga Pengajar Semester <?php echo $result['semester'];?> Tahun Akademik <?php echo $result['thn_akademik'];?>.</td>
+				<td></td>
+				<td style="font-size: 12px;">
+				<?php
+				$jurusan = $result['id_jurusan'];
+				$kajur = "SELECT * FROM tb_pengguna WHERE level=2";
+				$sql     =mysqli_query($conn,$kajur);
+				$row    =mysqli_fetch_array($sql);
+				?>
+				<img src="../AdminLTE/dist/img/<?= $row['ttd'];?>" width="120" height="90">
 			</tr>
-			
+			<tr class="text2">
+				<td width="420"></td>
+				<td width="300"><?php echo $row['nama_lengkap'];?><br>NPAK. <?php echo $row['nip'];?></td>
+			</tr>
 		</table>
-		<table width="700">
-			<tr>
-				<td>
-				<center>
-					<font size="3">MEMUTUSKAN :</font>
-				</center>
-				</td>			
+		<?php
+		}
+		elseif($result['jns_sp']=='skmengajar'){
+		?>
+		<table>
+			<tr class="text2">
+				<td width="40"></td>
+				<td width="600"><br><br>Dengan hormat,</td>
 			</tr>
+			<tr class="text2">
+				<td width="40"></td>
+				<td width="600"><br>Sehubungan dengan pelaksanaan perkuliahan pada semester <?php echo $result['semester'];?> Tahun Akademik <?php echo $result['thn_akademik'];?>, kami bermaksud mengajukan permohonan <?php echo $result['perihal'];?> pada dosen-dosen dengan nama terlampir.</td>
+			</tr>
+			<tr class="text2">
+				<td width="40"></td>
+				<td width="600"><br>Demikian surat permohoonan ini saya buat, atas perhatian dan kerjasamanya kami ucapkan terima kasih.</td>
+			</tr>			
 		</table>
 		<table>
 			<tr class="text2">
-				<td width="110">Menetapkan</td>
-				<td width="20"><span>:</span><td>
-				<td width="480" style="text-transform:uppercase;">Keputusan direktur politeknik negeri cilacap tentang <?php echo $result['perihal'];?> JURUSAN <?php echo "<a>". $nm_jurusan."</a>";?> Semester <?php echo $result['semester'];?> Tahun Akademik <?php echo $result['thn_akademik'];?>.</td>
-			</tr>		
+				<td width="420"></td>
+				<td><br><br><br><br>Jurusan <?php echo "<a>" .$nm_jurusan."</a>"?><br>Ketua</td>
+			</tr>
+			<tr class="text2">
+				<td></td>
+				<td style="font-size: 12px;">
+				<?php
+				$jurusan = $result['id_jurusan'];
+				$kajur = "SELECT * FROM tb_pengguna WHERE level=2";
+				$sql     =mysqli_query($conn,$kajur);
+				$row    =mysqli_fetch_array($sql);
+				?>
+				<img src="../AdminLTE/dist/img/<?= $row['ttd'];?>" width="120" height="90">
+			</tr>
+			<tr class="text2">
+				<td width="420"></td>
+				<td width="300"><?php echo $row['nama_lengkap'];?><br>NPAK. <?php echo $row['nip'];?></td>
+			</tr>
 		</table>
-		<table>
-			<tr class="text2">
-				<td width="110">KESATU</td>
-				<td width="20"><span>:</span><td>
-				<td width="480">Menetapkan nama-nama yang terdapat pada lampiran surat keputusan ini, sebagai dosen/tenaga pengajar yang diberi tugas mengajar/menguji untuk Semester <?php echo $result['semester'];?> Tahun Akademik <?php echo $result['thn_akademik'];?>.</td>
-			</tr>
-			<tr class="text2">
-				<td width="110">KEDUA</td>
-				<td width="20"><span>:</span><td>
-				<td width="480">Tugas mengajar/menguji dosen tercantum dalam lampiran keputusan ini yang terdapat pada kolom 1 nomor, kolom 2 nama dosen, kolom 3 nama matakuliah, kolom 4 program studi, kolom 5 kelas, kolom 6 SKS matakuliah dan kolom 7 SKS pararel.</td>
-			</tr>
-			<tr class="text2">
-				<td width="110">KETIGA</td>
-				<td width="20"><span>:</span><td>
-				<td width="480">Dalam melaksanakan tugasnya dosen/tenaga pengajar sebagaimana dalam diktum kesatu bertanggungjawab kepada Direktur Politeknik Negeri Cilacap melalui Ketua Jurusan.</td>
-			</tr>
-			<tr class="text2">
-				<td width="110">KEEMPAT</td>
-				<td width="20"><span>:</span><td>
-				<td width="480">Segala biaya yang timbul sebagai akibat ditetapkannya Surat Keputusan ini dibebankan pada DIPA Politeknik Negeri Cilacap Tahun Anggaran 2019 Nomor: DIPA.042.01.2.400867/2019 tanggal 5 Desember 2018.</td>
-			</tr>
-			<tr class="text2">
-				<td width="110">KELIMA</td>
-				<td width="20"><span>:</span><td>
-				<td width="480">Keputusan Direktur ini mulai berlaku pada tanggal ditetapkan.</td>
-			</tr>					
-		</table>
-		<br><br><br>
-		<table width="700">
-			<tr>
-				<td width="320"><br><br><br></td>
-				<td>Ditetapkan di Cilacap<br><?php echo  "<a>". $h." ". $nm. " ". $y. "</a>" ?><br>DIREKTUR POLITEKNIK NEGERI<br>CILACAP<br>
-				<br><br><br><br><span style="text-transform:uppercase;text-align: center;"><?php 
-		$direktur = "SELECT * FROM tb_pengguna WHERE level=3";
-		$sql     =mysqli_query($conn,$direktur);
-		$r    =mysqli_fetch_array($sql);?><?php echo $r['nama_lengkap'];?></span><br><?php echo $r['nip'];?></td>
-			</tr>
-	     </table>
-	     <div style="page-break-before:always;">
+		<div style="page-break-before:always;">
 	     	<table width="700">
-				<tr style="font-size: 10px;">
-					<td width="300"></td>
-					<td width="400">Lampiran Keputusan Direktur Politeknik Negeri Cilacap</td>
+				<tr style="font-size: 12px;">
+					<td width="100"><br>Lampiran Nomor : <?php echo $result['no_sp'];?></td>
 				</tr>
-				<tr style="font-size: 10px;">
-					<td width="400"></td>
-					<td width="30">Nomor &nbsp;&nbsp;&nbsp;: <?php echo $result['no_sk'];?></td>
+				<tr style="font-size: 12px;">
+					<td width="100">Tanggal &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <?php echo  "<a>". $h." ". $nm. " ". $t. "</a>" ?></td>
 				</tr>
-				<tr style="font-size: 10px;">
-					<td width="300"></td>
-					<td>Tanggal &nbsp;&nbsp;: <?php echo  "<a>". $h." ". $nm. " ". $y. "</a>" ?></td>
-				</tr>
-				<tr style="font-size: 10px;">
-					<td width="300"></td>
-					<td>Tentang : <?php echo $result['perihal'];?> Semester <?php echo $result['semester'];?> Jurusan <?php echo "<a>". $nm_jurusan."</a>";?> Tahun Akademik <?php echo $result['thn_akademik'];?>
-					<td>
-				</tr>
-			</table><br><br>		
+			</table>		
 			<table width="700">
 				<tr>
 					<td width="700">
 					<center>
-						<font size="1" style="text-transform:uppercase;" >DAFTAR NAMA-NAMA DOSEN / TENAGA PENGAJAR YANG DIBERI BEBAN TUGAS MENGAJAR DAN MENGUJI<br>
+						<font size="2" style="text-transform:uppercase;" ><strong><br>DAFTAR NAMA-NAMA DOSEN / TENAGA PENGAJAR YANG DIBERI BEBAN TUGAS MENGAJAR DAN MENGUJI<br>
 						PADA JURUSAN <?php echo "<a>". $nm_jurusan."</a>";?> SEMESTER <?php echo $result['semester'];?><br>
-						TAHUN AKADEMIK <?php echo $result['thn_akademik'];?>
+						TAHUN AKADEMIK <?php echo $result['thn_akademik'];?></strong>
 						</font>
 					</center>
 					</td>			
@@ -460,19 +403,67 @@ error_reporting(0);
             	<?php
 				}
 				?>
+				<table>
+					<tr class="text2">
+						<td width="420"></td>
+						<td><br><br><br><br>Jurusan <?php echo "<a>" .$nm_jurusan."</a>"?><br>Ketua</td>
+					</tr>
+					<tr class="text2">
+						<td></td>
+						<td style="font-size: 12px;">
+						<img src="../AdminLTE/dist/img/<?= $row['ttd'];?>" width="120" height="90">
+					</tr>
+					<tr class="text2">
+						<td width="420"></td>
+						<td width="300"><?php echo $row['nama_lengkap'];?><br>NPAK. <?php echo $row['nip'];?></td>
+					</tr>
+				</table>
 			</table>
-			<br><br><br>
-			<table width="700">
-				<tr>
-					<td width="420"><br><br><br><br></td>
-					<td style="font-size: 12px;"> Ditetapkan di Cilacap<br><?php echo  "<a>". $h." ". $nm. " ". $y. "</a>" ?><br>DIREKTUR POLITEKNIK NEGERI<br>CILACAP<br>
-					<br><br><br><br><span style="text-transform:uppercase;text-align: center;"><?php 
-					$direktur = "SELECT * FROM tb_pengguna WHERE level=3";
-					$sql     =mysqli_query($conn,$direktur);
-					$r    =mysqli_fetch_array($sql);?><?php echo $r['nama_lengkap'];?></span><br><?php echo $r['nip'];?></td>
-				</tr>
-		     </table>
 	     </div>
+		<?php
+		}
+		elseif ($result['jns_sp']=='skmagang'){
+		?>
+		<table>
+			<tr class="text2">
+				<td width="40"></td>
+				<td width="600"><br><br>Dengan hormat,</td>
+			</tr>
+			<tr class="text2">
+				<td width="40"></td>
+				<td width="600"><br>Sehubungan dengan pelaksanaan perkuliahan pada semester <?php echo $result['semester'];?> Tahun Akademik <?php echo $result['thn_akademik'];?>, kami bermaksud mengajukan permohonan <?php echo $result['perihal'];?> pada dosen-dosen dengan nama terlampir.</td>
+			</tr>
+			<tr class="text2">
+				<td width="40"></td>
+				<td width="600"><br>Demikian surat permohoonan ini saya buat, atas perhatian dan kerjasamanya kami ucapkan terima kasih.</td>
+			</tr>			
+		</table>
+		<table>
+			<tr class="text2">
+				<td width="420"></td>
+				<td><br><br><br><br>Jurusan <?php echo "<a>" .$nm_jurusan."</a>"?><br>Ketua</td>
+			</tr>
+			<tr class="text2">
+				<td></td>
+				<td style="font-size: 12px;">
+				<?php
+				$jurusan = $result['id_jurusan'];
+				$kajur = "SELECT * FROM tb_pengguna WHERE level=2";
+				$sql     =mysqli_query($conn,$kajur);
+				$row    =mysqli_fetch_array($sql);
+				?>
+				<img src="../AdminLTE/dist/img/<?= $row['ttd'];?>" width="120" height="90">
+			</tr>
+			<tr class="text2">
+				<td width="420"></td>
+				<td width="300"><?php echo $row['nama_lengkap'];?><br>NPAK. <?php echo $row['nip'];?></td>
+			</tr>
+		</table>
+		<?php
+		}
+		?>
+		
+
 	    
 </body>
 </html>
