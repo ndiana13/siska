@@ -16,7 +16,7 @@ if ( isset($_POST["submit"]))
     echo "
     <script>
     alert('Data Berhasil Ditambahkan');
-    document.location.href='tb_sp_mengajar.php';
+    document.location.href='tb_pengajuan.php';
     </script>
     ";
   }else {
@@ -24,7 +24,7 @@ if ( isset($_POST["submit"]))
     echo "
     <script>
     alert('Data Gagal Ditambahkan');
-     document.location.href='tb_sp_mengajar.php';
+     document.location.href='tb_pengajuan.php';
     </script>
     ";
 
@@ -36,14 +36,14 @@ if ( isset($_POST["submit1"])) {
       echo "
       <script>
       alert('Data berhasil diubah');
-      document.location.href='tb_sp_mengajar.php';
+      document.location.href='tb_pengajuan.php';
       </script>
       ";
     }else {
     echo "
       <script>
       alert('Data gagal diubah');
-      document.location.href='tb_sp_mengajar.php';
+      document.location.href='tb_pengajuan.php';
       </script>
       ";
     }
@@ -246,7 +246,7 @@ if ( isset($_POST["submit1"])) {
                     Status
                   </th>
                   <th>
-                    No SK<br>
+                    No SK<br>Lampiran
                   </th>
                   <th>
                     Action
@@ -256,31 +256,26 @@ if ( isset($_POST["submit1"])) {
               <tbody>
               <?php                    
                 $connection = mysqli_connect("localhost",'root',"","siska");
-                $sql = "SELECT * FROM tb_pengajuan ORDER BY id_sp";
+                $sql = "SELECT * FROM tb_pengajuan INNER JOIN tb_jurusan ON tb_pengajuan.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_pengajuan.nip = tb_pengguna.nip";
                 $result = mysqli_query($connection,$sql);
                 $no= 1;
                 while($d = mysqli_fetch_array($result)) {
-                  if ($d['status']=='1'){
-                    $status = 'Diverifikasi Kajur';
-                    $warna = 'info';
-                    $tgl = $d['tgl_kajur'];
-                    }
-                    elseif ($d['status']=='2'){
+                  if($d['status']=='1'){
                     $status = 'Diverifikasi BAAK';
                     $warna = 'warning';
                     $tgl = $d['tgl_baak'];
                     }
-                    elseif ($d['status']=='3'){
+                    elseif ($d['status']=='2'){
                     $status = 'Diverifikasi Wadir';
                     $warna = 'primary';
                     $tgl = $d['tgl_wadir'];
                     }
-                    elseif ($d['status']=='4'){
+                    elseif ($d['status']=='3'){
                     $status = 'Diverifikasi Direktur';
                     $warna = 'success';
                     $tgl = $d['tgl_direktur'];
                     }
-                    elseif ($d['status']=='5'){
+                    elseif ($d['status']=='4'){
                     $status = 'Ditolak';
                     $warna = 'dangger';
                     }
@@ -295,10 +290,10 @@ if ( isset($_POST["submit1"])) {
                       <td><?php echo $d['nip']; ?></td>
                       <td><?php echo $d['no_sp']; ?></td>
                       <td><?php echo $d['tgl_sp']; ?></td>
-                      <td><?php echo $d['id_jurusan']; ?><br><?php echo $d['thn_akademik']; ?></td>
+                      <td><?php echo $d['nm_jurusan']; ?><br><?php echo $d['thn_akademik']; ?></td>
                       <td><?php echo $d['perihal']; ?></td>
                       <td><?php echo "<a a href= '#' class='badge bg-". $warna."'>". $status."</a>";?><br><?php echo "<a>" .$tgl. "<a>"?>
-                      <td><?php echo $d['no_sk']; ?></td>
+                      <td><?php echo $d['no_sk']; ?><br><?php echo $d['lampiran_sp']; ?></td>
                       <td>
                         <a class="btn btn-app" data-toggle="modal" data-target="#myModal<?php echo $d['id_sp']; ?>">
                           <i class="fas fa-edit"></i> Edit</a>

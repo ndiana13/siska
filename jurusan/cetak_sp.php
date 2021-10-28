@@ -1,5 +1,10 @@
 <?php
 include '../login/config.php';
+session_start();
+ 
+if (!isset($_SESSION['nama'])) {
+    header("Location: index.php");
+}
 $id_sp = $_GET['id_sp'];
 $query     =mysqli_query($conn, "SELECT * FROM tb_pengajuan WHERE id_sp='$id_sp'");
 $result    =mysqli_fetch_array($query);
@@ -103,7 +108,7 @@ error_reporting(0);
 				<td width="40"></td>
 				<td width="70">Lampiran</td>
 				<td width="20"><span>:</span><td>
-				<td width="300"><?php echo $result['lampiran'];?><td>
+				<td width="300">1 bundle<td>
 			</tr>
 			<tr class="text2">
 				<td width="40"></td>
@@ -155,8 +160,8 @@ error_reporting(0);
 				<td></td>
 				<td style="font-size: 12px;">
 				<?php
-				$jurusan = $result['id_jurusan'];
-				$kajur = "SELECT * FROM tb_pengguna WHERE level=2";
+				$jurusan = $_SESSION['nama'];
+				$kajur = "SELECT * FROM tb_pengguna WHERE nama_lengkap='$jurusan'";
 				$sql     =mysqli_query($conn,$kajur);
 				$row    =mysqli_fetch_array($sql);
 				?>
@@ -194,8 +199,8 @@ error_reporting(0);
 				<td></td>
 				<td style="font-size: 12px;">
 				<?php
-				$jurusan = $result['id_jurusan'];
-				$kajur = "SELECT * FROM tb_pengguna WHERE level=2";
+				$jurusan = $_SESSION['nama'];
+				$kajur = "SELECT * FROM tb_pengguna WHERE nama_lengkap='$jurusan'";
 				$sql     =mysqli_query($conn,$kajur);
 				$row    =mysqli_fetch_array($sql);
 				?>
@@ -212,7 +217,7 @@ error_reporting(0);
 					<td width="100"><br>Lampiran Nomor : <?php echo $result['no_sp'];?></td>
 				</tr>
 				<tr style="font-size: 12px;">
-					<td width="100">Tanggal &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <?php echo  "<a>". $h." ". $nm. " ". $t. "</a>" ?></td>
+					<td width="100">Tanggal &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <?php echo  "<a>". $h." ". $nm. " ". $t. "</a>" ?></td>
 				</tr>
 			</table>		
 			<table width="700">
@@ -447,8 +452,8 @@ error_reporting(0);
 				<td></td>
 				<td style="font-size: 12px;">
 				<?php
-				$jurusan = $result['id_jurusan'];
-				$kajur = "SELECT * FROM tb_pengguna WHERE level=2";
+				$jurusan = $_SESSION['nama'];
+				$kajur = "SELECT * FROM tb_pengguna WHERE nama_lengkap='$jurusan'";
 				$sql     =mysqli_query($conn,$kajur);
 				$row    =mysqli_fetch_array($sql);
 				?>

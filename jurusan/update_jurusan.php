@@ -3,7 +3,7 @@
 $server = "localhost";
 $user = "root";
 $pass = "";
-$database = "sisk";
+$database = "siska";
 
 $conn = mysqli_connect($server, $user, $pass, $database);
 if (!$conn) {
@@ -23,7 +23,7 @@ if  (!$updatedata){
 
     echo "
     <script>
-    alert('Data Gagal Diupdate');
+    alert('Data Gagal Diubah');
     document.location.href='tb_jurusan.php';
     </script>
     ";
@@ -31,7 +31,7 @@ if  (!$updatedata){
 
     echo "
     <script>
-    alert('Data Berhasil Diupdate');
+    alert('Data Berhasil Diubah');
      document.location.href='tb_jurusan.php';
     </script>
     ";

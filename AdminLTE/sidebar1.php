@@ -31,36 +31,13 @@
               <i class="nav-icon fas fa-home"></i>
               <p>Dashboard</p>
             </a>
-          </li> 
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-mail-bulk"></i>
-              <p>
-                Surat Pengajuan
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="tb_sp_mengajar.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>SK Mengajar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/tables/data.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>SK Magang</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/tables/jsgrid.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>SK Dosen Wali</p>
-                </a>
-              </li>
-            </ul>
           </li>
+          <li class="nav-item">
+            <a href="tb_verifikasi.php" class="nav-link">
+              <i class="nav-icon far fa-check-square"></i>
+              <p>Pengajuan</p>
+            </a>
+          </li>    
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-mail-bulk"></i>
@@ -93,22 +70,15 @@
             <li class="nav-item">
             <a href="tb_jurusan.php" class="nav-link">
               <i class="nav-icon fas fa-file"></i>
-              <p>Tabel Jurusan</p>
+              <p>Jurusan</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="tb_user.php" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
-              <p>Tabel User</p>
+              <p>User</p>
             </a>
-          </li>
-          <li class="nav-item">
-            <a href="tb_verifikasi.php" class="nav-link">
-              <i class="nav-icon far fa-check-square"></i>
-              <p>Tabel Verifikasi</p>
-            </a>
-          </li>
-          
+          </li> 
           <li class="nav-item">
             <a href="tb_history_sk_mengajar.php" class="nav-link">
               <i class="nav-icon fas fa-list-ol"></i>

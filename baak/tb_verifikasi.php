@@ -105,26 +105,34 @@ require 'function_verifikasi.php';
               </thead>
               <tbody>
               <?php                    
-                $connection = mysqli_connect("localhost",'root',"","siska");
-                $sql = "SELECT * FROM tb_sk_mengajar WHERE status=0 ";
+               $connection = mysqli_connect("localhost",'root',"","siska");
+                $sql = "SELECT * FROM tb_pengajuan WHERE status=0";
                 $result = mysqli_query($connection,$sql);
                 $no= 1;
                 while($d = mysqli_fetch_array($result)) {
-                  if ($d['status']=='1'){
+                  if($d['status']=='1'){
                     $status = 'Diverifikasi BAAK';
                     $warna = 'warning';
+                    $tgl = $d['tgl_baak'];
                     }
                     elseif ($d['status']=='2'){
                     $status = 'Diverifikasi Wadir';
                     $warna = 'primary';
+                    $tgl = $d['tgl_wadir'];
                     }
                     elseif ($d['status']=='3'){
                     $status = 'Diverifikasi Direktur';
                     $warna = 'success';
+                    $tgl = $d['tgl_direktur'];
+                    }
+                    elseif ($d['status']=='4'){
+                    $status = 'Ditolak';
+                    $warna = 'dangger';
                     }
                     else {
                         $status = 'Belum Diverifikasi';
-                        $warna = 'danger';
+                        $warna = 'secondary';
+                        $tgl= '';
                       }
                     ?>
                     <tr>
@@ -135,14 +143,14 @@ require 'function_verifikasi.php';
                       <td><?php echo $d['perihal']; ?></td>
                       <td><?php echo $d['no_sk']; ?><br>
                       <?php echo $d['lampiran_sp']; ?></td>
-                      <td><?php echo "<a href='edit_status.php?id_sk_mengajar=".$d['id_sk_mengajar']."' class='badge bg-". $warna."'>". $status."</a>";?></td>
+                      <td><?php echo "<a href='edit_status.php?id_sp=".$d['id_sp']."' class='badge bg-". $warna."'>". $status."</a>";?></td>
                       <td>
                         <a class="btn btn-outline-info" href="lampiran/skmengajar/<?php echo $d['lampiran_sp']; ?>"><i class="far fa-file"></i> Lampiran</a>
-                          <a class="btn btn-outline-success"href="cetak_sk_mengajar.php?id_sk_mengajar=<?php echo $d['id_sk_mengajar']; ?>" target="_BLANK"><i class="fas fa-print"></i> SK</a>
+                          <a class="btn btn-outline-success"href="cetak_sk_mengajar.php?id_sp=<?php echo $d['id_sp']; ?>" target="_BLANK"><i class="fas fa-print"></i> SK</a>
                       </td>                      
                       <td>
-                        <div><a class="btn-sm btn-outline-success" href="accept_baak.php?id_sk_mengajar=<?php echo $d['id_sk_mengajar']; ?>"><i class="fas fa-check"></i> ACCEPT</a></div>
-                        <div><a class="btn-sm btn-outline-danger" onclick="return confirm('Anda yakin ingin menolak item ini ?'" href="decline_baak.php?id_sk_mengajar=<?php echo $d['id_sk_mengajar']; ?>" ><i class="fas fa-times"></i> DECLINE</a></div> 
+                        <div><a class="btn-sm btn-outline-success" href="accept_baak.php?id_sp=<?php echo $d['id_sp']; ?>"><i class="fas fa-check"></i> ACCEPT</a></div>
+                        <div><a class="btn-sm btn-outline-danger" onclick="return confirm('Anda yakin ingin menolak item ini ?'" href="decline_baak.php?id_sp=<?php echo $d['id_sp']; ?>" ><i class="fas fa-times"></i> DECLINE</a></div> 
                           
                       </td>
                     </tr>

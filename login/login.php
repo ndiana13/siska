@@ -23,30 +23,24 @@ if (isset($_POST['submit'])) {
           $_SESSION['nama'] = $row['nama_lengkap'];
           $_SESSION['foto'] = $row['foto'];
           $_SESSION['level'] = "2";
-          header("Location: ../kajur/index.php");
+          header("Location: ../baak/index.php");
         }else if($row['level']=='3'){
           $_SESSION['username'] = $username;
           $_SESSION['nama'] = $row['nama_lengkap'];
           $_SESSION['foto'] = $row['foto'];
           $_SESSION['level'] = "3";
-          header("Location: ../baak/index.php");
+          header("Location: ../umum/index.php");
         }else if($row['level']=='4'){
           $_SESSION['username'] = $username;
           $_SESSION['nama'] = $row['nama_lengkap'];
           $_SESSION['foto'] = $row['foto'];
           $_SESSION['level'] = "4";
-          header("Location: ../umum/index.php");
+          header("Location: ../wadir/index.php");
         }else if($row['level']=='5'){
           $_SESSION['username'] = $username;
           $_SESSION['nama'] = $row['nama_lengkap'];
           $_SESSION['foto'] = $row['foto'];
           $_SESSION['level'] = "5";
-          header("Location: ../wadir/index.php");
-        }else if($row['level']=='6'){
-          $_SESSION['username'] = $username;
-          $_SESSION['nama'] = $row['nama_lengkap'];
-          $_SESSION['foto'] = $row['foto'];
-          $_SESSION['level'] = "6";
           header("Location: ../direktur/index.php");
         }    
     }else {
