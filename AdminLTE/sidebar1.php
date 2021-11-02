@@ -33,9 +33,15 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="tb_pengajuan.php" class="nav-link">
+              <i class="nav-icon fas fa-envelope-open-text"></i>
+              <p>Pengajuan</p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="tb_verifikasi.php" class="nav-link">
               <i class="nav-icon far fa-check-square"></i>
-              <p>Pengajuan</p>
+              <p>Verifikasi</p>
             </a>
           </li>    
           <li class="nav-item">
@@ -67,10 +73,16 @@
               </li>
             </ul>
           </li>
-            <li class="nav-item">
+          <li class="nav-item">
             <a href="tb_jurusan.php" class="nav-link">
               <i class="nav-icon fas fa-file"></i>
               <p>Jurusan</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="tb_kajur.php" class="nav-link">
+              <i class="nav-icon fas fa-envelope-open-text"></i>
+              <p>Kajur</p>
             </a>
           </li>
           <li class="nav-item">

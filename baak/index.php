@@ -203,22 +203,22 @@ $jumlah_sk_doswal = mysqli_num_rows($row_sk_doswal);
               <?php $sql = "SELECT * FROM tb_pengguna WHERE username='$username'"; 
                 $result = mysqli_query($conn, $sql);
                 while ($row = $result->fetch_assoc()) {
-                  if ($row['level']== 1) {
+                  if ($row['level']== 0) {
                     $t_level = 'Jurusan';
                   }
-                   elseif ($row['level']== 2) {
+                   elseif ($row['level']== 1) {
                     $t_level = 'Kajur';
                   }
-                  elseif ($row['level']== 3) {
+                  elseif ($row['level']== 2) {
                     $t_level = 'BAAK';
                   }
-                  elseif ($row['level']== 4) {
+                  elseif ($row['level']== 3) {
                     $t_level = 'Bagian Umum';
                   }
-                  elseif ($row['level']== 5) {
+                  elseif ($row['level']== 4) {
                     $t_level = 'Wakil Direktur';
                   }
-                  elseif ($row['level']== 6) {
+                  elseif ($row['level']== 5) {
                     $t_level = 'Direktur';
                   }
 
@@ -284,24 +284,24 @@ $jumlah_sk_doswal = mysqli_num_rows($row_sk_doswal);
                           <div class="form-group">
                             <select class="form-control" name="level" required>
                               <option hidden selected value="<?= $row["level"];?>"><?= $t_level ?></option>
-                              <option value="1">Jurusan</option>
-                              <option value="2">Kajur</option>
-                              <option value="3">BAAK</option>
-                              <option value="4">Bagian Umum</option>
-                              <option value="5">Wakil Direktur</option>
-                              <option value="6">Direktur</option>
+                              <option value="0">Jurusan</option>
+                              <option value="1">Kajur</option>
+                              <option value="2">BAAK</option>
+                              <option value="3">Bagian Umum</option>
+                              <option value="4">Wakil Direktur</option>
+                              <option value="5">Direktur</option>
                             </select>
                           </div>
                         </div>
                         <div class="form-group">
                           <label for="">Foto</label><br>
                           <img src="../AdminLTE/dist/img/<?= $row['foto'];?>"  width="100" height="100"><br><br>
-                          <input type="file" name="foto" value="<?= $row["foto"];?>"> 
+                          <input type="file" name="foto" id="foto"> 
                         </div>
                         <div class="form-group" hidden="">
                           <label for="">Tanda Tangan</label><br>
                           <img src="../AdminLTE/dist/img/<?= $row['ttd'];?>"  width="100" height="100"><br><br>
-                          <input type="file" name="ttd" value="<?= $row["ttd"];?>">             
+                          <input type="file" name="ttd" id="ttd">             
                       </div>
                       <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-secondary col-md-3" data-dismiss="modal">Close</button>

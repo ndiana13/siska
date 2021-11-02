@@ -247,7 +247,7 @@ error_reporting(0);
 				<td width="320"><br><br><br></td>
 				<td>Ditetapkan di Cilacap<br><?php echo  "<a>". $h." ". $nm. " ". $y. "</a>" ?><br>DIREKTUR POLITEKNIK NEGERI<br>CILACAP<br>
 				<br><br><br><br><span style="text-transform:uppercase;text-align: center;"><?php 
-		$direktur = "SELECT * FROM tb_pengguna WHERE level=3";
+		$direktur = "SELECT * FROM tb_pengguna WHERE level=5";
 		$sql     =mysqli_query($conn,$direktur);
 		$r    =mysqli_fetch_array($sql);?><?php echo $r['nama_lengkap'];?></span><br><?php echo $r['nip'];?></td>
 			</tr>
@@ -467,7 +467,7 @@ error_reporting(0);
 					<td width="420"><br><br><br><br></td>
 					<td style="font-size: 12px;"> Ditetapkan di Cilacap<br><?php echo  "<a>". $h." ". $nm. " ". $y. "</a>" ?><br>DIREKTUR POLITEKNIK NEGERI<br>CILACAP<br>
 					<br><br><br><br><span style="text-transform:uppercase;text-align: center;"><?php 
-					$direktur = "SELECT * FROM tb_pengguna WHERE level=3";
+					$direktur = "SELECT * FROM tb_pengguna WHERE level=5";
 					$sql     =mysqli_query($conn,$direktur);
 					$r    =mysqli_fetch_array($sql);?><?php echo $r['nama_lengkap'];?></span><br><?php echo $r['nip'];?></td>
 				</tr>

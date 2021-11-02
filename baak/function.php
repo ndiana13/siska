@@ -30,7 +30,7 @@ function tambah($data){
 	if(!$lampiran_sp){
 		return false;
 	}
-	$id_sk_mengajar = htmlspecialchars($data["id_sk_mengajar"]);
+	$id_sp = htmlspecialchars($data["id_sp"]);
 	$nip 			= htmlspecialchars($data["nip"]);
 	$id_jurusan  	= htmlspecialchars($data["id_jurusan"]);
 	$tgl_sp 		= htmlspecialchars($data["tgl_sp"]);
@@ -40,7 +40,7 @@ function tambah($data){
 	$status  		= htmlspecialchars($data["status"]);
 	$no_sk  		= htmlspecialchars($data["no_sk"]);
 
-	$query = "INSERT INTO tb_sk_mengajar VALUES ('$id_sk_mengajar', '$nip', '$id_jurusan', '$tgl_sp', '$thn_akademik', '$semester', '$perihal', '$lampiran_sp', '$status', 'NULL', 'NULL', 'NULL', '$no_sk')";
+	$query = "INSERT INTO tb_pengajuan VALUES ('$id_sp', '$nip', '$id_jurusan', '$tgl_sp', '$thn_akademik', '$semester', '$perihal', '$lampiran_sp', '$status', 'NULL', 'NULL', 'NULL', '$no_sk')";
 	mysqli_query($conn,$query);
 	return mysqli_affected_rows($conn);
 }
@@ -95,8 +95,8 @@ function ubah($data){
 
 	global $conn;
 
-	$id_sk_mengajar 			= htmlspecialchars($data["id_sk_mengajar"]);
-	$id_sk_mengajar_edit 		= htmlspecialchars($data["id_sk_mengajar_edit"]);
+	$id_sp 			= htmlspecialchars($data["id_sp"]);
+	$id_sp_edit 		= htmlspecialchars($data["id_sp_edit"]);
 	$nip 						= htmlspecialchars($data["nip"]);
 	$id_jurusan 				= htmlspecialchars($data["id_jurusan"]);
 	$tgl_sp 					= htmlspecialchars($data["tgl_sp"]);
@@ -115,9 +115,9 @@ function ubah($data){
 	
 	
 		//insert data
-	$query ="UPDATE tb_sk_mengajar SET
+	$query ="UPDATE tb_pengajuan SET
 	
-	id_sk_mengajar   ='$id_sk_mengajar_edit',
+	id_sp   ='$id_sp_edit',
 	nip ='$nip',
 	tgl_sp  ='$tgl_sp',
 	id_jurusan ='$id_jurusan',
@@ -127,34 +127,33 @@ function ubah($data){
 	lampiran_sp   ='$lampiran_sp',
 	status = '$status',
 	no_sk = '$no_sk'
-	WHERE id_sk_mengajar = $id_sk_mengajar";
+	WHERE id_sp = $id_sp";
 	mysqli_query($conn,$query);
 	return mysqli_affected_rows($conn);
 }
 
-function hapus($id_sk_mengajar) {
+function hapus($id_sp) {
 	global $conn;
-	mysqli_query($conn,"DELETE FROM tb_sk_mengajar WHERE id_sk_mengajar = $id_sk_mengajar");
+	mysqli_query($conn,"DELETE FROM tb_pengajuan WHERE id_sp = $id_sp");
 	
 	return mysqli_affected_rows($conn);
 }
 
-function acc_baak($id_sk_mengajar) {
+function acc_baak($id_sp) {
 	global $conn;
 	$tgl = date('Y-m-d');
 	
-	$query ="UPDATE tb_sk_mengajar SET status = '1', tgl_verif1= '$tgl' WHERE id_sk_mengajar = $id_sk_mengajar
-	";
+	$query ="UPDATE tb_pengajuan SET status = '2', tgl_baak= '$tgl' WHERE id_sp = $id_sp";
 
 	mysqli_query($conn,$query);
 	return mysqli_affected_rows($conn);	
 }
-function dec_baak($id_sk_mengajar) {
+function dec_baak($id_sp) {
 	global $conn;
 	
 
 		//insert data
-	$query ="UPDATE tb_sk_mengajar SET status = '4' WHERE id_sk_mengajar = $id_sk_mengajar
+	$query ="UPDATE tb_pengajuan SET status = '4' WHERE id_sp = $id_sp
 	";
 
 	mysqli_query($conn,$query);
@@ -291,8 +290,8 @@ function ubah_profil($data){
 	$nama_lengkap   = htmlspecialchars($data['nama_lengkap']);
 	$no_hp         	= htmlspecialchars($data['no_hp']);
 	$level         	= htmlspecialchars($data['level']);
-	$foto         	= htmlspecialchars($data['fotolama']);
-	$ttd         	= htmlspecialchars($data['ttdLama']);
+	$fotoLama       = htmlspecialchars($data['fotoLama']);
+	$ttdLama        = htmlspecialchars($data['ttdLama']);
 		
 	//cek apakah user pilih foto baru atau tidak
 	if($_FILES['foto']['error'] === 4){

@@ -2,7 +2,7 @@
  include '../login/config.php';
 session_start();
  
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['nama'])) {
     header("Location: index.php");
 }
 error_reporting();
@@ -11,7 +11,7 @@ require 'function_user.php';
 if ( isset($_POST["submit"]))
 {
         //cek data berhasil tambah atau tidak
-  if  (tambah($_POST)<0){
+  if  (tambah_pengguna($_POST)<0){
 
     echo "
     <script>
@@ -126,20 +126,25 @@ if ( isset($_POST["submit"]))
                       <label for="">Level</label>
                       <div class="form-group">
                         <select class="form-control" id="level" name="level">
-
                           <option value="0">Jurusan</option>
-                          <option value="1">BAAK</option>
-                          <option value="2">Bagian Umum</option>
-                          <option value="3">Wakil Direktur I</option>
-                          <option value="4">Direktur</option>
+                          <option value="1">Kajur</option>
+                          <option value="2">BAAK</option>
+                          <option value="3">Bagian Umum</option>
+                          <option value="4">Wakil Direktur I</option>
+                          <option value="5">Direktur</option>
                         </select>
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="">Foto</label><br>
                       <input type="file" id="foto" name="foto" placeholder=""><br>
-                     <small style="color:#dc3545;"> Format foto .jpg, .jpeg atau .png dengan ukuran max 5MB</small>
-                    </div>   
+                     <small style="color:#dc3545;"> Format foto 4x4.jpg, .jpeg atau .png dengan ukuran max 5MB</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Tanda Tangan</label><br>
+                        <input type="file" id="ttd" name="ttd" ><br>
+                        <small style="color:#dc3545;"> Format tanda tangan .jpg, .jpeg atau .png dengan ukuran max 5MB</small>          
+                      </div>  
                     <div class="modal-footer justify-content-between">
                       <button type="button" class="btn btn-secondary col-md-3" data-dismiss="modal">Close</button>
                       <button type="submit" class="btn btn-primary col-md-3" id="submit" name="submit" >Simpan</button>
@@ -166,7 +171,7 @@ if ( isset($_POST["submit"]))
                    <?php
                    if ( isset($_POST["submit1"])) {
                       //cek data berhasil ubah atau tidak
-                      if  (ubah($_POST)>0){
+                      if  (ubah_profil($_POST)>0){
                         echo "
                         <script>
                         alert('data berhasil diubah');
@@ -189,15 +194,18 @@ if ( isset($_POST["submit"]))
                             $t_level = 'Jurusan';
                           }
                           elseif ($d['level']== 1) {
-                            $t_level = 'BAAK';
+                            $t_level = 'Kajur';
                           }
                           elseif ($d['level']== 2) {
-                            $t_level = 'Bagian Umum';
+                            $t_level = 'BAAK';
                           }
                           elseif ($d['level']== 3) {
-                            $t_level = 'Wakil Direktur';
+                            $t_level = 'Bagian Umum';
                           }
                           elseif ($d['level']== 4) {
+                            $t_level = 'Wakil Direktur';
+                          }
+                          elseif ($d['level']== 5) {
                             $t_level = 'Direktur';
                           }
                           ?>
@@ -207,14 +215,13 @@ if ( isset($_POST["submit"]))
                             <td class="text-center"><?php echo $d['nama_lengkap']; ?></td>
                             <td class="text-center"><?php echo $d['email']; ?></td>
                             <td class="text-center"><?php echo $d['no_hp']; ?></td>
-                            <td class="text-center"><?php echo $d['level']; ?></td>
-                            <td>
-
-                            <a class="btn btn-outline-warning" data-toggle="modal" data-target="#myModal<?php echo $d['nip']; ?>"><i class="far fa-edit"></i> Edit</a>
-                            <a class="btn btn-outline-danger" href="hapus_user.php?nip=<?php echo $d['nip']; ?>" onclick="return confirm('Anda yakin ingin menghapus item ini ?')"><i class="far fa-trash-alt"></i> Hapus</a>
-                            <a class="btn btn-outline-info" data-toggle="modal" data-target="#lihatmodal<?php echo $d['nip']; ?>"><i class="fas fa-list"></i> Detail</a> 
-                            
-                            <div class="modal fade" id="myModal<?php echo $d['nip']; ?>">
+                            <td class="text-center"><?php echo $t_level ?></td>
+                            <td class="text-center">
+                              <a class="btn btn-app" data-toggle="modal" data-target="#myModal<?php echo $d['nip']; ?>"><i class="fas fa-edit"></i> Edit</a>
+                              <a class="btn btn-app" href="hapus_user.php?nip=<?php echo $d['nip']; ?>" onclick="return confirm('Anda yakin ingin menghapus item ini ?')"><i class="fas fa-trash-alt"></i> Hapus</a>
+                              <a class="btn btn-app" data-toggle="modal" data-target="#lihatModal<?php echo $d['nip']; ?>"><i class="fas fa-edit"></i>Detail</a>
+                            </td>
+                              <div class="modal fade" id="myModal<?php echo $d['nip']; ?>">
                                 <div class="modal-dialog">
                                   <div class="modal-content">
                                     <div class="modal-header">
@@ -225,9 +232,9 @@ if ( isset($_POST["submit"]))
                                     </div>
                                     <div class="modal-body">
                                       <form method="POST" class="forms-sample" enctype="multipart/form-data">
-                                        <div class="card-body">
                                         <input type="hidden" name="nip" value="<?= $d["nip"];?>">
-                                         <input type="hidden" name="fotoLama" value="<?= $d["foto"];?>">
+                                        <input type="hidden" name="fotoLama" value="<?= $d["foto"];?>">
+                                        <input type="hidden" name="ttdLama" value="<?= $d["ttd"];?>">
                                         <div class="form-group">
                                           <label for="">NIP/NPAK</label>
                                           <input type="text" class="form-control"  required id="nip_edit" name="nip_edit" value="<?= $d["nip"];?>">
@@ -258,45 +265,49 @@ if ( isset($_POST["submit"]))
                                             <select class="form-control" name="level" required>
                                               <option hidden selected value="<?= $d['level'];?>"><?= $t_level ?></option>
                                               <option value="0">Jurusan</option>
-                                              <option value="1">BAAK</option>
-                                              <option value="2">Bagian Umum</option>
-                                              <option value="3">Wakil Direktur</option>
-                                              <option value="4">Direktur</option>
+                                              <option value="1">Kajur</option>
+                                              <option value="2">BAAK</option>
+                                              <option value="3">Bagian Umum</option>
+                                              <option value="4">Wakil Direktur</option>
+                                              <option value="5">Direktur</option>
                                             </select>
                                           </div>
-                                          <div class="form-group">
+                                        </div>
+                                        <div class="form-group">
                                           <label for="">Foto</label><br>
                                           <img src="../AdminLTE/dist/img/<?= $d['foto'];?>"  width="100" height="100"><br><br>
-                                          <input type="file" name="foto" value="<?= $d["foto"];?>">
+                                          <input type="file" name="foto" id="foto">
                                         </div>
-                                        </div>
+                                        <div class="form-group">
+                                          <label for="">Tanda Tangan</label><br>
+                                          <img src="../AdminLTE/dist/img/<?= $d['ttd'];?>"  width="100" height="100"><br><br>
+                                          <input type="file" name="ttd" id="ttd">             
+                                      </div>
                                         <div class="modal-footer justify-content-between">
                                           <button type="button" class="btn btn-secondary col-md-3" data-dismiss="modal">Close</button>
                                           <button type="submit" class="btn btn-primary col-md-3" id="submit1" name="submit1" >Simpan</button>
                                         </div>
-                                      </div>
                                   </form>
                                 </div>
                               </div>
                             </div>
                           </div>
-                          <div class="modal fade" id="lihatmodal<?php echo $d['nip']; ?>">
-                                <div class="modal-dialog">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h4 class="modal-title">Detail Data User</h4>
-                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                      </button>
+                          <div class="modal fade" id="lihatModal<?php echo $d['nip']; ?>">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h4 class="modal-title">Detail Data User</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
                                     </div>
                                     <div class="modal-body">
                                       <div class="card-body box-profile">
-                                        <div class="text-center">
-                                          <img class="profile-user-img img-fluid img-circle" src="../AdminLTE/dist/img/<?=$d['foto'];?>" alt="User profile picture">
-                                        </div>
+                                        <div class="text-center"><img class="profile-user-img img-fluid img-circle" src="../AdminLTE/dist/img/<?= $d['foto'];?>" alt="User profile picture"></div>
+
                                         <h3 class="profile-username text-center"><?php echo $d['nama_lengkap']?></h3>
 
-                                        <p class="text-muted text-center"><?php echo $d['email']?></p>
+                                        <p class="text-muted text-center"><?php echo $t_level?></p>
 
                                         <ul class="list-group list-group-unbordered mb-3">
                                           <li class="list-group-item">
@@ -315,7 +326,7 @@ if ( isset($_POST["submit"]))
                                             <b>NO HP</b> <a class="float-right"><?php echo $d['no_hp']?></a>
                                           </li>
                                           <li class="list-group-item">
-                                            <b>Level</b> <a class="float-right"><?php echo $d['level']?></a>
+                                            <b>Tanda Tangan</b> <a class="float-right"><img src="../AdminLTE/dist/img/<?= $d['ttd'];?>" width="50" height="50"></a>
                                           </li>
                                         </ul>
 
@@ -326,14 +337,10 @@ if ( isset($_POST["submit"]))
                                   </div>
                                 </div>
                           </div>
-                            </td>
-                                </div>
-                              </div>
-                            </div>
-                          </tr>
-                        <?php 
-                          }
-                        ?>
+                      </tr>
+                      <?php 
+                        }
+                      ?>
                   </table>
                 </div>
               </div>
@@ -352,10 +359,6 @@ if ( isset($_POST["submit"]))
   </aside>
   <!-- /.control-sidebar -->
 </div>
-<!-- ./wrapper -->
-
-
-<!-- jQuery -->
 </script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="../AdminLTE/dist/js/pages/dashboard.js"></script>

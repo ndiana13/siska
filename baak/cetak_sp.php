@@ -168,8 +168,110 @@ error_reporting();
 				$kajur 	= "SELECT * FROM tb_kajur INNER JOIN tb_jurusan ON tb_kajur.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_kajur.nip = tb_pengguna.nip WHERE tb_kajur.id_jurusan='$jur'";
 				$sql    = mysqli_query($kon,$kajur);
 				$row    = mysqli_fetch_array($sql);
+				if ($result['status']>=1) {
+					echo "<img src='../AdminLTE/dist/img/".$row['ttd']."' width='120' height='90'>";
+				}
+				else{
+					echo "";
+				}
+				?>				
+				
+			</tr>
+			<tr class="text2">
+				<td width="420"></td>
+				<td width="300"><?php echo $row['nama_lengkap'];?><br>NPAK. <?php echo $row['nip'];?></td>
+			</tr>
+		</table>
+		<?php
+		}
+		elseif($result['jns_sp']=='skmengajar'){
+		?>
+		<table>
+			<tr class="text2">
+				<td width="40"></td>
+				<td width="600"><br><br>Dengan hormat,</td>
+			</tr>
+			<tr class="text2">
+				<td width="40"></td>
+				<td width="600"><br>Sehubungan dengan pelaksanaan perkuliahan pada semester <?php echo $result['semester'];?> Tahun Akademik <?php echo $result['thn_akademik'];?>, kami bermaksud mengajukan permohonan <?php echo $result['perihal'];?> pada dosen-dosen dengan nama terlampir.</td>
+			</tr>
+			<tr class="text2">
+				<td width="40"></td>
+				<td width="600"><br>Demikian surat permohoonan ini saya buat, atas perhatian dan kerjasamanya kami ucapkan terima kasih.</td>
+			</tr>			
+		</table>
+		<table>
+			<tr class="text2">
+				<td width="420"></td>
+				<td><br><br><br><br>Jurusan <?php echo "<a>" .$nm_jurusan."</a>"?><br>Ketua</td>
+			</tr>
+			<tr class="text2">
+				<td></td>
+				<td style="font-size: 12px;">
+				<?php
+				$kon = mysqli_connect("localhost",'root',"","siska");
+			    if (!$kon){
+			       	die("Koneksi database gagal:".mysqli_connect_error());
+			   	}
+				$jur 	= $result['id_jurusan'];
+				$kajur 	= "SELECT * FROM tb_kajur INNER JOIN tb_jurusan ON tb_kajur.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_kajur.nip = tb_pengguna.nip WHERE tb_kajur.id_jurusan='$jur'";
+				$sql    = mysqli_query($kon,$kajur);
+				$row    = mysqli_fetch_array($sql);
+				if ($result['status']>=1) {
+					echo "<img src='../AdminLTE/dist/img/".$row['ttd']."' width='120' height='90'>";
+				}
+				else{
+					echo "";
+				}
 				?>
-				<img src="../AdminLTE/dist/img/<?= $row['ttd'];?>" width="120" height="90">
+			</tr>
+			<tr class="text2">
+				<td width="420"></td>
+				<td width="300"><?php echo $row['nama_lengkap'];?><br>NPAK. <?php echo $row['nip'];?></td>
+			</tr>
+		</table>
+		<?php
+		}
+		elseif ($result['jns_sp']=='skmagang'){
+		?>
+		<table>
+			<tr class="text2">
+				<td width="40"></td>
+				<td width="600"><br><br>Dengan hormat,</td>
+			</tr>
+			<tr class="text2">
+				<td width="40"></td>
+				<td width="600"><br>Sehubungan dengan pelaksanaan perkuliahan pada semester <?php echo $result['semester'];?> Tahun Akademik <?php echo $result['thn_akademik'];?>, kami bermaksud mengajukan permohonan <?php echo $result['perihal'];?> pada dosen-dosen dengan nama terlampir.</td>
+			</tr>
+			<tr class="text2">
+				<td width="40"></td>
+				<td width="600"><br>Demikian surat permohoonan ini saya buat, atas perhatian dan kerjasamanya kami ucapkan terima kasih.</td>
+			</tr>			
+		</table>
+		<table>
+			<tr class="text2">
+				<td width="420"></td>
+				<td><br><br><br><br>Jurusan <?php echo "<a>" .$nm_jurusan."</a>"?><br>Ketua</td>
+			</tr>
+			<tr class="text2">
+				<td></td>
+				<td style="font-size: 12px;">
+				<?php
+				$kon = mysqli_connect("localhost",'root',"","siska");
+			    if (!$kon){
+			       	die("Koneksi database gagal:".mysqli_connect_error());
+			   	}
+				$jur 	= $result['id_jurusan'];
+				$kajur 	= "SELECT * FROM tb_kajur INNER JOIN tb_jurusan ON tb_kajur.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_kajur.nip = tb_pengguna.nip WHERE tb_kajur.id_jurusan='$jur'";
+				$sql    = mysqli_query($kon,$kajur);
+				$row    = mysqli_fetch_array($sql);
+				if ($result['status']>=1) {
+					echo "<img src='../AdminLTE/dist/img/".$row['ttd']."' width='120' height='90'>";
+				}
+				else{
+					echo "";
+				}
+				?>
 			</tr>
 			<tr class="text2">
 				<td width="420"></td>
@@ -179,7 +281,6 @@ error_reporting();
 		<?php
 		}
 		?>
-
 		
 
 	    

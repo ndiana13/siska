@@ -12,12 +12,18 @@ if (isset($_POST['submit'])) {
     $result = mysqli_query($conn, $sql);
     if ($result->num_rows > 0) {
         $row = mysqli_fetch_assoc($result);
-        if($row['level']=='1'){
+        if($row['level']=='0'){
+          $_SESSION['username'] = $username;
+          $_SESSION['nama'] = $row['nama_lengkap'];
+          $_SESSION['foto'] = $row['foto'];
+          $_SESSION['level'] = "0";
+          header("Location: ../jurusan/index.php");
+        }elseif($row['level']=='1'){
           $_SESSION['username'] = $username;
           $_SESSION['nama'] = $row['nama_lengkap'];
           $_SESSION['foto'] = $row['foto'];
           $_SESSION['level'] = "1";
-          header("Location: ../jurusan/index.php");
+          header("Location: ../kajur/index.php");
         }else if($row['level']=='2'){
           $_SESSION['username'] = $username;
           $_SESSION['nama'] = $row['nama_lengkap'];

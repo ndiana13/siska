@@ -104,30 +104,36 @@ require 'function_verifikasi.php';
                 </tr>
               </thead>
               <tbody>
-              <?php                    
-               $connection = mysqli_connect("localhost",'root',"","siska");
-                $sql = "SELECT * FROM tb_pengajuan WHERE status=0";
+              <?php          
+                $connection = mysqli_connect("localhost",'root',"","siska");
+                $sql = "SELECT * FROM tb_pengajuan INNER JOIN tb_jurusan ON tb_pengajuan.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_pengajuan.nip = tb_pengguna.nip WHERE status=1";
                 $result = mysqli_query($connection,$sql);
                 $no= 1;
                 while($d = mysqli_fetch_array($result)) {
                   if($d['status']=='1'){
-                    $status = 'Diverifikasi BAAK';
+                    $status = 'Diverifikasi Kajur';
                     $warna = 'warning';
-                    $tgl = $d['tgl_baak'];
+                    $tgl = $d['tgl_kajur'];
                     }
                     elseif ($d['status']=='2'){
+                    $status = 'Diverifikasi BAAK';
+                    $warna = 'primary';
+                    $tgl = $d['tgl_baak'];
+                    }
+                    elseif ($d['status']=='3'){
                     $status = 'Diverifikasi Wadir';
                     $warna = 'primary';
                     $tgl = $d['tgl_wadir'];
                     }
-                    elseif ($d['status']=='3'){
+                    elseif ($d['status']=='4'){
                     $status = 'Diverifikasi Direktur';
                     $warna = 'success';
                     $tgl = $d['tgl_direktur'];
                     }
-                    elseif ($d['status']=='4'){
+                    elseif ($d['status']=='5'){
                     $status = 'Ditolak';
-                    $warna = 'dangger';
+                    $warna = 'danger';
+                    $tgl = '';
                     }
                     else {
                         $status = 'Belum Diverifikasi';
@@ -138,25 +144,25 @@ require 'function_verifikasi.php';
                     <tr>
                       <td><?php echo $no++; ?></td>
                       <td><?php echo $d['nip']; ?></td>
+                      <td><?php echo $d['no_sp']; ?></td>
                       <td><?php echo $d['tgl_sp']; ?></td>
-                      <td><?php echo $d['id_jurusan']; ?><br><?php echo $d['thn_akademik']; ?></td>
+                      <td><?php echo $d['nm_jurusan']; ?><br><?php echo $d['thn_akademik']; ?></td>
                       <td><?php echo $d['perihal']; ?></td>
-                      <td><?php echo $d['no_sk']; ?><br>
-                      <?php echo $d['lampiran_sp']; ?></td>
-                      <td><?php echo "<a href='edit_status.php?id_sp=".$d['id_sp']."' class='badge bg-". $warna."'>". $status."</a>";?></td>
+                      <td><?php echo "<a href= 'accept_baak.php?id_sp=".$d['id_sp']."' class='badge bg-". $warna."'>". $status."</a>";?><br><?php echo "<a>" .$tgl. "<a>"?>
+                      <td><?php echo $d['no_sk']; ?><br><?php echo $d['lampiran_sp']; ?></td>
                       <td>
-                        <a class="btn btn-outline-info" href="lampiran/skmengajar/<?php echo $d['lampiran_sp']; ?>"><i class="far fa-file"></i> Lampiran</a>
-                          <a class="btn btn-outline-success"href="cetak_sk_mengajar.php?id_sp=<?php echo $d['id_sp']; ?>" target="_BLANK"><i class="fas fa-print"></i> SK</a>
-                      </td>                      
-                      <td>
-                        <div><a class="btn-sm btn-outline-success" href="accept_baak.php?id_sp=<?php echo $d['id_sp']; ?>"><i class="fas fa-check"></i> ACCEPT</a></div>
-                        <div><a class="btn-sm btn-outline-danger" onclick="return confirm('Anda yakin ingin menolak item ini ?'" href="decline_baak.php?id_sp=<?php echo $d['id_sp']; ?>" ><i class="fas fa-times"></i> DECLINE</a></div> 
-                          
+                        <a class="btn btn-app" href="../baak/lampiran/<?php echo $d['lampiran_sp']; ?>">
+                          <i class="fas fa-file-download"></i>Lampiran</a>
+                        <a class="btn btn-app" href="../baak/sk/<?php echo $d['upload_sk']; ?>">
+                          <i class="fas fa-save"></i>SK</a>
+                        <a class="btn btn-app" href="cetak_sp.php?id_sp=<?php echo $d['id_sp']; ?>" target="_BLANK">
+                          <i class="fas fa-save"></i>SP</a>
+
                       </td>
-                    </tr>
-                    <?php
+                      </tr>
+                      <?php
                       }
-                    ?>
+                      ?>
                       </tbody>
                     </table>
 

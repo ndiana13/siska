@@ -48,6 +48,7 @@ if ( isset($_POST["submit1"])) {
       ";
     }
   }
+
 ?>
 
 <!DOCTYPE html>
@@ -91,7 +92,7 @@ if ( isset($_POST["submit1"])) {
 <div class="wrapper">
 
       <?php    include "../AdminLTE/header.php"; ?>
-      <?php    include "../AdminLTE/sidebar.php"; ?>
+      <?php    include "../AdminLTE/sidebar1.php"; ?>
       
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -143,8 +144,8 @@ if ( isset($_POST["submit1"])) {
                         if (!$kon){
                             die("Koneksi database gagal:".mysqli_connect_error());
                         }
-                        $nama = $_SESSION['nama'];
-                        $sql="SELECT nip FROM tb_pengguna WHERE nama_lengkap='$nama'";
+                        $user = $_SESSION['username'];
+                        $sql="SELECT nip FROM tb_pengguna WHERE username='$user'";
                         $hasil=mysqli_query($kon,$sql);
                         while ($data = mysqli_fetch_array($hasil)) {
                        ?>
@@ -254,10 +255,10 @@ if ( isset($_POST["submit1"])) {
                 </tr>
               </thead>
               <tbody>
-              <?php   
-                $username = $_SESSION['nama'];                 
+              <?php 
+                                   
                 $connection = mysqli_connect("localhost",'root',"","siska");
-                $sql = "SELECT * FROM tb_pengajuan INNER JOIN tb_jurusan ON tb_pengajuan.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_pengajuan.nip = tb_pengguna.nip WHERE nama_lengkap='$username'";
+                $sql = "SELECT * FROM tb_pengajuan INNER JOIN tb_jurusan ON tb_pengajuan.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_pengajuan.nip = tb_pengguna.nip";
                 $result = mysqli_query($connection,$sql);
                 $no= 1;
                 while($d = mysqli_fetch_array($result)) {
@@ -308,10 +309,10 @@ if ( isset($_POST["submit1"])) {
                           <i class="fas fa-trash-alt"></i> Hapus</a>
                         <a class="btn btn-app" href="../baak/lampiran/<?php echo $d['lampiran_sp']; ?>">
                           <i class="fas fa-file-download"></i>Lampiran</a>
-                        <a class="btn btn-app" href="cetak_sp.php?id_sp=<?php echo $d['id_sp']; ?>" target="_BLANK">
-                          <i class="fas fa-save"></i>SP</a>
-                        <a class="btn btn-app" href="../baak/sk/<?php echo $d['upload_sk']; ?>">
+                        <a class="btn btn-app" href="cetak_sk_mengajar.php?id_sp=<?php echo $d['id_sp']; ?>">
                           <i class="fas fa-save"></i>SK</a>
+                        <a class="btn btn-app" href="cetak_sp.php?id_sp=<?php echo $d['id_sp']; ?>">
+                          <i class="fas fa-save"></i>SP</a>
 
                           <div class="modal fade" id="myModal<?php echo $d['id_sp']; ?>">
                           <div class="modal-dialog">

@@ -65,7 +65,7 @@ function upload(){
 	else {
 	
 			//cek apakah yang boleh diupload
-	$ekstensifile_transaksiValid = ['xls','docx','xlsx'];
+	$ekstensifile_transaksiValid = ['xls','docx','xlsx','pdf'];
 	$ekstensifile_transaksi = explode('.', $namaFile);
 	$ekstensifile_transaksi = strtolower(end($ekstensifile_transaksi));
 	if(!in_array($ekstensifile_transaksi,$ekstensifile_transaksiValid)){
@@ -327,8 +327,8 @@ function ubah_profil($data){
 	$nama_lengkap   = htmlspecialchars($data['nama_lengkap']);
 	$no_hp         	= htmlspecialchars($data['no_hp']);
 	$level         	= htmlspecialchars($data['level']);
-	$foto         	= htmlspecialchars($data['fotolama']);
-	$ttd         	= htmlspecialchars($data['ttdLama']);
+	$fotoLama       = htmlspecialchars($data['fotoLama']);
+	$ttdLama        = htmlspecialchars($data['ttdLama']);
 		
 	//cek apakah user pilih foto baru atau tidak
 	if($_FILES['foto']['error'] === 4){

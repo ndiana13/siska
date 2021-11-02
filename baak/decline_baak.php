@@ -1,17 +1,17 @@
 <?php
 require 'function.php';
-$id_sk_mengajar =$_GET["id_sk_mengajar"];
-if (dec_baak($id_sk_mengajar)>0){
+$id_sp =$_GET["id_sp"];
+if (dec_baak($id_sp)>0){
 		echo "
 			<script>
-			alert('Data Berhasil di Decline');
+			alert('Data Pengajuan Ditolak');
 			document.location.href='tb_verifikasi.php';
 			</script>
 			";
 		}else {
 		echo "
 			<script>
-			alert('Data Gagal di Decline');
+			alert('Data Pengajuan Gagal Ditolak');
 			document.location.href='tb_verifikasi.php';
 			</script>
 			";

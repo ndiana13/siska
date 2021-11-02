@@ -1,8 +1,8 @@
 <?php 
 
 require 'function.php';
-$id_sk_mengajar =$_GET["id_sk_mengajar"];
-if (hapus($id_sk_mengajar)>0){
+$id_sp =$_GET["id_sp"];
+if (hapus($id_sp)>0){
         echo "
             <script>
             alert('data berhasil dihapus');

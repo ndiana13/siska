@@ -33,43 +33,15 @@
             </a>
           </li> 
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="tb_pengajuan.php" class="nav-link">
               <i class="nav-icon fas fa-mail-bulk"></i>
-              <p>
-                Surat Pengajuan
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="tb_sp_mengajar.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>SK Mengajar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/tables/data.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>SK Magang</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/tables/jsgrid.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>SK Dosen Wali</p>
-                </a>
-              </li>
-            </ul>
-          <li class="nav-item">
-            <a href="tb_verifikasi.php" class="nav-link">
-              <i class="nav-icon far fa-check-square"></i>
-              <p>Tabel Verifikasi</p>
+              <p>Pengajuan</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="tb_history_sk_mengajar.php" class="nav-link">
-              <i class="nav-icon fas fa-list-ol"></i>
-              <p>History SK</p>
+            <a href="tb_verifikasi.php" class="nav-link">
+              <i class="nav-icon far fa-check-square"></i>
+              <p>Verifikasi</p>
             </a>
           </li>
           </li>
