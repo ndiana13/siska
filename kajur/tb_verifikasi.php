@@ -1,49 +1,61 @@
 <?php
 error_reporting();
-$server = "localhost";
-$user = "root";
-$pass = "";
-$database = "siska";
-
-$conn = mysqli_connect($server, $user, $pass, $database);
-
-if (!$conn) {
-    die("<script>alert('Connection Failed.')</script>");
-}
+ include '../login/config.php';
 session_start();
  
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['nama'])) {
     header("Location: index.php");
 }
+require 'function.php';
 
+$nama = $_SESSION['nama'];
+$sql ="SELECT * FROM tb_kajur INNER JOIN tb_pengguna ON tb_kajur.nip = tb_pengguna.nip INNER JOIN tb_jurusan ON tb_kajur.id_jurusan = tb_jurusan.id_jurusan WHERE nama_lengkap = '$nama'";
+$row = mysqli_query($conn,$sql);
+while($d = mysqli_fetch_array($row)){
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SISKA | DataTables</title>
-
-  <!-- Google Font: Source Sans Pro -->
+  <title>SISKA | Dashboard</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../AdminLTE/plugins/fontawesome-free/css/all.min.css">
-  <link rel="stylesheet" href="../AdminLTE/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
-  <!-- Toastr -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/toastr/toastr.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Tempusdominus Bootstrap 4 -->
+  <link rel="stylesheet" href="../AdminLTE/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="../AdminLTE/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="../AdminLTE/plugins/jqvmap/jqvmap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../AdminLTE/dist/css/adminlte.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="../AdminLTE/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="../AdminLTE/plugins/daterangepicker/daterangepicker.css">
+  <!-- summernote -->
+  <link rel="stylesheet" href="../AdminLTE/plugins/summernote/summernote-bs4.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../AdminLTE/plugins/fontawesome-free/css/all.min.css">
   <!-- DataTables -->
   <link rel="stylesheet" href="../AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="../AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="../AdminLTE/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../AdminLTE/dist/css/adminlte.min.css">
+  <!-- Theme style -->
 </head>
+
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
-      <?php    include '../AdminLTE/header.php'; ?>
-      <?php    include '../AdminLTE/sidebar2.php'; ?>
+
+      <?php    include "../AdminLTE/header.php"; ?>
+      <?php    include "../AdminLTE/sidebar2.php"; ?>
       
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -53,57 +65,58 @@ if (!isset($_SESSION['username'])) {
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1 class="m-0">Tabel Verifikasi</h1>
-          </div>
+          </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active">Dashboard v1</li>
             </ol>
-          </div>
-        </div>
-      </div>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
     </div>
-     <section class="content">
+    <!-- /.content-header -->
+    <section class="content">
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-            <!-- /.modal-dialog -->
             <div class="card">
               <div class="card-body">
-                 <table id="example2" class="table table-bordered table-striped">
+            <table id="example2" class="table table-bordered table-striped">
               <thead>
                 <tr style="text-align: center;">
-                    <th>#</th>
-                    <th>
-                      NIP
-                    </th>     
-                    <th>
-                      No Pengajuan
-                    </th>
-                    <th>
-                      Tanggal
-                    </th>
-                    <th>
-                      Jurusan
-                    </th>
-                    <th>
-                      Perihal
-                    </th>
-                    <th>
-                      Status
-                    </th>
-                    <th>
-                      No SK
-                    </th>
-                    <th>
-                      Action
-                    </th>
-                  </tr>
+                  <th>#</th>
+                  <th>
+                    NIP
+                  </th>     
+                  <th>
+                    No Pengajuan
+                  </th>
+                  <th>
+                    Tanggal
+                  </th>
+                  <th>
+                    Jurusan
+                  </th>
+                  <th>
+                    Perihal
+                  </th>
+                  <th>
+                    Status
+                  </th>
+                  <th>
+                    No SK<br>Lampiran
+                  </th>
+                  <th>
+                    Action
+                  </th>
+                </tr>
               </thead>
               <tbody>
-              <?php          
+              <?php
+              $jurusan = $d['id_jurusan'];                   
                 $connection = mysqli_connect("localhost",'root',"","siska");
-                $sql = "SELECT * FROM tb_pengajuan INNER JOIN tb_jurusan ON tb_pengajuan.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_pengajuan.nip = tb_pengguna.nip WHERE status=3";
+                $sql = "SELECT * FROM tb_pengajuan INNER JOIN tb_jurusan ON tb_pengajuan.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_pengajuan.nip = tb_pengguna.nip WHERE tb_pengajuan.id_jurusan ='$jurusan' AND status=0";
                 $result = mysqli_query($connection,$sql);
                 $no= 1;
                 while($d = mysqli_fetch_array($result)) {
@@ -145,18 +158,21 @@ if (!isset($_SESSION['username'])) {
                       <td><?php echo $d['tgl_sp']; ?></td>
                       <td><?php echo $d['nm_jurusan']; ?><br><?php echo $d['thn_akademik']; ?></td>
                       <td><?php echo $d['perihal']; ?></td>
-                      <td><?php echo "<a href= 'accept_direktur.php?id_sp=".$d['id_sp']."' class='badge bg-". $warna."'>". $status."</a>";?><br><?php echo "<a>" .$tgl. "<a>"?>
-                      <td><?php echo $d['no_sk']; ?></td>
+                      <td><?php echo "<a href= 'accept_kajur.php?id_sp=".$d['id_sp']."' class='badge bg-". $warna."'>". $status."</a>";?><br><?php echo "<a>" .$tgl. "<a>"?>
+                      <td><?php echo $d['no_sk']; ?><br><?php echo $d['lampiran_sp']; ?></td>
                       <td>
                         <a class="btn btn-app" href="../baak/lampiran/<?php echo $d['lampiran_sp']; ?>">
                           <i class="fas fa-file-download"></i>Lampiran</a>
                         <a class="btn btn-app" href="../baak/sk/<?php echo $d['upload_sk']; ?>">
                           <i class="fas fa-save"></i>SK</a>
+                        <a class="btn btn-app" href="cetak_sp.php?id_sp=<?php echo $d['id_sp']; ?>" target="_BLANK">
+                          <i class="fas fa-save"></i>SP</a>
 
                       </td>
                       </tr>
                       <?php
                       }
+                    }
                       ?>
 
                       </tbody>
@@ -167,21 +183,28 @@ if (!isset($_SESSION['username'])) {
             </div>
           </div>
         </section>
+        </div>
+        <!-- /.row (main row) -->
+      </div><!-- /.container-fluid -->
 
-  </div>
   <!-- /.content-wrapper -->
-  <?php include '../AdminLTE/footer.php';?>
+<?php    include "../AdminLTE/footer.php"; ?>
+      
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
   </aside>
   <!-- /.control-sidebar -->
-</div>
+
 <!-- ./wrapper -->
 
-
-<!-- jQuery -->
+<script src="../AdminLTE/plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="../AdminLTE/plugins/jquery-ui/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
 </script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="../AdminLTE/dist/js/pages/dashboard.js"></script>
@@ -217,7 +240,7 @@ if (!isset($_SESSION['username'])) {
       "searching": true,
       "ordering": true,
       "info": true,
-      "autoWidth": false,
+      "autoWidth": false ,
       "responsive": false,
     });
   });

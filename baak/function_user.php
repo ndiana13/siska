@@ -43,7 +43,7 @@ function tambah_pengguna($data){
 
 
 	$query="INSERT INTO tb_pengguna
-		VALUES ('$nip','$username','$password','$email','$nama_lengkap','$no_hp', '$level', '$foto', '$ttd')";
+		VALUES ('$nip', '$username', '$password', '$email', '$nama_lengkap', '$no_hp', '$level', '$foto', '$ttd')";
 	mysqli_query($conn, $query);
 
 }

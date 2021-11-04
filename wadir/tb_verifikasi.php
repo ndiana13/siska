@@ -70,150 +70,105 @@ if (!isset($_SESSION['username'])) {
             <!-- /.modal-dialog -->
             <div class="card">
               <div class="card-body">
-                <button type="button" class="btn btn-primary col-md-2" data-toggle="modal" data-target="#modal-lg"><i class="fas fa-plus-circle"></i>
-                    Tambah Verifikasi
-                </button>
-                <div><br></div>
-                <div class="modal fade" id="modal-lg">
-                <div class="modal-dialog modal-lg">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h4 class="modal-title">Verifikasi</h4>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <form method="POST" class="forms-sample" enctype="multipart/form-data">
-                        <div class="form-group">
-                          <label for="">ID SP</label>
-                          <select class="form-control" id="id_sp" name="id_sp">
-                           <?php 
-                            $kon = mysqli_connect("localhost",'root',"","sisk");
-                            if (!$kon){
-                                die("Koneksi database gagal:".mysqli_connect_error());
-                            }
-                            $sql="select * from tb_sp_mengajar";
-                            $hasil=mysqli_query($kon,$sql);
-                            $no=0;
-                            while ($data = mysqli_fetch_array($hasil)) {
-                            $no++;
-                           ?>
-                            <option value="<?php echo $data['id_sp'];?>"><?php echo $data['id_sp'];?></option>
-                              <?php 
-                                  }
-                              ?>
-                          </select>
-                        </div>
-                        <div class="form-group">
-                          <label for="">Tanggal Verifikasi</label>
-                          <input type="date" class="form-control" id="tgl_verifikasi" name='tgl_verifikasi' placeholder="">
-                        </div>
-                        <div class="form-group">
-                          <label for="">Status</label>
-                          <div class="form-group">
-                          <select class="form-control" id="status" name="status">
-                            <option value="1">Diverifikasi BAAK</option>
-                            <option value="2">Diverifikasi Wadir</option>
-                            <option value="3">Diverifikasi Direktur</option>
-                          </select>
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <label for="">Catatan</label>
-                          <input type="text-area" class="form-control" id="catatan" name='catatan' placeholder="">
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <button type="submit" class="btn btn-primary" id="submit" name="submit" >Simpan</button>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-                </div>
                  <table id="example2" class="table table-bordered table-striped">
               <thead>
-                <tr>
-                  <th>#</th>
-                  <th>
-                    NIP/NPAK
-                  </th>
-                  <th>
-                    Tanggal
-                  </th>
-                  <th>
-                    Jurusan<br>
-                    Tahun Akademik
-                  </th>
-                  <th>
-                    Perihal
-                  </th>
-                  <th>
-                    No SK<br>
-                    Lampiran
-                  </th>
-                  <th>
-                    Status
-                  </th>
-                  
-                  <th>
-                    Action
-                  </th>
-                </tr>
+                <tr style="text-align: center;">
+                    <th>#</th>
+                    <th>
+                      NIP
+                    </th>     
+                    <th>
+                      No Pengajuan
+                    </th>
+                    <th>
+                      Tanggal
+                    </th>
+                    <th>
+                      Jurusan
+                    </th>
+                    <th>
+                      Perihal
+                    </th>
+                    <th>
+                      Status
+                    </th>
+                    <th>
+                      No SK
+                    </th>
+                    <th>
+                      Action
+                    </th>
+                  </tr>
               </thead>
               <tbody>
-              <?php                    
+              <?php          
                 $connection = mysqli_connect("localhost",'root',"","siska");
-                $sql = "SELECT * FROM tb_sk_mengajar WHERE status=1 ";
+                $sql = "SELECT * FROM tb_pengajuan INNER JOIN tb_jurusan ON tb_pengajuan.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_pengajuan.nip = tb_pengguna.nip WHERE status=2";
                 $result = mysqli_query($connection,$sql);
                 $no= 1;
                 while($d = mysqli_fetch_array($result)) {
-                  if ($d['status']=='1'){
-                    $status = 'Diverifikasi BAAK';
+                  if($d['status']=='1'){
+                    $status = 'Diverifikasi Kajur';
                     $warna = 'warning';
+                    $tgl = $d['tgl_kajur'];
                     }
                     elseif ($d['status']=='2'){
-                    $status = 'Diverifikasi Wadir';
+                    $status = 'Diverifikasi BAAK';
                     $warna = 'primary';
+                    $tgl = $d['tgl_baak'];
                     }
                     elseif ($d['status']=='3'){
+                    $status = 'Diverifikasi Wadir';
+                    $warna = 'primary';
+                    $tgl = $d['tgl_wadir'];
+                    }
+                    elseif ($d['status']=='4'){
                     $status = 'Diverifikasi Direktur';
                     $warna = 'success';
+                    $tgl = $d['tgl_direktur'];
+                    }
+                    elseif ($d['status']=='5'){
+                    $status = 'Ditolak';
+                    $warna = 'danger';
+                    $tgl = '';
                     }
                     else {
                         $status = 'Belum Diverifikasi';
-                        $warna = 'danger';
+                        $warna = 'secondary';
+                        $tgl= '';
                       }
                     ?>
                     <tr>
                       <td><?php echo $no++; ?></td>
                       <td><?php echo $d['nip']; ?></td>
+                      <td><?php echo $d['no_sp']; ?></td>
                       <td><?php echo $d['tgl_sp']; ?></td>
-                      <td><?php echo $d['id_jurusan']; ?><br><?php echo $d['thn_akademik']; ?></td>
+                      <td><?php echo $d['nm_jurusan']; ?><br><?php echo $d['thn_akademik']; ?></td>
                       <td><?php echo $d['perihal']; ?></td>
-                      <td><?php echo $d['no_sk']; ?><br>
-                      <?php echo $d['lampiran_sp']; ?></td>
-                      <td><?php echo "<a href='edit_status.php?id_sk_mengajar=".$d['id_sk_mengajar']."' class='badge bg-". $warna."'>". $status."</a>";?></td>
-                      
+                      <td><?php echo "<a href= 'accept_wadir.php?id_sp=".$d['id_sp']."' class='badge bg-". $warna."'>". $status."</a>";?><br><?php echo "<a>" .$tgl. "<a>"?>
+                      <td><?php echo $d['no_sk']; ?></td>
                       <td>
-                        <div><a class="btn btn-outline-success" href="accept_wadir.php?id_sk_mengajar=<?php echo $d['id_sk_mengajar']; ?>"><i class="fas fa-check"></i> ACCEPT</a></div>
-                        <div><a class="btn btn-outline-danger" onclick="return confirm('Anda yakin ingin menolak item ini ?'" href="decline_wadir.php?id_sk_mengajar=<?php echo $d['id_sk_mengajar']; ?>" ><i class="fas fa-times"></i> DECLINE</a></div> 
-                          
+                        <a class="btn btn-app" href="../baak/lampiran/<?php echo $d['lampiran_sp']; ?>">
+                          <i class="fas fa-file-download"></i>Lampiran</a>
+                        <a class="btn btn-app" href="../baak/sk/<?php echo $d['upload_sk']; ?>">
+                          <i class="fas fa-save"></i>SK</a>
+                        <a class="btn btn-app" href="cetak_sp.php?id_sp=<?php echo $d['id_sp']; ?>" target="_BLANK">
+                          <i class="fas fa-save"></i>SP</a>
+
                       </td>
-                    </tr>
-                    <?php
+                      </tr>
+                      <?php
                       }
-                    ?>
+                      ?>
+
                       </tbody>
                     </table>
-
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
   </div>
   <!-- /.content-wrapper -->

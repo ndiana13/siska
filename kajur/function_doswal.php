@@ -30,17 +30,17 @@ function tambah($data){
 	if(!$lampiran_sp){
 		return false;
 	}
-	$id_sk_mengajar = htmlspecialchars($data["id_sk_mengajar"]);
+	$id_sk_doswal = htmlspecialchars($data["id_sk_doswal"]);
 	$nip 			= htmlspecialchars($data["nip"]);
-	$nm_jurusan  	= htmlspecialchars($data["nm_jurusan"]);
-	$tgl_sp 		= htmlspecialchars($data["tgl_sp"]);
+	$id_jurusan  	= htmlspecialchars($data["id_jurusan"]);
+	$tgl_sp_doswal 	= htmlspecialchars($data["tgl_sp_doswal"]);
 	$thn_akademik 	= htmlspecialchars($data["thn_akademik"]);
 	$semester  		= htmlspecialchars($data["semester"]);
 	$perihal  		= htmlspecialchars($data["perihal"]);
 	$status  		= htmlspecialchars($data["status"]);
 	$no_sk  		= htmlspecialchars($data["no_sk"]);
 
-	$query = "INSERT INTO tb_sk_mengajar VALUES ('$id_sk_mengajar','$nip', '$nm_jurusan', '$tgl_sp', '$thn_akademik', '$semester', '$perihal', '$lampiran_sp', '$status', '$no_sk')";
+	$query = "INSERT INTO tb_sk_doswal VALUES ('$id_sk_doswal', '$nip', '$id_jurusan', '$tgl_sp_doswal', '$thn_akademik', '$semester', '$perihal', '$lampiran_sp', '$status', 'NULL', 'NULL', 'NULL', '$no_sk')";
 	mysqli_query($conn,$query);
 	return mysqli_affected_rows($conn);
 }
@@ -51,7 +51,6 @@ function upload(){
 	$error      = $_FILES['lampiran_sp']['error'];
 	$tmpName    = $_FILES['lampiran_sp']['tmp_name'];
 	
-			//cek apakah tidak ada gambar yang di upload
 	if($error === 4) {
 		echo "<script>
 		alert('Pilih file terlebih dahulu!');
@@ -60,7 +59,7 @@ function upload(){
 	}
 	
 			//cek apakah yang boleh diupload
-	$ekstensifile_transaksiValid = ['csv'];
+	$ekstensifile_transaksiValid = ['xls'];
 	$ekstensifile_transaksi = explode('.', $namaFile);
 	$ekstensifile_transaksi = strtolower(end($ekstensifile_transaksi));
 	if(!in_array($ekstensifile_transaksi,$ekstensifile_transaksiValid)){
@@ -82,13 +81,11 @@ function upload(){
 			//lolos pengecekan
 			//nama baru
 
-	$nama_folder = preg_replace("([^\w\s\d\-_~,;:\[\]\(\].]|[\.]{2,})", '',  $_SESSION["username"]); 
-	$namaFileBaru = ("Lamp_SKM_".$nama_folder);
+	$namaFileBaru = uniqid();
 	$namaFileBaru .= '.';
 	$namaFileBaru .=$ekstensifile_transaksi;
 	
-	
-	move_uploaded_file($tmpName,'lampiran/skmengajar/'.$namaFileBaru);
+	move_uploaded_file($tmpName,'../baak/lampiran/skdoswal/'.$namaFileBaru);
 	return $namaFileBaru;
 }
 
@@ -96,11 +93,10 @@ function ubah($data){
 
 	global $conn;
 
-	$id_sk_mengajar 				= htmlspecialchars($data["id_sk_mengajar"]);
-	$id_sk_mengajar_edit 		= htmlspecialchars($data["id_sk_mengajar_edit"]);
+	$id_sk_doswal   	= htmlspecialchars($data["id_sk_doswal  "]);
 	$nip 				= htmlspecialchars($data["nip"]);
 	$id_jurusan 		= htmlspecialchars($data["id_jurusan"]);
-	$tgl_sp 			= htmlspecialchars($data["tgl_sp"]);
+	$tgl_sp_doswal 		= htmlspecialchars($data["tgl_sp_doswal"]);
 	$thn_akademik 		= htmlspecialchars($data["thn_akademik"]);
 	$semester  			= htmlspecialchars($data["semester"]);
 	$perihal  			= htmlspecialchars($data["perihal"]);
@@ -118,9 +114,9 @@ function ubah($data){
 		//insert data
 	$query ="UPDATE tb_sk_mengajar SET
 	
-	id_sk_mengajar   ='$id_sk_mengajar_edit',
+	id_sk_doswal     ='$id_sk_doswal  ',
 	nip ='$nip',
-	tgl_sp  ='$tgl_sp',
+	tgl_sp_doswal  ='$tgl_sp_doswal',
 	id_jurusan ='$id_jurusan',
 	thn_akademik ='$thn_akademik',
 	semester ='$semester',
@@ -128,40 +124,46 @@ function ubah($data){
 	lampiran_sp   ='$lampiran_sp',
 	status = '$status',
 	no_sk = '$no_sk'
-	WHERE id_sk_mengajar = $id_sk_mengajar";
+	WHERE id_sk_doswal   = $id_sk_doswal  ";
 	mysqli_query($conn,$query);
 	return mysqli_affected_rows($conn);
 }
 
-function hapus($id_sk_mengajar) {
+function ubah_profil($data){
+
 	global $conn;
-	mysqli_query($conn,"DELETE FROM tb_sk_mengajar WHERE id_sk_mengajar = $id_sk_mengajar");
+
+	$nip 			=htmlspecialchars($data["nip"]);
+	$nip_edit 		=htmlspecialchars($data["nip_edit"]);
+	$username       = htmlspecialchars($data['username']);
+	$password 		= htmlspecialchars($data['password']);
+	$email  		= htmlspecialchars($data['email']);
+	$jabatan        = htmlspecialchars($data['jabatan']);
+	$no_hp         	= htmlspecialchars($data['no_hp']);
+	$level         	= htmlspecialchars($data['level']);
+		
+
 	
-	return mysqli_affected_rows($conn);
-}
-
-function acc_wadir($id_sp) {
-	global $conn;	
-	$tgl = date('Y-m-d');
-
-	$query ="UPDATE tb_pengajuan SET status = '3', tgl_wadir= '$tgl'  WHERE id_sp = $id_sp
-	";
-
-	mysqli_query($conn,$query);
-	return mysqli_affected_rows($conn);	
-	
-	return mysqli_affected_rows($conn);
-}
-function dec_wadir($id_sk_mengajar) {
-	global $conn;
-	
-
 		//insert data
-	$query ="UPDATE tb_sk_mengajar SET status = '4' WHERE id_sk_mengajar = $id_sk_mengajar
+	$query ="UPDATE tb_user SET
+	
+	nip 		='$nip_edit',
+	username 	='$username',
+	password	='$password',
+	email 		='$email',
+	jabatan 	='$jabatan',
+	no_hp 		='$no_hp',
+	level 		='$level'
+	
+	WHERE nip= '$nip'
 	";
-
 	mysqli_query($conn,$query);
-	return mysqli_affected_rows($conn);	
+	return mysqli_affected_rows($conn);
+}
+
+function hapus($id_sk_doswal  ) {
+	global $conn;
+	mysqli_query($conn,"DELETE FROM tb_sk_mengajar WHERE id_sk_doswal   = $id_sk_doswal  ");
 	
 	return mysqli_affected_rows($conn);
 }

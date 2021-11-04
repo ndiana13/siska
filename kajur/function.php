@@ -22,7 +22,6 @@ function query($query){
   return $rows;
 }
 
-
 function tambah_sp($data){
 	global $conn;
 		//ambil data dari form
@@ -202,32 +201,7 @@ function hapus_sp($id_sp) {
 	
 	return mysqli_affected_rows($conn);
 }
-function acc_baak($id_sp) {
-	global $conn;
-	$tgl = date('Y-m-d');
-	
-	$query ="UPDATE tb_pengajuan SET status = '2', tgl_baak= '$tgl' WHERE id_sp = $id_sp";
 
-	mysqli_query($conn,$query);
-	return mysqli_affected_rows($conn);	
-}
-function dec_baak($id_sp) {
-	global $conn;
-	
-
-		//insert data
-	$query ="UPDATE tb_pengajuan SET status = '4' WHERE id_sp = $id_sp
-	";
-
-	mysqli_query($conn,$query);
-	return mysqli_affected_rows($conn);	
-}
-function hapus_lam_skm(){
-	global $conn;
-	mysqli_query($conn,"DELETE FROM lam_skm");
-	
-	return mysqli_affected_rows($conn);
-}
 function tambah_pengguna($data){
 	global $conn;
 
@@ -354,7 +328,7 @@ function ubah_profil($data){
 	$no_hp         	= htmlspecialchars($data['no_hp']);
 	$level         	= htmlspecialchars($data['level']);
 	$fotoLama       = htmlspecialchars($data['fotoLama']);
-	$ttdLama        = htmlspecialchars($data['ttdLama']);
+	$ttdLama       	= htmlspecialchars($data['ttdLama']);
 		
 	//cek apakah user pilih foto baru atau tidak
 	if($_FILES['foto']['error'] === 4){
@@ -384,6 +358,19 @@ function ubah_profil($data){
 	WHERE nip= '$nip'
 	";
 	mysqli_query($conn,$query);
+	return mysqli_affected_rows($conn);
+}
+
+function acc_kajur($id_sp) {
+	global $conn;	
+	$tgl = date('Y-m-d');
+
+	$query ="UPDATE tb_pengajuan SET status = '1', tgl_kajur = '$tgl'  WHERE id_sp = $id_sp
+	";
+
+	mysqli_query($conn,$query);
+	return mysqli_affected_rows($conn);	
+	
 	return mysqli_affected_rows($conn);
 }
 ?>

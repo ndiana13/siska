@@ -1,21 +1,11 @@
 <?php
-error_reporting();
-$server = "localhost";
-$user = "root";
-$pass = "";
-$database = "siska";
-
-$conn = mysqli_connect($server, $user, $pass, $database);
-
-if (!$conn) {
-    die("<script>alert('Connection Failed.')</script>");
-}
+ include '../login/config.php';
 session_start();
  
 if (!isset($_SESSION['username'])) {
     header("Location: index.php");
 }
-
+error_reporting();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,7 +33,7 @@ if (!isset($_SESSION['username'])) {
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
       <?php    include '../AdminLTE/header.php'; ?>
-      <?php    include '../AdminLTE/sidebar2.php'; ?>
+      <?php    include '../AdminLTE/sidebar.php'; ?>
       
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -52,7 +42,7 @@ if (!isset($_SESSION['username'])) {
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Tabel Verifikasi</h1>
+            <h1 class="m-0">Tabel User</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -63,110 +53,93 @@ if (!isset($_SESSION['username'])) {
         </div>
       </div>
     </div>
-     <section class="content">
+    <section class="content">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-12">
-            <!-- /.modal-dialog -->
-            <div class="card">
-              <div class="card-body">
-                 <table id="example2" class="table table-bordered table-striped">
-              <thead>
-                <tr style="text-align: center;">
-                    <th>#</th>
-                    <th>
-                      NIP
-                    </th>     
-                    <th>
-                      No Pengajuan
-                    </th>
-                    <th>
-                      Tanggal
-                    </th>
-                    <th>
-                      Jurusan
-                    </th>
-                    <th>
-                      Perihal
-                    </th>
-                    <th>
-                      Status
-                    </th>
-                    <th>
-                      No SK
-                    </th>
-                    <th>
-                      Action
-                    </th>
-                  </tr>
-              </thead>
-              <tbody>
-              <?php          
-                $connection = mysqli_connect("localhost",'root',"","siska");
-                $sql = "SELECT * FROM tb_pengajuan INNER JOIN tb_jurusan ON tb_pengajuan.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_pengajuan.nip = tb_pengguna.nip WHERE status=3";
-                $result = mysqli_query($connection,$sql);
-                $no= 1;
-                while($d = mysqli_fetch_array($result)) {
-                  if($d['status']=='1'){
-                    $status = 'Diverifikasi Kajur';
-                    $warna = 'warning';
-                    $tgl = $d['tgl_kajur'];
-                    }
-                    elseif ($d['status']=='2'){
-                    $status = 'Diverifikasi BAAK';
-                    $warna = 'primary';
-                    $tgl = $d['tgl_baak'];
-                    }
-                    elseif ($d['status']=='3'){
-                    $status = 'Diverifikasi Wadir';
-                    $warna = 'primary';
-                    $tgl = $d['tgl_wadir'];
-                    }
-                    elseif ($d['status']=='4'){
-                    $status = 'Diverifikasi Direktur';
-                    $warna = 'success';
-                    $tgl = $d['tgl_direktur'];
-                    }
-                    elseif ($d['status']=='5'){
-                    $status = 'Ditolak';
-                    $warna = 'danger';
-                    $tgl = '';
-                    }
-                    else {
-                        $status = 'Belum Diverifikasi';
-                        $warna = 'secondary';
-                        $tgl= '';
-                      }
-                    ?>
-                    <tr>
-                      <td><?php echo $no++; ?></td>
-                      <td><?php echo $d['nip']; ?></td>
-                      <td><?php echo $d['no_sp']; ?></td>
-                      <td><?php echo $d['tgl_sp']; ?></td>
-                      <td><?php echo $d['nm_jurusan']; ?><br><?php echo $d['thn_akademik']; ?></td>
-                      <td><?php echo $d['perihal']; ?></td>
-                      <td><?php echo "<a href= 'accept_direktur.php?id_sp=".$d['id_sp']."' class='badge bg-". $warna."'>". $status."</a>";?><br><?php echo "<a>" .$tgl. "<a>"?>
-                      <td><?php echo $d['no_sk']; ?></td>
-                      <td>
-                        <a class="btn btn-app" href="../baak/lampiran/<?php echo $d['lampiran_sp']; ?>">
-                          <i class="fas fa-file-download"></i>Lampiran</a>
-                        <a class="btn btn-app" href="../baak/sk/<?php echo $d['upload_sk']; ?>">
-                          <i class="fas fa-save"></i>SK</a>
-
-                      </td>
-                      </tr>
-                      <?php
-                      }
-                      ?>
-
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
+          <div class="col-lg-10">
+          <!-- Profile Image -->
+          <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Profil User</h3>
               </div>
+            <div class="card-body box-profile">
+              <h3 class="profile-username text-center"><?php echo $_SESSION['username']; ?></h3>
+              <ul class="list-group list-group-unbordered mb-3">
+                <li class="list-group-item">
+                  <b>NIP/NPAK</b> <a class="float-right"><?php
+                  include '../login/config.php';
+                  $username = $_SESSION['username'];
+
+                  $sql = "SELECT nip FROM tb_user WHERE username='$username'"; 
+                  $result = mysqli_query($conn, $sql);
+                  while ($row = $result->fetch_assoc()) {
+                    echo $row['nip']."<br>";
+                  }
+
+                  ?></a>
+                </li>
+
+                <li class="list-group-item">
+                  <b>Username</b> <a class="float-right"><?php
+                  include '../login/config.php';
+                  $username = $_SESSION['username'];
+
+                  $sql = "SELECT username FROM tb_user WHERE username='$username'"; 
+                  $result = mysqli_query($conn, $sql);
+                  while ($row = $result->fetch_assoc()) {
+                    echo $row['username']."<br>";
+                  }
+
+                  ?></a>
+                </li>
+                <li class="list-group-item">
+                  <b>No Hp</b> <a class="float-right"><?php
+                  include '../login/config.php';
+                  $username = $_SESSION['username'];
+
+                  $sql = "SELECT no_hp FROM tb_user WHERE username='$username'"; 
+                  $result = mysqli_query($conn, $sql);
+                  while ($row = $result->fetch_assoc()) {
+                    echo $row['no_hp']."<br>";
+                  }
+
+                  ?></a>
+                </li>
+                <li class="list-group-item">
+                  <b>Jabatan</b> <a class="float-right"><?php
+                  include '../login/config.php';
+                  $username = $_SESSION['username'];
+
+                  $sql = "SELECT jabatan FROM tb_user WHERE username='$username'"; 
+                  $result = mysqli_query($conn, $sql);
+                  while ($row = $result->fetch_assoc()) {
+                    echo $row['jabatan']."<br>";
+                  }
+
+                  ?></a>
+                </li>
+
+                <li class="list-group-item">
+                  <b>Email</b> <a class="float-right"><?php
+                  include '../login/config.php';
+                  $username = $_SESSION['username'];
+
+                  $sql = "SELECT email FROM tb_user WHERE username='$username'"; 
+                  $result = mysqli_query($conn, $sql);
+                  while ($row = $result->fetch_assoc()) {
+                    echo $row['email']."<br>";
+                  }
+
+                  ?></a>
+                </li>
+                  <a href="edit_profil.php" class="btn btn-primary btn-block"><b>Edit Profil</b></a>
+                </ul>
+              </div>
+              <!-- /.card-body -->
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
   </div>
   <!-- /.content-wrapper -->

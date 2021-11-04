@@ -92,13 +92,6 @@
             </a>
           </li> 
           <li class="nav-item">
-            <a href="tb_history_sk_mengajar.php" class="nav-link">
-              <i class="nav-icon fas fa-list-ol"></i>
-              <p>History SK</p>
-            </a>
-          </li>
-          </li>
-          <li class="nav-item">
             <a href="../login/logout.php" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>Logout</p>
