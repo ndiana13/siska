@@ -173,6 +173,16 @@ function ubah_sp($data){
 	}else{
 		$upload_sk =upload_sk();
 	}
+
+	// VALIDASI NIP
+    $cek_no_sk = mysqli_query($conn, "SELECT * FROM tb_pengajuan WHERE id_sp = '$id_sp'");
+    if (mysqli_fetch_array($cek_no_sk)) {
+        echo "<script>
+        alert('Nomor SK Sudah Ada');
+        document.location.href='tb_penomoran.php';
+        </script>";
+        return false;
+    }
 	
 	
 		//insert data

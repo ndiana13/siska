@@ -63,7 +63,7 @@ if ( isset($_POST["submit1"])) {
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
       <?php    include '../AdminLTE/header.php'; ?>
-      <?php    include '../AdminLTE/sidebar1.php'; ?>
+      <?php    include '../AdminLTE/sidebar3.php'; ?>
       
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -123,7 +123,7 @@ if ( isset($_POST["submit1"])) {
               <tbody>
               <?php          
                 $connection = mysqli_connect("localhost",'root',"","siska");
-                $sql = "SELECT * FROM tb_pengajuan INNER JOIN tb_jurusan ON tb_pengajuan.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_pengajuan.nip = tb_pengguna.nip WHERE status=4";
+                $sql = "SELECT * FROM tb_pengajuan INNER JOIN tb_jurusan ON tb_pengajuan.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_pengajuan.nip = tb_pengguna.nip WHERE status=4 ORDER BY no_sk";
                 $result = mysqli_query($connection,$sql);
                 $no= 1;
                 while($d = mysqli_fetch_array($result)) {

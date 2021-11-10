@@ -153,7 +153,7 @@ if ( isset($_POST["submit1"])) {
               <?php 
                                    
                 $connection = mysqli_connect("localhost",'root',"","siska");
-                $sql = "SELECT * FROM tb_pengajuan INNER JOIN tb_jurusan ON tb_pengajuan.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_pengajuan.nip = tb_pengguna.nip";
+                $sql = "SELECT * FROM tb_pengajuan INNER JOIN tb_jurusan ON tb_pengajuan.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_pengajuan.nip = tb_pengguna.nip ORDER BY id_sp DESC";
                 $result = mysqli_query($connection,$sql);
                 $no= 1;
                 while($d = mysqli_fetch_array($result)) {

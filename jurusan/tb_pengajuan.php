@@ -56,26 +56,6 @@ if ( isset($_POST["submit1"])) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SISKA | Dashboard</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/fontawesome-free/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Tempusdominus Bootstrap 4 -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <!-- JQVMap -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/jqvmap/jqvmap.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../AdminLTE/dist/css/adminlte.min.css">
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-  <!-- Daterange picker -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/daterangepicker/daterangepicker.css">
-  <!-- summernote -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/summernote/summernote-bs4.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../AdminLTE/plugins/fontawesome-free/css/all.min.css">
   <!-- DataTables -->
@@ -257,7 +237,7 @@ if ( isset($_POST["submit1"])) {
               <?php   
                 $username = $_SESSION['nama'];                 
                 $connection = mysqli_connect("localhost",'root',"","siska");
-                $sql = "SELECT * FROM tb_pengajuan INNER JOIN tb_jurusan ON tb_pengajuan.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_pengajuan.nip = tb_pengguna.nip WHERE nama_lengkap='$username'";
+                $sql = "SELECT * FROM tb_pengajuan INNER JOIN tb_jurusan ON tb_pengajuan.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_pengajuan.nip = tb_pengguna.nip WHERE nama_lengkap='$username' ORDER BY id_sp DESC";
                 $result = mysqli_query($connection,$sql);
                 $no= 1;
                 while($d = mysqli_fetch_array($result)) {
@@ -310,9 +290,7 @@ if ( isset($_POST["submit1"])) {
                           <i class="fas fa-file-download"></i>Lampiran</a>
                         <a class="btn btn-app" href="cetak_sp.php?id_sp=<?php echo $d['id_sp']; ?>" target="_BLANK">
                           <i class="fas fa-save"></i>SP</a>
-                        <a class="btn btn-app" href="../baak/sk/<?php echo $d['upload_sk']; ?>">
-                          <i class="fas fa-save"></i>SK</a>
-
+                          
                           <div class="modal fade" id="myModal<?php echo $d['id_sp']; ?>">
                           <div class="modal-dialog">
                             <div class="modal-content">
@@ -461,20 +439,6 @@ if ( isset($_POST["submit1"])) {
   </aside>
   <!-- /.control-sidebar -->
 
-<!-- ./wrapper -->
-
-<script src="../AdminLTE/plugins/jquery/jquery.min.js"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="../AdminLTE/plugins/jquery-ui/jquery-ui.min.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button)
-</script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="../AdminLTE/dist/js/pages/dashboard.js"></script>
-<script src="../AdminLTE/plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="../AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- DataTables  & Plugins -->
 <script src="../AdminLTE/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="../AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -488,10 +452,6 @@ if ( isset($_POST["submit1"])) {
 <script src="../AdminLTE/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="../AdminLTE/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="../AdminLTE/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../AdminLTE/dist/js/adminlte.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../AdminLTE/dist/js/demo.js"></script>
 <script>
   $(function () {
     $("#example1").DataTable({

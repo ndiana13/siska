@@ -232,8 +232,8 @@ error_reporting();
 		</table>
 		<?php
 		}
-		elseif ($result['jns_sp']=='skmagang'){
 		?>
+		<?php  elseif ($result['jns_sp']=='skmagang'){ ?>
 		<table>
 			<tr class="text2">
 				<td width="40"></td>
@@ -279,6 +279,9 @@ error_reporting();
 			</tr>
 		</table>
 		<?php
+		}
+		else {
+			echo "";
 		}
 		?>
 		

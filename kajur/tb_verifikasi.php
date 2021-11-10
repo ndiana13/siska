@@ -116,7 +116,7 @@ while($d = mysqli_fetch_array($row)){
               <?php
               $jurusan = $d['id_jurusan'];                   
                 $connection = mysqli_connect("localhost",'root',"","siska");
-                $sql = "SELECT * FROM tb_pengajuan INNER JOIN tb_jurusan ON tb_pengajuan.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_pengajuan.nip = tb_pengguna.nip WHERE tb_pengajuan.id_jurusan ='$jurusan' AND status=0";
+                $sql = "SELECT * FROM tb_pengajuan INNER JOIN tb_jurusan ON tb_pengajuan.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_pengajuan.nip = tb_pengguna.nip WHERE tb_pengajuan.id_jurusan ='$jurusan' AND status=0 ORDER BY id_sp";
                 $result = mysqli_query($connection,$sql);
                 $no= 1;
                 while($d = mysqli_fetch_array($result)) {
