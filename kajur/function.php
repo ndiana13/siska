@@ -370,7 +370,14 @@ function acc_kajur($id_sp) {
 
 	mysqli_query($conn,$query);
 	return mysqli_affected_rows($conn);	
+}
+function dec_wadir($id_sp) {
+	global $conn;
+	$tgl = date('Y-m-d');
 	
-	return mysqli_affected_rows($conn);
+	$query ="UPDATE tb_pengajuan SET status = '5', tgl_kajur = '$tgl' WHERE id_sp = $id_sp";
+
+	mysqli_query($conn,$query);
+	return mysqli_affected_rows($conn);	
 }
 ?>

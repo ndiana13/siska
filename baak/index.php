@@ -7,22 +7,23 @@ if (!isset($_SESSION['nama'])) {
     header("Location: index.php");
 }
 
-?>
-<?php
-$row_sk_mengajar = mysqli_query($conn,"SELECT * FROM tb_pengajuan WHERE jns_sp ='skmengajar'");
+$row_sk_mengajar = mysqli_query($conn,"SELECT * FROM tb_pengajuan WHERE jns_sp ='skmengajar' AND status=1");
 $jumlah_sk_mengajar = mysqli_num_rows($row_sk_mengajar);
-?>
 
-<?php
+$sk_mengajar = mysqli_query($conn,"SELECT * FROM tb_pengajuan WHERE jns_sp ='skmengajar' AND status=4");
+$j_sk_mengajar = mysqli_num_rows($sk_mengajar);
 
-$row_sk_magang = mysqli_query($conn, "SELECT * FROM tb_pengajuan WHERE jns_sp ='skmagang'");
+$row_sk_magang = mysqli_query($conn, "SELECT * FROM tb_pengajuan WHERE jns_sp ='skmagang' AND status=1");
 $jumlah_sk_magang = mysqli_num_rows($row_sk_magang);
-?>
 
-<?php
+$sk_magang = mysqli_query($conn, "SELECT * FROM tb_pengajuan WHERE jns_sp ='skmagang' AND status=4");
+$j_sk_magang = mysqli_num_rows($sk_magang);
 
-$row_sk_doswal = mysqli_query($conn,"SELECT * FROM tb_pengajuan WHERE jns_sp ='skdoswal'");
+$row_sk_doswal = mysqli_query($conn,"SELECT * FROM tb_pengajuan WHERE jns_sp ='skdoswal' AND status=1");
 $jumlah_sk_doswal = mysqli_num_rows($row_sk_doswal);
+
+$sk_doswal = mysqli_query($conn,"SELECT * FROM tb_pengajuan WHERE jns_sp ='skdoswal' AND status=4");
+$j_sk_doswal = mysqli_num_rows($sk_doswal);
 ?>
 
 <!DOCTYPE html>
@@ -31,27 +32,6 @@ $jumlah_sk_doswal = mysqli_num_rows($row_sk_doswal);
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SISKA | Dashboard</title>
-
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/fontawesome-free/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Tempusdominus Bootstrap 4 -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <!-- JQVMap -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/jqvmap/jqvmap.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../AdminLTE/dist/css/adminlte.min.css">
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-  <!-- Daterange picker -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/daterangepicker/daterangepicker.css">
-  <!-- summernote -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/summernote/summernote-bs4.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -125,6 +105,48 @@ $jumlah_sk_doswal = mysqli_num_rows($row_sk_doswal);
                 <h3><?php echo $jumlah_sk_doswal; ?></h3>
 
                 <p>Pengajuan Surat Dosen Wali</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-card"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-4 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3><?php echo $j_sk_mengajar; ?></h3>
+
+                <p>Jumlah SK Surat Mengajar</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-card"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-4 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3><?php echo $j_sk_magang; ?></h3>
+
+                <p>Jumlah SK Magang</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-card"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-4 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3><?php echo $j_sk_doswal; ?></h3>
+
+                <p>Jumlah SK Dosen Wali</p>
               </div>
               <div class="icon">
                 <i class="ion ion-card"></i>
@@ -355,41 +377,5 @@ $jumlah_sk_doswal = mysqli_num_rows($row_sk_doswal);
   <!-- /.content-wrapper -->
   <?php    include "../AdminLTE/footer.php"; ?>
 </div>
-<!-- ./wrapper -->
-
-<!-- jQuery -->
-<script src="../AdminLTE/plugins/jquery/jquery.min.js"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="../AdminLTE/plugins/jquery-ui/jquery-ui.min.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button)
-</script>
-<!-- Bootstrap 4 -->
-<script src="../AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- ChartJS -->
-<script src="../AdminLTE/plugins/chart.js/Chart.min.js"></script>
-<!-- Sparkline -->
-<script src="../AdminLTE/plugins/sparklines/sparkline.js"></script>
-<!-- JQVMap -->
-<script src="../AdminLTE/plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="../AdminLTE/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-<!-- jQuery Knob Chart -->
-<script src="../AdminLTE/plugins/jquery-knob/jquery.knob.min.js"></script>
-<!-- daterangepicker -->
-<script src="../AdminLTE/plugins/moment/moment.min.js"></script>
-<script src="../AdminLTE/plugins/daterangepicker/daterangepicker.js"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="../AdminLTE/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-<!-- Summernote -->
-<script src="../AdminLTE/plugins/summernote/summernote-bs4.min.js"></script>
-<!-- overlayScrollbars -->
-<script src="../AdminLTE/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../AdminLTE/dist/js/adminlte.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../AdminLTE/dist/js/demo.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="../AdminLTE/dist/js/pages/dashboard.js"></script>
 </body>
 </html>

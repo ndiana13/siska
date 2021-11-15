@@ -24,21 +24,6 @@ if (!isset($_SESSION['username'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SISKA | DataTables</title>
 
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/fontawesome-free/css/all.min.css">
-  <link rel="stylesheet" href="../AdminLTE/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
-  <!-- Toastr -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/toastr/toastr.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../AdminLTE/dist/css/adminlte.min.css">
-  <!-- DataTables -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="../AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-  <link rel="stylesheet" href="../AdminLTE/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../AdminLTE/dist/css/adminlte.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -93,9 +78,6 @@ if (!isset($_SESSION['username'])) {
                       Status
                     </th>
                     <th>
-                      No SK
-                    </th>
-                    <th>
                       Action
                     </th>
                   </tr>
@@ -146,8 +128,8 @@ if (!isset($_SESSION['username'])) {
                       <td><?php echo $d['nm_jurusan']; ?><br><?php echo $d['thn_akademik']; ?></td>
                       <td><?php echo $d['perihal']; ?></td>
                       <td><?php echo "<a href= 'accept_wadir.php?id_sp=".$d['id_sp']."' class='badge bg-". $warna."'>". $status."</a>";?><br><?php echo "<a>" .$tgl. "<a>"?>
-                      <td><?php echo $d['no_sk']; ?></td>
                       <td>
+
                         <a class="btn btn-app" href="../baak/lampiran/<?php echo $d['lampiran_sp']; ?>">
                           <i class="fas fa-file-download"></i>Lampiran</a>
                         <a class="btn btn-app" href="../baak/sk/<?php echo $d['upload_sk']; ?>">
@@ -180,33 +162,6 @@ if (!isset($_SESSION['username'])) {
   </aside>
   <!-- /.control-sidebar -->
 </div>
-<!-- ./wrapper -->
-
-
-<!-- jQuery -->
-</script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="../AdminLTE/dist/js/pages/dashboard.js"></script>
-<script src="../AdminLTE/plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="../AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- DataTables  & Plugins -->
-<script src="../AdminLTE/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="../AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="../AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="../AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="../AdminLTE/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="../AdminLTE/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="../AdminLTE/plugins/jszip/jszip.min.js"></script>
-<script src="../AdminLTE/plugins/pdfmake/pdfmake.min.js"></script>
-<script src="../AdminLTE/plugins/pdfmake/vfs_fonts.js"></script>
-<script src="../AdminLTE/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="../AdminLTE/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="../AdminLTE/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../AdminLTE/dist/js/adminlte.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../AdminLTE/dist/js/demo.js"></script>
 <script>
   $(function () {
     $("#example1").DataTable({

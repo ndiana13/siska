@@ -7,29 +7,6 @@ if (!isset($_SESSION['nama'])) {
     header("Location: index.php");
 }
 require 'function.php';
-if ( isset($_POST["submit"]))
-{
-        //cek data berhasil tambah atau tidak
-  if  (tambah_sp($_POST)>0){
-
-
-    echo "
-    <script>
-    alert('Data Berhasil Ditambahkan');
-    document.location.href='tb_pengajuan.php';
-    </script>
-    ";
-  }else {
-
-    echo "
-    <script>
-    alert('Data Gagal Ditambahkan');
-     document.location.href='tb_pengajuan.php';
-    </script>
-    ";
-
-  }
-}
 if ( isset($_POST["submit1"])) {
     //cek data berhasil ubah atau tidak
     if  (ubah_sp($_POST)>0){
@@ -57,35 +34,6 @@ if ( isset($_POST["submit1"])) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SISKA | Dashboard</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/fontawesome-free/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Tempusdominus Bootstrap 4 -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <!-- JQVMap -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/jqvmap/jqvmap.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../AdminLTE/dist/css/adminlte.min.css">
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-  <!-- Daterange picker -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/daterangepicker/daterangepicker.css">
-  <!-- summernote -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/summernote/summernote-bs4.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/fontawesome-free/css/all.min.css">
-  <!-- DataTables -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="../AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-  <link rel="stylesheet" href="../AdminLTE/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../AdminLTE/dist/css/adminlte.min.css">
-  <!-- Theme style -->
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -153,7 +101,7 @@ if ( isset($_POST["submit1"])) {
               <?php 
                                    
                 $connection = mysqli_connect("localhost",'root',"","siska");
-                $sql = "SELECT * FROM tb_pengajuan INNER JOIN tb_jurusan ON tb_pengajuan.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_pengajuan.nip = tb_pengguna.nip";
+                $sql = "SELECT * FROM tb_pengajuan INNER JOIN tb_jurusan ON tb_pengajuan.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_pengajuan.nip = tb_pengguna.nip ORDER BY id_sp DESC";
                 $result = mysqli_query($connection,$sql);
                 $no= 1;
                 while($d = mysqli_fetch_array($result)) {
@@ -239,9 +187,9 @@ if ( isset($_POST["submit1"])) {
                                               $jns = "Surat Keputusan Mengajar";
                                             }
                                             elseif ($d['jns_sp']=='skdoswal'){
-                                              $jns = "Surat Keputusan Dosen Walir";
+                                              $jns = "Surat Keputusan Dosen Wali";
                                             }
-                                            elseif ($d['jns_sp']=='skdoswal'){
+                                            elseif ($d['jns_sp']=='skmagang'){
                                               $jns = "Surat Keputusan Magang";
                                             }
                                             ?>
@@ -273,7 +221,7 @@ if ( isset($_POST["submit1"])) {
                                               $hasil=mysqli_query($kon,$sql);
                                               while ($data = mysqli_fetch_array($hasil)) {
                                              ?>
-                                              <option hidden selected value="<?= $d["id_jurusan"]; ?>"><?= $d["id_jurusan"]; ?></option>
+                                              <option hidden selected value="<?= $d["id_jurusan"]; ?>"><?= $d["nm_jurusan"]; ?></option>
                                               <option value="<?= $data['id_jurusan'];?>"><?php echo $data['nm_jurusan'];?></option>
                                                 <?php 
                                                     }
@@ -312,7 +260,7 @@ if ( isset($_POST["submit1"])) {
                                           <input type="file" name="lampiran_sp" value="<?= $d["lampiran_sp"];?>"><br>
                                           <small style="color:#dc3545;">*Format file yang diperbolehkan adalah (.xls, xlsx,docs) max 50MB!</small>
                                         </div>
-                                        <div class="form-group" hidden="">
+                                        <div class="form-group">
                                           <label for="">SK</label><br>
                                           <p><?php echo $d['upload_sk'];?></p>
                                           <input type="file" name="upload_sk" value="<?= $d["upload_sk"];?>"><br>

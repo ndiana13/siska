@@ -20,27 +20,6 @@ while($d = mysqli_fetch_array($row)){
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SISKA | Dashboard</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/fontawesome-free/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Tempusdominus Bootstrap 4 -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <!-- JQVMap -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/jqvmap/jqvmap.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../AdminLTE/dist/css/adminlte.min.css">
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-  <!-- Daterange picker -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/daterangepicker/daterangepicker.css">
-  <!-- summernote -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/summernote/summernote-bs4.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="../AdminLTE/plugins/fontawesome-free/css/all.min.css">
   <!-- DataTables -->
   <link rel="stylesheet" href="../AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
@@ -105,10 +84,7 @@ while($d = mysqli_fetch_array($row)){
                     Status
                   </th>
                   <th>
-                    No SK<br>Lampiran
-                  </th>
-                  <th>
-                    Action
+                    Detail
                   </th>
                 </tr>
               </thead>
@@ -158,8 +134,11 @@ while($d = mysqli_fetch_array($row)){
                       <td><?php echo $d['tgl_sp']; ?></td>
                       <td><?php echo $d['nm_jurusan']; ?><br><?php echo $d['thn_akademik']; ?></td>
                       <td><?php echo $d['perihal']; ?></td>
-                      <td><?php echo "<a href= 'accept_kajur.php?id_sp=".$d['id_sp']."' class='badge bg-". $warna."'>". $status."</a>";?><br><?php echo "<a>" .$tgl. "<a>"?>
-                      <td><?php echo $d['no_sk']; ?><br><?php echo $d['lampiran_sp']; ?></td>
+                      <td><?php echo "<a  href= 'accept_kajur.php?id_sp=".$d['id_sp']."' onclick= "return confirm('Anda yakin ingin menerima pengajuan ini ?')" class='badge bg-". $warna."'>". $status."</a>";?><br><?php echo "<a>" .$tgl. "<a>"?>
+                      <!--<td>
+                        <a class="buttons" href="accept_kajur.php?id_sp=<?php echo $d['id_sp']; ?>" style="color: green;"><i class="fas fa-check" style="color: green;"></i> Accept</a><br>
+                        <a class="buttons" href="decline_kajur.php?id_sp=<?php echo $d['id_sp']; ?>" style="color: red;" onclick="return confirm('Anda yakin ingin menolak pengajuan ini ?')"><i class="fas fa-check" style="color: red;"></i> Decline</a>
+                      </td> -->
                       <td>
                         <a class="btn btn-app" href="../baak/lampiran/<?php echo $d['lampiran_sp']; ?>">
                           <i class="fas fa-file-download"></i>Lampiran</a>
@@ -183,51 +162,17 @@ while($d = mysqli_fetch_array($row)){
             </div>
           </div>
         </section>
-        </div>
-        <!-- /.row (main row) -->
-      </div><!-- /.container-fluid -->
+      </div>
+  </div><!-- /.container-fluid -->
 
   <!-- /.content-wrapper -->
 <?php    include "../AdminLTE/footer.php"; ?>
       
-
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
   </aside>
-  <!-- /.control-sidebar -->
 
-<!-- ./wrapper -->
-
-<script src="../AdminLTE/plugins/jquery/jquery.min.js"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="../AdminLTE/plugins/jquery-ui/jquery-ui.min.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button)
-</script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="../AdminLTE/dist/js/pages/dashboard.js"></script>
-<script src="../AdminLTE/plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="../AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- DataTables  & Plugins -->
-<script src="../AdminLTE/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="../AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="../AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="../AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="../AdminLTE/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="../AdminLTE/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="../AdminLTE/plugins/jszip/jszip.min.js"></script>
-<script src="../AdminLTE/plugins/pdfmake/pdfmake.min.js"></script>
-<script src="../AdminLTE/plugins/pdfmake/vfs_fonts.js"></script>
-<script src="../AdminLTE/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="../AdminLTE/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="../AdminLTE/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../AdminLTE/dist/js/adminlte.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../AdminLTE/dist/js/demo.js"></script>
 <script>
   $(function () {
     $("#example1").DataTable({

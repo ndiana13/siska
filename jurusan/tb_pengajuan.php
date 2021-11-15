@@ -321,9 +321,9 @@ if ( isset($_POST["submit1"])) {
                                               $jns = "Surat Keputusan Mengajar";
                                             }
                                             elseif ($d['jns_sp']=='skdoswal'){
-                                              $jns = "Surat Keputusan Dosen Walir";
+                                              $jns = "Surat Keputusan Dosen Wali";
                                             }
-                                            elseif ($d['jns_sp']=='skdoswal'){
+                                            elseif ($d['jns_sp']=='skmagang'){
                                               $jns = "Surat Keputusan Magang";
                                             }
                                             ?>
@@ -355,7 +355,7 @@ if ( isset($_POST["submit1"])) {
                                               $hasil=mysqli_query($kon,$sql);
                                               while ($data = mysqli_fetch_array($hasil)) {
                                              ?>
-                                              <option hidden selected value="<?= $d["id_jurusan"]; ?>"><?= $d["id_jurusan"]; ?></option>
+                                              <option hidden selected value="<?= $d["id_jurusan"]; ?>"><?= $d["nm_jurusan"]; ?></option>
                                               <option value="<?= $data['id_jurusan'];?>"><?php echo $data['nm_jurusan'];?></option>
                                                 <?php 
                                                     }

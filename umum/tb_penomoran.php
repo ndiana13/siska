@@ -43,22 +43,6 @@ if ( isset($_POST["submit1"])) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SISKA | DataTables</title>
-
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/fontawesome-free/css/all.min.css">
-  <link rel="stylesheet" href="../AdminLTE/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
-  <!-- Toastr -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/toastr/toastr.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../AdminLTE/dist/css/adminlte.min.css">
-  <!-- DataTables -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="../AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-  <link rel="stylesheet" href="../AdminLTE/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../AdminLTE/dist/css/adminlte.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -169,13 +153,13 @@ if ( isset($_POST["submit1"])) {
                       <td><?php echo $d['no_sk']; ?></td>
                       <td>
                         <a class="btn btn-app" data-toggle="modal" data-target="#myModal<?php echo $d['id_sp']; ?>">
-                          <i class="fas fa-edit"></i> Edit</a>
-                        <a class="btn btn-app" href="../baak/lampiran/<?php echo $d['lampiran_sp']; ?>">
+                          <i class="fas fa-edit"></i> Beri NO SK</a>
+                        <!--<a class="btn btn-app" href="../baak/lampiran/<?php echo $d['lampiran_sp']; ?>">
                           <i class="fas fa-file-download"></i>Lampiran</a>
                         <a class="btn btn-app" href="../baak/sk/<?php echo $d['upload_sk']; ?>">
                           <i class="fas fa-save"></i>SK</a>
                         <a class="btn btn-app" href="cetak_sp.php?id_sp=<?php echo $d['id_sp']; ?>" target="_BLANK">
-                          <i class="fas fa-save"></i>SP</a>
+                          <i class="fas fa-save"></i>SP</a>-->
                         <div class="modal fade" id="myModal<?php echo $d['id_sp']; ?>">
                           <div class="modal-dialog">
                             <div class="modal-content">
@@ -206,9 +190,9 @@ if ( isset($_POST["submit1"])) {
                                               $jns = "Surat Keputusan Mengajar";
                                             }
                                             elseif ($d['jns_sp']=='skdoswal'){
-                                              $jns = "Surat Keputusan Dosen Walir";
+                                              $jns = "Surat Keputusan Dosen Wali";
                                             }
-                                            elseif ($d['jns_sp']=='skdoswal'){
+                                            elseif ($d['jns_sp']=='skmagang'){
                                               $jns = "Surat Keputusan Magang";
                                             }
                                             ?>
@@ -320,33 +304,6 @@ if ( isset($_POST["submit1"])) {
   </aside>
   <!-- /.control-sidebar -->
 </div>
-<!-- ./wrapper -->
-
-
-<!-- jQuery -->
-</script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="../AdminLTE/dist/js/pages/dashboard.js"></script>
-<script src="../AdminLTE/plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="../AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- DataTables  & Plugins -->
-<script src="../AdminLTE/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="../AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="../AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="../AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="../AdminLTE/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="../AdminLTE/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="../AdminLTE/plugins/jszip/jszip.min.js"></script>
-<script src="../AdminLTE/plugins/pdfmake/pdfmake.min.js"></script>
-<script src="../AdminLTE/plugins/pdfmake/vfs_fonts.js"></script>
-<script src="../AdminLTE/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="../AdminLTE/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="../AdminLTE/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../AdminLTE/dist/js/adminlte.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../AdminLTE/dist/js/demo.js"></script>
 <script>
   $(function () {
     $("#example1").DataTable({

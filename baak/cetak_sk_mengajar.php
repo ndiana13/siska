@@ -1,12 +1,12 @@
 <?php
 include '../login/config.php';
-$id_sk_mengajar = $_GET['id_sk_mengajar'];
-$query     =mysqli_query($conn, "SELECT * FROM tb_sk_mengajar WHERE id_sk_mengajar='$id_sk_mengajar'");
+$id_sp = $_GET['id_sp'];
+$query     =mysqli_query($conn, "SELECT * FROM tb_pengajuan WHERE id_sp='$id_sp'");
 $result    =mysqli_fetch_array($query);
 
-   $y = substr($result['tgl_verif3'],0,4);
-   $m = substr($result['tgl_verif3'],5,2);
-   $h = substr($result['tgl_verif3'],8,2);
+   $y = substr($result['tgl_direktur'],0,4);
+   $m = substr($result['tgl_direktur'],5,2);
+   $h = substr($result['tgl_direktur'],8,2);
 
    if($m == "01"){
        $nm = "Januari";
@@ -247,7 +247,7 @@ error_reporting(0);
 				<td width="350"><br><br><br><br></td>
 				<td>Ditetapkan di Cilacap<br><?php echo  "<a>". $h." ". $nm. " ". $y. "</a>" ?><br>DIREKTUR POLITEKNIK NEGERI<br>CILACAP<br>
 				<br><br><br><br><span style="text-transform:uppercase;text-align: center;"><?php 
-		$direktur = "SELECT * FROM tb_pengguna WHERE level=3";
+		$direktur = "SELECT * FROM tb_pengguna WHERE level=5";
 		$sql     =mysqli_query($conn,$direktur);
 		$r    =mysqli_fetch_array($sql);?><?php echo $r['nama_lengkap'];?></span><br><?php echo $r['nip'];?></td>
 			</tr>
@@ -467,7 +467,7 @@ error_reporting(0);
 					<td width="420"><br><br><br><br></td>
 					<td style="font-size: 12px;"> Ditetapkan di Cilacap<br><?php echo  "<a>". $h." ". $nm. " ". $y. "</a>" ?><br>DIREKTUR POLITEKNIK NEGERI<br>CILACAP<br>
 					<br><br><br><br><span style="text-transform:uppercase;text-align: center;"><?php 
-					$direktur = "SELECT * FROM tb_pengguna WHERE level=3";
+					$direktur = "SELECT * FROM tb_pengguna WHERE level=5";
 					$sql     =mysqli_query($conn,$direktur);
 					$r    =mysqli_fetch_array($sql);?><?php echo $r['nama_lengkap'];?></span><br><?php echo $r['nip'];?></td>
 						</tr>

@@ -109,9 +109,6 @@ if ( isset($_POST["submit1"])) {
                         No Pengajuan
                       </th>
                       <th>
-                        Tanggal
-                      </th>
-                      <th>
                         Jurusan
                       </th>
                       <th>
@@ -169,9 +166,8 @@ if ( isset($_POST["submit1"])) {
                         ?>
                         <tr>
                           <td><?php echo $no++; ?></td>
-                          <td><?php echo $d['nip']; ?></td>
+                          <td><?php echo $d['nip']; ?><br><?php echo $d['tgl_sp']; ?></td>
                           <td><?php echo $d['no_sp']; ?></td>
-                          <td><?php echo $d['tgl_sp']; ?></td>
                           <td><?php echo $d['nm_jurusan']; ?><br><?php echo $d['thn_akademik']; ?></td>
                           <td><?php echo $d['perihal']; ?></td>
                           <td><?php echo "<a a href= '#' class='badge bg-". $warna."'>". $status."</a>";?><br><?php echo "<a>" .$tgl. "<a>"?></td>

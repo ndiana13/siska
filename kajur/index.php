@@ -7,22 +7,23 @@ if (!isset($_SESSION['nama'])) {
     header("Location: index.php");
 }
 
-?>
-<?php
-$row_sk_mengajar = mysqli_query($conn,"SELECT * FROM tb_pengajuan WHERE jns_sp ='skmengajar'");
+$row_sk_mengajar = mysqli_query($conn,"SELECT * FROM tb_pengajuan WHERE jns_sp ='skmengajar' AND status=0");
 $jumlah_sk_mengajar = mysqli_num_rows($row_sk_mengajar);
-?>
 
-<?php
+$sk_mengajar = mysqli_query($conn,"SELECT * FROM tb_pengajuan WHERE jns_sp ='skmengajar' AND status=4");
+$j_sk_mengajar = mysqli_num_rows($sk_mengajar);
 
-$row_sk_magang = mysqli_query($conn, "SELECT * FROM tb_pengajuan WHERE jns_sp ='skmagang'");
+$row_sk_magang = mysqli_query($conn, "SELECT * FROM tb_pengajuan WHERE jns_sp ='skmagang' AND status=0");
 $jumlah_sk_magang = mysqli_num_rows($row_sk_magang);
-?>
 
-<?php
+$sk_magang = mysqli_query($conn, "SELECT * FROM tb_pengajuan WHERE jns_sp ='skmagang' AND status=4");
+$j_sk_magang = mysqli_num_rows($sk_magang);
 
-$row_sk_doswal = mysqli_query($conn,"SELECT * FROM tb_pengajuan WHERE jns_sp ='skdoswal'");
+$row_sk_doswal = mysqli_query($conn,"SELECT * FROM tb_pengajuan WHERE jns_sp ='skdoswal' AND status=0");
 $jumlah_sk_doswal = mysqli_num_rows($row_sk_doswal);
+
+$sk_doswal = mysqli_query($conn,"SELECT * FROM tb_pengajuan WHERE jns_sp ='skdoswal' AND status=4");
+$j_sk_doswal = mysqli_num_rows($sk_doswal);
 ?>
 
 <!DOCTYPE html>
@@ -104,6 +105,48 @@ $jumlah_sk_doswal = mysqli_num_rows($row_sk_doswal);
                 <h3><?php echo $jumlah_sk_doswal; ?></h3>
 
                 <p>Pengajuan Surat Dosen Wali</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-card"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-4 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3><?php echo $j_sk_mengajar; ?></h3>
+
+                <p>Jumlah SK Surat Mengajar</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-card"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-4 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3><?php echo $j_sk_magang; ?></h3>
+
+                <p>Jumlah SK Magang</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-card"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-4 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3><?php echo $j_sk_doswal; ?></h3>
+
+                <p>Jumlah SK Dosen Wali</p>
               </div>
               <div class="icon">
                 <i class="ion ion-card"></i>

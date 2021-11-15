@@ -31,40 +31,17 @@
               <i class="nav-icon fas fa-home"></i>
               <p>Dashboard</p>
             </a>
-          </li> 
+          </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="tb_pengajuan.php" class="nav-link">
               <i class="nav-icon fas fa-mail-bulk"></i>
-              <p>
-                Surat Pengajuan
-                <i class="fas fa-angle-left right"></i>
-              </p>
+              <p>Pengajuan</p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="tb_sp_mengajar.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>SK Mengajar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/tables/data.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>SK Magang</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/tables/jsgrid.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>SK Dosen Wali</p>
-                </a>
-              </li>
-            </ul>
           </li>
           <li class="nav-item">
             <a href="tb_penomoran.php" class="nav-link">
               <i class="nav-icon far fa-check-square"></i>
-              <p>Tabel Penomoran</p>
+              <p>Penomoran SK</p>
             </a>
           </li>
           <li class="nav-item">
