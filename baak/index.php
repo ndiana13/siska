@@ -343,31 +343,30 @@ $j_sk_doswal = mysqli_num_rows($sk_doswal);
           </div>
             <!-- About Me Box -->
             <div class="col-lg-8 col-6">
-            <div class="card">
-              <div class="card-header p-2">
-                <ul class="nav nav-pills">
-                  <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Syarat dan Ketentuan Pengajuan SK</a></li>
+              <div class="card">
+                <div class="card-header p-2">
+                  <ul class="nav nav-pills">
+                    <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Syarat dan Ketentuan Pengajuan SK</a></li>
+                  </ul>
+                </div><!-- /.card-header -->
+                <div class="card-body">
+                  <div class="tab-content">
+                    <div class="active tab-pane" id="activity">
+                      <!-- Post -->
+                      <div class="post">
 
-                </ul>
-              </div><!-- /.card-header -->
-              <div class="card-body">
-                <div class="tab-content">
-                  <div class="active tab-pane" id="activity">
-                    <!-- Post -->
-                    <div class="post">
-
-                      <!-- /.user-block -->
-                      <p><ol>
-                        <li>Pegawai terdaftar sebagai pegawai di Politeknik Negeri Cilacap</li>
-                        <li>Lampiran yang akan dilampirkan di SK Magang/SK Mengajar/SK Dosen Wali (Format lampiran dalam bentuk .xls)</li>
-                         <a class="btn btn-primary" href="../AdminLTE/coba.xls"><i class="far fa-file"></i> Contoh Format Lampiran Surat Keputusan Mengajar</a>
-                      </ol></p>
+                        <!-- /.user-block -->
+                        <p><ol>
+                          <li>Pegawai terdaftar sebagai pegawai di Politeknik Negeri Cilacap</li>
+                          <li>Lampiran yang akan dilampirkan di SK Magang/SK Mengajar/SK Dosen Wali (Format lampiran dalam bentuk .xls)</li>
+                           <a class="btn btn-primary" href="../AdminLTE/coba.xls"><i class="far fa-file"></i> Contoh Format Lampiran Surat Keputusan Mengajar</a>
+                        </ol></p>
+                      </div>
                     </div>
                   </div>
                 </div>
+              </div>
             </div>
-          </div>
-        </div>
         </div>
       </div>
       <!-- /.container-fluid -->

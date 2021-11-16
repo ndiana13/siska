@@ -1,5 +1,4 @@
 <?php 
-
 require 'function_kajur.php';
 $id_kajur =$_GET["id_kajur"];
 if (hapus($id_kajur)>0){

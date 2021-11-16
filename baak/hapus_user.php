@@ -1,5 +1,4 @@
 <?php 
-
 require 'function_user.php';
 $nip =$_GET["nip"];
 if (hapus($nip)>0){

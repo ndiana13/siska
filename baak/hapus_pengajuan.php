@@ -1,5 +1,4 @@
 <?php 
-
 require 'function.php';
 $id_sp =$_GET["id_sp"];
 if (hapus($id_sp)>0){

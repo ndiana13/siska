@@ -1,7 +1,7 @@
 <?php
 include '../login/config.php';
-$id_sk_mengajar = $_GET['id_sk_mengajar'];
-$query     =mysqli_query($conn, "SELECT * FROM tb_sk_mengajar WHERE id_sk_mengajar='$id_sk_mengajar'");
+$id_sp = $_GET['id_sp'];
+$query     =mysqli_query($conn, "SELECT * FROM tb_pengajuan WHERE id_sp='$id_sp'");
 $result    =mysqli_fetch_array($query);
 if ($result['id_jurusan'] =='TI'){
 	$nm_jurusan = 'Teknik Informatika';

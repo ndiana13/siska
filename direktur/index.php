@@ -74,7 +74,7 @@ $j_sk_doswal = mysqli_num_rows($sk_doswal);
               <div class="inner">
                 <h3><?php echo $jumlah_sk_mengajar; ?></h3>
 
-                <p>Pengajuan Surat Mengajar</p>
+                <p>SK Mengajar Yang Belum Diverfikasi</p>
               </div>
               <div class="icon">
                 <i class="ion ion-easel"></i>
@@ -89,7 +89,7 @@ $j_sk_doswal = mysqli_num_rows($sk_doswal);
             <div class="small-box bg-success">
               <div class="inner">
                 <h3><?php echo $jumlah_sk_magang; ?></h3>
-                <p>Pengajuan Surat Magang</p>
+                <p>SK Magang Yang Belum Diverfikasi</p>
               </div>
               <div class="icon">
                 <i class="ion ion-laptop"></i>
@@ -104,7 +104,7 @@ $j_sk_doswal = mysqli_num_rows($sk_doswal);
               <div class="inner">
                 <h3><?php echo $jumlah_sk_doswal; ?></h3>
 
-                <p>Pengajuan Surat Dosen Wali</p>
+                <p>SK Dosen Wali Yang Belum Diverfikasi</p>
               </div>
               <div class="icon">
                 <i class="ion ion-card"></i>
@@ -118,7 +118,7 @@ $j_sk_doswal = mysqli_num_rows($sk_doswal);
               <div class="inner">
                 <h3><?php echo $j_sk_mengajar; ?></h3>
 
-                <p>Jumlah SK Surat Mengajar</p>
+                <p>SK Mengajar Yang Sudah Diverfikasi</p>
               </div>
               <div class="icon">
                 <i class="ion ion-card"></i>
@@ -132,7 +132,7 @@ $j_sk_doswal = mysqli_num_rows($sk_doswal);
               <div class="inner">
                 <h3><?php echo $j_sk_magang; ?></h3>
 
-                <p>Jumlah SK Magang</p>
+                <p>SK Magang Yang Sudah Diverfikasi</p>
               </div>
               <div class="icon">
                 <i class="ion ion-card"></i>
@@ -146,7 +146,7 @@ $j_sk_doswal = mysqli_num_rows($sk_doswal);
               <div class="inner">
                 <h3><?php echo $j_sk_doswal; ?></h3>
 
-                <p>Jumlah SK Dosen Wali</p>
+                <p>SK Dosen Wali Yang Sudah Diverfikasi</p>
               </div>
               <div class="icon">
                 <i class="ion ion-card"></i>
@@ -347,7 +347,6 @@ $j_sk_doswal = mysqli_num_rows($sk_doswal);
               <div class="card-header p-2">
                 <ul class="nav nav-pills">
                   <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Syarat dan Ketentuan Pengajuan SK</a></li>
-
                 </ul>
               </div><!-- /.card-header -->
               <div class="card-body">
@@ -355,8 +354,6 @@ $j_sk_doswal = mysqli_num_rows($sk_doswal);
                   <div class="active tab-pane" id="activity">
                     <!-- Post -->
                     <div class="post">
-
-                      <!-- /.user-block -->
                       <p><ol>
                         <li>Pegawai terdaftar sebagai pegawai di Politeknik Negeri Cilacap</li>
                         <li>Lampiran yang akan dilampirkan di SK Magang/SK Mengajar/SK Dosen Wali (Format lampiran dalam bentuk .xls)</li>
@@ -365,9 +362,9 @@ $j_sk_doswal = mysqli_num_rows($sk_doswal);
                     </div>
                   </div>
                 </div>
+              </div>
             </div>
           </div>
-        </div>
         </div>
       </div>
       <!-- /.container-fluid -->

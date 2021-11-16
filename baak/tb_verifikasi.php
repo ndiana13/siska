@@ -1,17 +1,8 @@
 <?php
 error_reporting();
-$server = "localhost";
-$user = "root";
-$pass = "";
-$database = "siska";
-
-$conn = mysqli_connect($server, $user, $pass, $database);
-
-if (!$conn) {
-    die("<script>alert('Connection Failed.')</script>");
-}
 session_start();
- 
+include '../login/config.php';
+
 if (!isset($_SESSION['nama'])) {
     header("Location: index.php");
 }
@@ -108,7 +99,7 @@ if ( isset($_POST["submit1"])) {
                   </tr>
               </thead>
               <tbody>
-              <?php          
+                <?php          
                 $connection = mysqli_connect("localhost",'root',"","siska");
                 $sql = "SELECT * FROM tb_pengajuan INNER JOIN tb_jurusan ON tb_pengajuan.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_pengajuan.nip = tb_pengguna.nip WHERE status=1";
                 $result = mysqli_query($connection,$sql);
@@ -173,130 +164,127 @@ if ( isset($_POST["submit1"])) {
                                 </button>
                               </div>
                               <div class="modal-body">
-                                      <form action="" method="POST" class="forms-sample" enctype="multipart/form-data">
-                                        <input type="hidden" name="lampiran_sp_lama" value="<?= $d["lampiran_sp"];?>">
-                                        <input type="hidden" name="upload_sk_lama" value="<?= $d["upload_sk"];?>">
-                                        <input type="hidden" name="id_sp" value="<?= $d["id_sp"];?>">
-                                        <div class="form-group" hidden="">
-                                          <label for="">Id Surat</label>
-                                          <input type="text" class="form-control"  required id="id_sp" name="id_sp_edit" value="<?= $d["id_sp"];?>">
-                                        </div>
-                                        <div class="form-group"  hidden="">
-                                          <label for="">NIP</label>
-                                          <input type="text" class="form-control"  required id="nip" name="nip" value="<?= $d["nip"];?>">
-                                        </div>
-                                        <div class="form-group"  hidden="">
-                                          <label for="">Jenis Pengajuan</label>
-                                          <div class="form-group">
-                                            <?php
-                                            if ($d['jns_sp']=='skmengajar'){
-                                              $jns = "Surat Keputusan Mengajar";
-                                            }
-                                            elseif ($d['jns_sp']=='skdoswal'){
-                                              $jns = "Surat Keputusan Dosen Wali";
-                                            }
-                                            elseif ($d['jns_sp']=='skmagang'){
-                                              $jns = "Surat Keputusan Magang";
-                                            }
-                                            ?>
-                                              <select class="form-control" name="jns_sp" required id="jns_sp">
-                                                <option hidden selected value = "<?= $d["jns_sp"];?>"><?= "<a>" .$jns. "</a>"?></option>
-                                                <option value="skmengajar">Surat Keputusan Mengajar</option>
-                                                <option value="skdoswal">Surat Keputusan Dosen Wali</option>
-                                                <option value="skmagang">Surat Keputusan Magang</option>
-                                              </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group"  hidden="">
-                                          <label for="">No Surat</label>
-                                          <input type="text" class="form-control"  required id="no_sp" name="no_sp" value="<?= $d["no_sp"];?>">
-                                        </div>
-                                        <div class="form-group"  hidden="">
-                                          <label for="">Tanggal Pengajuan</label>
-                                          <input type="date" class="form-control"  required id="tgl_sp" name="tgl_sp" value="<?= $d["tgl_sp"];?>">
-                                        </div>
-                                        <div  hidden="">
-                                          <label for="">Id Jurusan</label>
-                                            <select class="form-control" id="id_jurusan" name="id_jurusan">
-                                             <?php
-                                              $kon = mysqli_connect("localhost",'root',"","siska");
-                                              if (!$kon){
-                                                  die("Koneksi database gagal:".mysqli_connect_error());
-                                              }
-                                              $sql="select * from tb_jurusan";
-                                              $hasil=mysqli_query($kon,$sql);
-                                              while ($data = mysqli_fetch_array($hasil)) {
-                                             ?>
-                                              <option hidden selected value="<?= $d["id_jurusan"]; ?>"><?= $d["nm_jurusan"]; ?></option>
-                                              <option value="<?= $data['id_jurusan'];?>"><?php echo $data['nm_jurusan'];?></option>
-                                                <?php 
-                                                    }
-                                                ?>
-                                            </select>
-                                        </div>
-                                        <div class="form-group"  hidden="">
-                                          <label for="">Tahun Akademik</label>
-                                          <input type="text" class="form-control"  required id="thn_akademik" name="thn_akademik" value="<?= $d["thn_akademik"];?>">
-                                        </div>
-                                        <div class="form-group"  hidden="">
-                                          <label for="">Semester</label>
-                                              <div class="form-group">
-                                              <select class="form-control" name="semester" required id="semester">
-                                                <option hidden selected><?= $d["semester"]; ?></option>
-                                                <option value="Gasal">Gasal</option>
-                                                <option value="Genap">Genap</option>
-                                              </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group " hidden="">
-                                          <label for="">Perihal</label>
-                                          <input type="text" class="form-control"  required id="perihal" name="perihal" value="<?= $d["perihal"];?>">
-                                        </div>
-                                        <div class="form-group" hidden="">
-                                          <label for="">Status</label>
-                                          <input type="text" class="form-control"  required id="status" name="status" value="<?= $d["status"];?>">
-                                        </div>
-                                        <div class="form-group" hidden="">
-                                          <label for="">NO SK</label>
-                                          <input type="text" class="form-control" name="no_sk" value="<?= $d["no_sk"];?>">
-                                        </div>
-                                        <div class="form-group"  hidden="">
-                                          <label for="">Lampiran</label><br>
-                                          <p><?php echo $d['lampiran_sp'];?></p>
-                                          <input type="file" name="lampiran_sp" value="<?= $d["lampiran_sp"];?>"><br>
-                                          <small style="color:#dc3545;">*Format file yang diperbolehkan adalah (.xls, xlsx,docs) max 50MB!</small>
-                                        </div>
-                                        <div class="form-group">
-                                          <label for="">SK</label><br>
-                                          <p><?php echo $d['upload_sk'];?></p>
-                                          <input type="file" name="upload_sk" value="<?= $d["upload_sk"];?>"><br>
-                                          <small style="color:#dc3545;">*Format file yang diperbolehkan adalah (.pdf, docx) max 50MB!</small>
-                                        </div>  
-                                       <div class="modal-footer justify-content-between">
-                                        <button type="button" class="btn btn-secondary col-md-3" data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary col-md-3" id="submit1" name="submit1" >Simpan</button>
-                                      </div>
-                                    </form>
+                                <form action="" method="POST" class="forms-sample" enctype="multipart/form-data">
+                                  <input type="hidden" name="lampiran_sp_lama" value="<?= $d["lampiran_sp"];?>">
+                                  <input type="hidden" name="upload_sk_lama" value="<?= $d["upload_sk"];?>">
+                                  <input type="hidden" name="id_sp" value="<?= $d["id_sp"];?>">
+                                  <div class="form-group" hidden="">
+                                    <label for="">Id Surat</label>
+                                    <input type="text" class="form-control"  required id="id_sp" name="id_sp_edit" value="<?= $d["id_sp"];?>">
                                   </div>
-                                </div>
+                                  <div class="form-group"  hidden="">
+                                    <label for="">NIP</label>
+                                    <input type="text" class="form-control"  required id="nip" name="nip" value="<?= $d["nip"];?>">
+                                  </div>
+                                  <div class="form-group"  hidden="">
+                                    <label for="">Jenis Pengajuan</label>
+                                    <div class="form-group">
+                                    <?php
+                                    if ($d['jns_sp']=='skmengajar'){
+                                    $jns = "Surat Keputusan Mengajar";
+                                    }
+                                    elseif ($d['jns_sp']=='skdoswal'){
+                                    $jns = "Surat Keputusan Dosen Wali";
+                                    }
+                                    elseif ($d['jns_sp']=='skmagang'){
+                                    $jns = "Surat Keputusan Magang";
+                                    }
+                                    ?>
+                                    <select class="form-control" name="jns_sp" required id="jns_sp">
+                                      <option hidden selected value = "<?= $d["jns_sp"];?>"><?= "<a>" .$jns. "</a>"?></option>
+                                      <option value="skmengajar">Surat Keputusan Mengajar</option>
+                                      <option value="skdoswal">Surat Keputusan Dosen Wali</option>
+                                      <option value="skmagang">Surat Keputusan Magang</option>
+                                    </select>
+                                    </div>
+                                  </div>
+                                  <div class="form-group"  hidden="">
+                                    <label for="">No Surat</label>
+                                    <input type="text" class="form-control"  required id="no_sp" name="no_sp" value="<?= $d["no_sp"];?>">
+                                  </div>
+                                  <div class="form-group"  hidden="">
+                                    <label for="">Tanggal Pengajuan</label>
+                                    <input type="date" class="form-control"  required id="tgl_sp" name="tgl_sp" value="<?= $d["tgl_sp"];?>">
+                                  </div>
+                                  <div  hidden="">
+                                    <label for="">Id Jurusan</label>
+                                    <select class="form-control" id="id_jurusan" name="id_jurusan">
+                                      <?php
+                                      $kon = mysqli_connect("localhost",'root',"","siska");
+                                      if (!$kon){
+                                      die("Koneksi database gagal:".mysqli_connect_error());
+                                      }
+                                      $sql="select * from tb_jurusan";
+                                      $hasil=mysqli_query($kon,$sql);
+                                      while ($data = mysqli_fetch_array($hasil)) {
+                                      ?>
+                                      <option hidden selected value="<?= $d["id_jurusan"]; ?>"><?= $d["nm_jurusan"]; ?></option>
+                                      <option value="<?= $data['id_jurusan'];?>"><?php echo $data['nm_jurusan'];?></option>
+                                      <?php
+                                      }
+                                      ?>
+                                    </select>
+                                  </div>
+                                  <div class="form-group"  hidden="">
+                                    <label for="">Tahun Akademik</label>
+                                    <input type="text" class="form-control"  required id="thn_akademik" name="thn_akademik" value="<?= $d["thn_akademik"];?>">
+                                  </div>
+                                  <div class="form-group"  hidden="">
+                                    <label for="">Semester</label>
+                                    <div class="form-group">
+                                      <select class="form-control" name="semester" required id="semester">
+                                        <option hidden selected><?= $d["semester"]; ?></option>
+                                        <option value="Gasal">Gasal</option>
+                                        <option value="Genap">Genap</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="form-group " hidden="">
+                                    <label for="">Perihal</label>
+                                    <input type="text" class="form-control"  required id="perihal" name="perihal" value="<?= $d["perihal"];?>">
+                                  </div>
+                                  <div class="form-group" hidden="">
+                                    <label for="">Status</label>
+                                    <input type="text" class="form-control"  required id="status" name="status" value="<?= $d["status"];?>">
+                                  </div>
+                                  <div class="form-group" hidden="">
+                                    <label for="">NO SK</label>
+                                    <input type="text" class="form-control" name="no_sk" value="<?= $d["no_sk"];?>">
+                                  </div>
+                                  <div class="form-group"  hidden="">
+                                    <label for="">Lampiran</label><br>
+                                    <p><?php echo $d['lampiran_sp'];?></p>
+                                    <input type="file" name="lampiran_sp" value="<?= $d["lampiran_sp"];?>"><br>
+                                    <small style="color:#dc3545;">*Format file yang diperbolehkan adalah (.xls, xlsx,docs) max 50MB!</small>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="">SK</label><br>
+                                    <p><?php echo $d['upload_sk'];?></p>
+                                    <input type="file" name="upload_sk" value="<?= $d["upload_sk"];?>"><br>
+                                    <small style="color:#dc3545;">*Format file yang diperbolehkan adalah (.pdf, docx) max 50MB!</small>
+                                  </div>
+                                  <div class="modal-footer justify-content-between">
+                                    <button type="button" class="btn btn-secondary col-md-3" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary col-md-3" id="submit1" name="submit1" >Simpan</button>
+                                  </div>
+                                </form>
                               </div>
                             </div>
-
+                          </div>
+                        </div>
                       </td>
-                      </tr>
-                      <?php
-                      }
-                      ?>
-                      </tbody>
-                    </table>
-
-                </div>
+                    </tr>
+                    <?php
+                    }
+                    ?>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
         </div>
-      </section>
-
+      </div>
+    </section>
   </div>
   <!-- /.content-wrapper -->
   <?php include '../AdminLTE/footer.php';?>

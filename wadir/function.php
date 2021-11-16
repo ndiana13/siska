@@ -149,21 +149,17 @@ function acc_wadir($id_sp) {
 
 	mysqli_query($conn,$query);
 	return mysqli_affected_rows($conn);	
-	
-	return mysqli_affected_rows($conn);
 }
-function dec_wadir($id_sk_mengajar) {
+function dec_wadir($id_sp) {
 	global $conn;
 	
 
 		//insert data
-	$query ="UPDATE tb_sk_mengajar SET status = '4' WHERE id_sk_mengajar = $id_sk_mengajar
+	$query ="UPDATE tb_pengajuan SET status = '4' WHERE id_sp = $id_sp
 	";
 
 	mysqli_query($conn,$query);
 	return mysqli_affected_rows($conn);	
-	
-	return mysqli_affected_rows($conn);
 }
 
 ?>
