@@ -335,22 +335,12 @@ if ( isset($_POST["submit1"])) {
                                           <input type="date" class="form-control"  required id="tgl_sp" name="tgl_sp" value="<?= $d["tgl_sp"];?>">
                                         </div>
                                         <div>
-                                          <label for="">Id Jurusan</label>
+                                          <label for="">Nama Jurusan</label>
                                             <select class="form-control" id="id_jurusan" name="id_jurusan">
-                                             <?php
-                                              $kon = mysqli_connect("localhost",'root',"","siska");
-                                              if (!$kon){
-                                                  die("Koneksi database gagal:".mysqli_connect_error());
-                                              }
-                                              $sql="select * from tb_jurusan";
-                                              $hasil=mysqli_query($kon,$sql);
-                                              while ($data = mysqli_fetch_array($hasil)) {
-                                             ?>
+
                                               <option hidden selected value="<?= $d["id_jurusan"]; ?>"><?= $d["nm_jurusan"]; ?></option>
-                                              <option value="<?= $data['id_jurusan'];?>"><?php echo $data['nm_jurusan'];?></option>
-                                                <?php 
-                                                    }
-                                                ?>
+                                              <option value="<?= $data['id_jurusan'];?>"><?php echo $d['nm_jurusan'];?></option>
+
                                             </select>
                                         </div>
                                         <div class="form-group">

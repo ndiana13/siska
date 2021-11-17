@@ -7,26 +7,21 @@ if (!isset($_SESSION['nama'])) {
     header("Location: index.php");
 }
 
-?>
-<?php
 $row_sk_mengajar = mysqli_query($conn,"SELECT * FROM tb_pengajuan WHERE jns_sp ='skmengajar' AND status=2");
 $jumlah_sk_mengajar = mysqli_num_rows($row_sk_mengajar);
 
 $sk_mengajar = mysqli_query($conn,"SELECT * FROM tb_pengajuan WHERE jns_sp ='skmengajar' AND status=4");
 $j_sk_mengajar = mysqli_num_rows($sk_mengajar);
-?>
 
-<?php
 $row_sk_magang = mysqli_query($conn, "SELECT * FROM tb_pengajuan WHERE jns_sp ='skmagang' AND status=2");
 $jumlah_sk_magang = mysqli_num_rows($row_sk_magang);
 
 $sk_magang = mysqli_query($conn, "SELECT * FROM tb_pengajuan WHERE jns_sp ='skmagang' AND status=4");
 $j_sk_magang = mysqli_num_rows($sk_magang);
-?>
 
-<?php
 $row_sk_doswal = mysqli_query($conn,"SELECT * FROM tb_pengajuan WHERE jns_sp ='skdoswal' AND status=2");
 $jumlah_sk_doswal = mysqli_num_rows($row_sk_doswal);
+
 $sk_doswal = mysqli_query($conn,"SELECT * FROM tb_pengajuan WHERE jns_sp ='skdoswal' AND status=4");
 $j_sk_doswal = mysqli_num_rows($sk_doswal);
 ?>

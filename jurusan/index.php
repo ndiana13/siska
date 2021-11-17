@@ -105,7 +105,7 @@ $j_sk_doswal = mysqli_num_rows($sk_doswal);
               <div class="inner">
                 <h3><?php echo $j_sk_mengajar; ?></h3>
 
-                <p>Jumlah SK Surat Mengajar</p>
+                <p>SK Mengajar Yang Sudah Diverifikasi</p>
               </div>
               <div class="icon">
                 <i class="ion ion-card"></i>
@@ -119,7 +119,7 @@ $j_sk_doswal = mysqli_num_rows($sk_doswal);
               <div class="inner">
                 <h3><?php echo $j_sk_magang; ?></h3>
 
-                <p>Jumlah SK Magang</p>
+                <p>SK Magang Yang Sudah Diverifikasi</p>
               </div>
               <div class="icon">
                 <i class="ion ion-card"></i>
@@ -129,11 +129,11 @@ $j_sk_doswal = mysqli_num_rows($sk_doswal);
           </div>
           <div class="col-lg-4 col-6">
             <!-- small box -->
-            <div class="small-box bg-success">
+            <div class="small-box bg-warning">
               <div class="inner">
                 <h3><?php echo $j_sk_doswal; ?></h3>
 
-                <p>Jumlah SK Dosen Wali</p>
+                <p>SK Dosen Wali Yang Sudah Diverifikasi</p>
               </div>
               <div class="icon">
                 <i class="ion ion-card"></i>
