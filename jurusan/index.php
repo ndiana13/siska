@@ -3,7 +3,7 @@ include '../login/config.php';
 include 'function.php';
 session_start();
  
-if (!isset($_SESSION['nama'])) {
+if (!isset($_SESSION['nip'])) {
     header("Location: index.php");
 }
 
@@ -44,7 +44,7 @@ $j_sk_doswal = mysqli_num_rows($sk_doswal);
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Selamat Datang, <?php echo $_SESSION['nama'];?> di SISKA PNC</h1>
+            <h1 class="m-0">Selamat Datang, <?php echo $row['nama_lengkap'];?> di SISKA PNC</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -149,69 +149,32 @@ $j_sk_doswal = mysqli_num_rows($sk_doswal);
               </div>
             <div class="card-body box-profile">
              <div class="text-center">
-                <img class="profile-user-img img-fluid img-circle" src="../AdminLTE/dist/img/<?= $_SESSION['foto'];?>" alt="User profile picture">
+                <img class="profile-user-img img-fluid img-circle" src="../AdminLTE/dist/img/<?= $row['foto'];?>" alt="User profile picture">
               </div>
-              <h3 class="profile-username text-center"><?php echo $_SESSION['nama'] ?></h3>
+              <h3 class="profile-username text-center"><?php echo $row['nama_lengkap'] ?></h3>
               <ul class="list-group list-group-unbordered mb-3">
                 <li class="list-group-item">
                   <b>NIP/NPAK</b> <a class="float-right"><?php
-                  include '../login/config.php';
-                  $username = $_SESSION['username'];
-
-                  $sql = "SELECT nip FROM tb_pengguna WHERE username='$username'"; 
-                  $result = mysqli_query($conn, $sql);
-                  while ($row = $result->fetch_assoc()) {
-                    echo $row['nip']."<br>";
-                  }
-
-                  ?></a>
+                    echo $_SESSION['nip'];?></a>
                 </li>
 
                 <li class="list-group-item">
                   <b>Username</b> <a class="float-right"><?php
-                  include '../login/config.php';
-                  $username = $_SESSION['username'];
-
-                  $sql = "SELECT username FROM tb_pengguna WHERE username='$username'"; 
-                  $result = mysqli_query($conn, $sql);
-                  while ($row = $result->fetch_assoc()) {
-                    echo $row['username']."<br>";
-                  }
-
-                  ?></a>
+                    echo $row['username'];?></a>
                 </li>
+
                 <li class="list-group-item">
-                  <b>No Hp</b> <a class="float-right"><?php
-                  include '../login/config.php';
-                  $username = $_SESSION['username'];
-
-                  $sql = "SELECT no_hp FROM tb_pengguna WHERE username='$username'"; 
-                  $result = mysqli_query($conn, $sql);
-                  while ($row = $result->fetch_assoc()) {
-                    echo $row['no_hp']."<br>";
-                  }
-
-                  ?></a>
+                  <b>No HP</b> <a class="float-right"><?php
+                    echo $row['no_hp'];?></a>
                 </li>
                 <li class="list-group-item">
                   <b>Email</b> <a class="float-right"><?php
-                  include '../login/config.php';
-                  $username = $_SESSION['username'];
-
-                  $sql = "SELECT email FROM tb_pengguna WHERE username='$username'"; 
-                  $result = mysqli_query($conn, $sql);
-                  while ($row = $result->fetch_assoc()) {
-                    echo $row['email']."<br>";
-                  }
-
-                  ?></a>
+                    echo $row['email'];?></a>
                 </li>
-                   <a  class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal<?php echo $_SESSION['username']; ?>"><b>Edit Profil</b></a>
-                </ul>
+                  <a  class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal-lg<?php echo $_SESSION['nip']; ?>"><b>Edit Profil</b></a>
+              </ul>
               </div>
-              <?php $sql = "SELECT * FROM tb_pengguna WHERE username='$username'"; 
-                $result = mysqli_query($conn, $sql);
-                while ($row = $result->fetch_assoc()) {
+              <?php 
                   if ($row['level']== 0) {
                     $t_level = 'Jurusan';
                   }
@@ -250,20 +213,20 @@ $j_sk_doswal = mysqli_num_rows($sk_doswal);
                     }
                   }
                ?>
-              <div class="modal fade" id="myModal<?php echo $_SESSION['username']; ?>">
-                <div class="modal-dialog">
+              <div class="modal fade" id="modal-lg<?php echo $_SESSION['nip']; ?>">
+                <div class="modal-dialog modal-lg">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h4 class="modal-title">Edit Data User</h4>
+                      <h4 class="modal-title">Edit Profil</h4>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
                     <div class="modal-body">
                       <form method="POST" class="forms-sample" enctype="multipart/form-data">
-                        <input type="hidden" name="nip" value="<?= $d["nip"];?>">
-                        <input type="hidden" name="fotoLama" value="<?= $d["foto"];?>">
-                        <input type="hidden" name="ttdLama" value="<?= $d["ttd"];?>">
+                        <input type="hidden" name="nip" value="<?= $row["nip"];?>">
+                        <input type="hidden" name="fotoLama" value="<?= $row["foto"];?>">
+                        <input type="hidden" name="ttdLama" value="<?= $row["ttd"];?>">
                         <div class="form-group">
                           <label for="">NIP/NPAK</label>
                           <input type="text" class="form-control"  required id="nip_edit" name="nip_edit" value="<?= $row["nip"];?>">
@@ -321,9 +284,6 @@ $j_sk_doswal = mysqli_num_rows($sk_doswal);
                 </div>
               </div>
             </div>
-            <?php
-              }
-            ?>
               <!-- /.card-body -->
             </div>
             <!-- /.card -->

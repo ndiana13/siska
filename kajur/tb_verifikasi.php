@@ -127,9 +127,9 @@ while($d = mysqli_fetch_array($row)){
                       <td><?php echo $d['tgl_sp']; ?></td>
                       <td><?php echo $d['nm_jurusan']; ?><br><?php echo $d['thn_akademik']; ?></td>
                       <td><?php echo $d['perihal']; ?></td>
-                      <td><?php echo "<a  href= 'accept_kajur.php?id_sp=".$d['id_sp']."' class='badge bg-". $warna."'>". $status."</a>";?><br><?php echo "<a>" .$tgl. "<a>"?>
+                      <td><?php echo "<a  href= 'accept_kajur.php?id_sp=".$d['id_sp']."'  class='badge bg-". $warna."'>". $status."</a>";?><br><?php echo "<a>" .$tgl. "<a>"?>
                       <!--<td>
-                        <a class="buttons" href="accept_kajur.php?id_sp=<?php echo $d['id_sp']; ?>" style="color: green;"><i class="fas fa-check" style="color: green;"></i> Accept</a><br>
+                        <a class="buttons" onclick= "return confirm('Anda yakin ingin menerima pengajuan ini ?')" href="accept_kajur.php?id_sp=<?php echo $d['id_sp']; ?>" style="color: green;"><i class="fas fa-check" style="color: green;"></i> Accept</a><br>
                         <a class="buttons" href="decline_kajur.php?id_sp=<?php echo $d['id_sp']; ?>" style="color: red;" onclick="return confirm('Anda yakin ingin menolak pengajuan ini ?')"><i class="fas fa-check" style="color: red;"></i> Decline</a>
                       </td> -->
                       <td>
