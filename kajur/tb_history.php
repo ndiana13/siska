@@ -31,7 +31,7 @@ require 'function.php';
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Tabel Verifikasi</h1>
+            <h1 class="m-0">Tabel History</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -46,7 +46,7 @@ require 'function.php';
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-12">
+           <div class="col-12">
             <div class="card">
               <div class="card-body">
             <table id="example2" class="table table-bordered table-striped">
@@ -72,20 +72,17 @@ require 'function.php';
                     Status
                   </th>
                   <th>
-                    Verifikasi
+                    No SK<br>Lampiran
                   </th>
                   <th>
-                    Detail
+                    Action
                   </th>
                 </tr>
               </thead>
               <tbody>
-              <?php
-                $kajur      = mysqli_query($conn, "SELECT * FROM tb_kajur INNER JOIN tb_pengguna ON tb_kajur.nip = tb_pengguna.nip INNER JOIN tb_jurusan ON tb_kajur.id_jurusan = tb_jurusan.id_jurusan WHERE tb_kajur.nip = '$nip'");
-                $r          = mysqli_fetch_array($kajur);
-                $jurusan    = $r['id_jurusan'];                   
-                $pengajuan  = mysqli_query($conn,"SELECT * FROM tb_pengajuan INNER JOIN tb_jurusan ON tb_pengajuan.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_pengajuan.nip = tb_pengguna.nip WHERE tb_pengajuan.id_jurusan ='$jurusan' AND status=0 ORDER BY id_sp");
-                $no= 1;
+              <?php            
+               $pengajuan  = mysqli_query($conn,"SELECT * FROM tb_pengajuan INNER JOIN tb_jurusan ON tb_pengajuan.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_pengajuan.nip = tb_pengguna.nip ORDER BY id_sp");
+                $no         = 1;
                 while($d = mysqli_fetch_array($pengajuan)) {
                   if($d['status']=='1'){
                     $status = 'Diverifikasi Kajur';
@@ -125,33 +122,24 @@ require 'function.php';
                       <td><?php echo $d['tgl_sp']; ?></td>
                       <td><?php echo $d['nm_jurusan']; ?><br><?php echo $d['thn_akademik']; ?></td>
                       <td><?php echo $d['perihal']; ?></td>
-                      <td><?php echo "<a  class='badge bg-". $warna."'>". $status."</a>";?><br><?php echo "<a>" .$tgl. "<a>"?></td>
+                      <td><?php echo "<a class='badge bg-". $warna."'>". $status."</a>";?><br><?php echo "<a>" .$tgl. "<a>"?>
+                      <td><?php echo $d['no_sk']; ?><br><?php echo $d['lampiran_sp']; ?></td>
                       <td>
-                      <div class="btn-group btn-group-sm">
-                        <a href="accept_kajur.php?id_sp=<?php echo $d['id_sp']; ?>" class="btn btn-info" onclick="return confirm('Anda yakin ingin menerima pengajuan ini ?')"><i class="fas fa-check"></i> Terima</a>
-                        <a href="decline_kajur.php?id_sp=<?php echo $d['id_sp']; ?>" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menolak pengajuan ini ?')"><i class="fas fa-times"></i>Tolak</a>
-                      </div>
-                    </td>
-                      <td>
-                        <a class="btn btn-app" href="../baak/lampiran/<?php echo $d['lampiran_sp']; ?>">
-                          <i class="fas fa-file-download"></i>Lampiran</a>
-                        <a class="btn btn-app" href="../baak/sk/<?php echo $d['upload_sk']; ?>">
-                          <i class="fas fa-save"></i>SK</a>
-                        <a class="btn btn-app" href="cetak_sp.php?id_sp=<?php echo $d['id_sp']; ?>" target="_BLANK">
-                          <i class="fas fa-save"></i>SP</a>
+                        <a class="btn btn-app" href="timeline.php?id_sp=<?php echo $d['id_sp']; ?>" target="_BLANK">
+                          <i class="fas fa-file-download"></i>Timeline</a>
 
                       </td>
                       </tr>
                       <?php
-                        }
+                      }
                       ?>
-
                       </tbody>
                     </table>
                   </div>
                 </div>
-              </div>
-            </div>
+
+          <!-- /.col -->
+        </div>
           </div>
         </section>
       </div>

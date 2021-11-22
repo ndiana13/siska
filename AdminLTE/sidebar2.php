@@ -48,6 +48,11 @@ $row  = mysqli_fetch_array($result);
               <p>Verifikasi</p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="tb_history.php" class="nav-link">
+              <i class="nav-icon far fa-check-square"></i>
+              <p>History</p>
+            </a>
           </li>
           <li class="nav-item">
             <a href="../login/logout.php" class="nav-link">
