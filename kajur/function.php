@@ -371,7 +371,7 @@ function acc_kajur($id_sp) {
 	mysqli_query($conn,$query);
 	return mysqli_affected_rows($conn);	
 }
-function dec_wadir($id_sp) {
+function dec_kajur($id_sp) {
 	global $conn;
 	$tgl = date('Y-m-d');
 	

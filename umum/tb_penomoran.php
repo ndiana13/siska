@@ -255,7 +255,7 @@ if ( isset($_POST["submit1"])) {
                                         </div>
                                         <div class="form-group">
                                           <label for="">NO SK</label>
-                                          <input type="text" class="form-control" name="no_sk" value="<?= $d["no_sk"];?>">
+                                          <input type="text" class="form-control" name="no_sk"  id="no_sk" value="<?= $d["no_sk"];?>">
                                         </div>
                                         <div class="form-group"  hidden="">
                                           <label for="">Lampiran</label><br>
