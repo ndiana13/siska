@@ -295,10 +295,21 @@ $j_sk = mysqli_num_rows($sk);
                             </div> 
                           </div>
                         </div>
-                        <div class="form-group" hidden="">
-                          <label for="">Tanda Tangan</label><br>
-                          <input type="file" name="ttd" id="ttd">             
-                      </div>
+                        <div class="row">
+                          <div class="col-lg-6" hidden="">
+                            <div class="form-group">
+                              <label for="exampleInputFile">Tanda Tangan</label><br>
+                              <img src="../AdminLTE/dist/img/<?= $row['ttd'];?>"  width="100" height="100"><br><br>
+                              <div class="input-group">
+                                <div class="custom-file">
+                                  <input type="file" class="custom-file-input" id="ttd" name="ttd">
+                                  <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                </div>  
+                              </div>
+                              <label for="exampleInputFile" style="color: gray;">*ukuran foto max 5MB</label>
+                            </div> 
+                          </div>
+                        </div>
                       <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-secondary col-md-2" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary col-md-2" id="submit" name="submit" >Save</button>

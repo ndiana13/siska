@@ -3,7 +3,7 @@ error_reporting();
  include '../login/config.php';
 session_start();
  
-if (!isset($_SESSION['nama'])) {
+if (!isset($_SESSION['nip'])) {
     header("Location: index.php");
 }
 require 'function.php';
@@ -117,10 +117,9 @@ if ( isset($_POST["submit1"])) {
                     </tr>
                   </thead>
                   <tbody>
-                  <?php   
-                    $username = $_SESSION['nama'];                 
+                  <?php                 
                     $connection = mysqli_connect("localhost",'root',"","siska");
-                    $sql = "SELECT * FROM tb_pengajuan INNER JOIN tb_jurusan ON tb_pengajuan.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_pengajuan.nip = tb_pengguna.nip WHERE nama_lengkap='$username' AND status=4 ORDER BY id_sp DESC";
+                    $sql = "SELECT * FROM tb_pengajuan INNER JOIN tb_jurusan ON tb_pengajuan.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_pengajuan.nip = tb_pengguna.nip WHERE tb_pengajuan.nip='$nip' AND status=4 ORDER BY id_sp DESC";
                     $result = mysqli_query($connection,$sql);
                     $no= 1;
                     while($d = mysqli_fetch_array($result)) {

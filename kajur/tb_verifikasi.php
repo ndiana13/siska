@@ -3,15 +3,10 @@ error_reporting();
  include '../login/config.php';
 session_start();
  
-if (!isset($_SESSION['nama'])) {
+if (!isset($_SESSION['nip'])) {
     header("Location: index.php");
 }
 require 'function.php';
-
-$nama = $_SESSION['nama'];
-$sql ="SELECT * FROM tb_kajur INNER JOIN tb_pengguna ON tb_kajur.nip = tb_pengguna.nip INNER JOIN tb_jurusan ON tb_kajur.id_jurusan = tb_jurusan.id_jurusan WHERE nama_lengkap = '$nama'";
-$row = mysqli_query($conn,$sql);
-while($d = mysqli_fetch_array($row)){
 ?>
 
 <!DOCTYPE html>
@@ -83,12 +78,12 @@ while($d = mysqli_fetch_array($row)){
               </thead>
               <tbody>
               <?php
-              $jurusan = $d['id_jurusan'];                   
-                $connection = mysqli_connect("localhost",'root',"","siska");
-                $sql = "SELECT * FROM tb_pengajuan INNER JOIN tb_jurusan ON tb_pengajuan.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_pengajuan.nip = tb_pengguna.nip WHERE tb_pengajuan.id_jurusan ='$jurusan' AND status=0 ORDER BY id_sp";
-                $result = mysqli_query($connection,$sql);
+                $kajur      = mysqli_query($conn, "SELECT * FROM tb_kajur INNER JOIN tb_pengguna ON tb_kajur.nip = tb_pengguna.nip INNER JOIN tb_jurusan ON tb_kajur.id_jurusan = tb_jurusan.id_jurusan WHERE tb_kajur.nip = '$nip'");
+                $r          = mysqli_fetch_array($kajur);
+                $jurusan    = $r['id_jurusan'];                   
+                $pengajuan  = mysqli_query($conn,"SELECT * FROM tb_pengajuan INNER JOIN tb_jurusan ON tb_pengajuan.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_pengajuan.nip = tb_pengguna.nip WHERE tb_pengajuan.id_jurusan ='$jurusan' AND status=0 ORDER BY id_sp");
                 $no= 1;
-                while($d = mysqli_fetch_array($result)) {
+                while($d = mysqli_fetch_array($pengajuan)) {
                   if($d['status']=='1'){
                     $status = 'Diverifikasi Kajur';
                     $warna = 'warning';
@@ -144,7 +139,6 @@ while($d = mysqli_fetch_array($row)){
                       </tr>
                       <?php
                         }
-                      }
                       ?>
 
                       </tbody>

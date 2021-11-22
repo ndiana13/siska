@@ -1,16 +1,12 @@
 <?php
 error_reporting();
- include '../login/config.php';
+include '../login/config.php';
 session_start();
  
-if (!isset($_SESSION['nama'])) {
+if (!isset($_SESSION['nip'])) {
     header("Location: index.php");
 }
 require 'function.php';
-$nama = $_SESSION['nama'];
-$sql ="SELECT * FROM tb_kajur INNER JOIN tb_pengguna ON tb_kajur.nip = tb_pengguna.nip INNER JOIN tb_jurusan ON tb_kajur.id_jurusan = tb_jurusan.id_jurusan WHERE nama_lengkap = '$nama'";
-$row = mysqli_query($conn,$sql);
-while($d = mysqli_fetch_array($row)){
 ?>
 
 <!DOCTYPE html>
@@ -19,15 +15,6 @@ while($d = mysqli_fetch_array($row)){
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SISKA | Dashboard</title>
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/fontawesome-free/css/all.min.css">
-  <!-- DataTables -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="../AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-  <link rel="stylesheet" href="../AdminLTE/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../AdminLTE/dist/css/adminlte.min.css">
-  <!-- Theme style -->
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -91,13 +78,13 @@ while($d = mysqli_fetch_array($row)){
                 </tr>
               </thead>
               <tbody>
-              <?php
-              $jurusan = $d['id_jurusan'];                   
-                $connection = mysqli_connect("localhost",'root',"","siska");
-                $sql = "SELECT * FROM tb_pengajuan INNER JOIN tb_jurusan ON tb_pengajuan.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_pengajuan.nip = tb_pengguna.nip WHERE tb_pengajuan.id_jurusan ='$jurusan' ORDER BY id_sp DESC";
-                $result = mysqli_query($connection,$sql);
-                $no= 1;
-                while($d = mysqli_fetch_array($result)) {
+              <?php            
+                $kajur      = mysqli_query($conn, "SELECT * FROM tb_kajur INNER JOIN tb_pengguna ON tb_kajur.nip = tb_pengguna.nip INNER JOIN tb_jurusan ON tb_kajur.id_jurusan = tb_jurusan.id_jurusan WHERE tb_kajur.nip = '$nip'");
+                $r          = mysqli_fetch_array($kajur);
+                $jurusan    = $r['id_jurusan'];
+                $pengajuan        = mysqli_query($conn,"SELECT * FROM tb_pengajuan INNER JOIN tb_jurusan ON tb_pengajuan.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_pengajuan.nip = tb_pengguna.nip WHERE tb_pengajuan.id_jurusan ='$jurusan' ORDER BY id_sp DESC");
+                $no         = 1;
+                while($d = mysqli_fetch_array($pengajuan)) {
                   if($d['status']=='1'){
                     $status = 'Diverifikasi Kajur';
                     $warna = 'warning';
@@ -150,7 +137,6 @@ while($d = mysqli_fetch_array($row)){
                       </tr>
                       <?php
                       }
-                    }
                       ?>
                       </tbody>
                     </table>
@@ -175,23 +161,6 @@ while($d = mysqli_fetch_array($row)){
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
   </aside>
-<!-- DataTables  & Plugins -->
-<script src="../AdminLTE/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="../AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="../AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="../AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="../AdminLTE/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="../AdminLTE/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="../AdminLTE/plugins/jszip/jszip.min.js"></script>
-<script src="../AdminLTE/plugins/pdfmake/pdfmake.min.js"></script>
-<script src="../AdminLTE/plugins/pdfmake/vfs_fonts.js"></script>
-<script src="../AdminLTE/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="../AdminLTE/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="../AdminLTE/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../AdminLTE/dist/js/adminlte.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../AdminLTE/dist/js/demo.js"></script>
 <script>
   $(function () {
     $("#example1").DataTable({

@@ -16,10 +16,7 @@ if (isset($_POST['submit'])) {
           $_SESSION['nip'] = $row['nip'];
           header("Location: ../jurusan/index.php");
         }elseif($row['level']=='1'){
-          $_SESSION['username'] = $username;
-          $_SESSION['nama'] = $row['nama_lengkap'];
-          $_SESSION['foto'] = $row['foto'];
-          $_SESSION['level'] = "1";
+          $_SESSION['nip'] = $row['nip'];
           header("Location: ../kajur/index.php");
         }else if($row['level']=='2'){
           $_SESSION['username'] = $username;

@@ -2,7 +2,7 @@
 include '../login/config.php';
 session_start();
  
-if (!isset($_SESSION['nama'])) {
+if (!isset($_SESSION['nip'])) {
     header("Location: index.php");
 }
 $id_sp = $_GET['id_sp'];
@@ -233,7 +233,7 @@ error_reporting();
 			</tr>
 			<tr class="text2">
 				<td width="40"></td>
-				<td width="600"><br>Sehubungan dengan pelaksanaan perkuliahan pada semester <?php echo $result['semester'];?> Tahun Akademik <?php echo $result['thn_akademik'];?>, kami bermaksud mengajukan permohonan <?php echo $result['perihal'];?> pada dosen-dosen dengan nama terlampir.</td>
+				<td width="600"><br>Sehubungan dengan pelaksanaan perkuliahan pada semester <?php echo $result['semester'];?> Tahun Akademik <?php echo $result['thn_akademik'];?>, kami bermaksud mengajukan permohonan <?php echo $result['perihal'];?> pada mahasiswa-mahasiswa dengan nama terlampir.</td>
 			</tr>
 			<tr class="text2">
 				<td width="40"></td>
