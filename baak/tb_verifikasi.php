@@ -3,7 +3,7 @@ error_reporting();
 session_start();
 include '../login/config.php';
 
-if (!isset($_SESSION['nama'])) {
+if (!isset($_SESSION['nip'])) {
     header("Location: index.php");
 }
 require 'function.php';

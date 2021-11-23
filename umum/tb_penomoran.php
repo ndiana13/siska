@@ -12,7 +12,7 @@ if (!$conn) {
 }
 session_start();
  
-if (!isset($_SESSION['nama'])) {
+if (!isset($_SESSION['nip'])) {
     header("Location: index.php");
 }
 require 'function.php';
@@ -56,7 +56,7 @@ if ( isset($_POST["submit1"])) {
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Tabel Verifikasi</h1>
+            <h1 class="m-0">Tabel Nomor SK</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -77,10 +77,7 @@ if ( isset($_POST["submit1"])) {
                  <table id="example2" class="table table-bordered table-striped">
               <thead>
                 <tr style="text-align: center;">
-                    <th>#</th>
-                    <th>
-                      NIP
-                    </th>     
+                    <th>#</th>    
                     <th>
                       No Pengajuan
                     </th>
@@ -144,7 +141,6 @@ if ( isset($_POST["submit1"])) {
                     ?>
                     <tr>
                       <td><?php echo $no++; ?></td>
-                      <td><?php echo $d['nip']; ?></td>
                       <td><?php echo $d['no_sp']; ?></td>
                       <td><?php echo $d['tgl_sp']; ?></td>
                       <td><?php echo $d['nm_jurusan']; ?><br><?php echo $d['thn_akademik']; ?></td>
@@ -164,7 +160,7 @@ if ( isset($_POST["submit1"])) {
                           <div class="modal-dialog">
                             <div class="modal-content">
                               <div class="modal-header">
-                                <h4 class="modal-title">Penomoran</h4>
+                                <h4 class="modal-title">Beri Nomor SK</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                   <span aria-hidden="true">&times;</span>
                                 </button>

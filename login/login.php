@@ -22,22 +22,13 @@ if (isset($_POST['submit'])) {
           $_SESSION['nip'] = $row['nip'];
           header("Location: ../baak/index.php");
         }else if($row['level']=='3'){
-          $_SESSION['username'] = $username;
-          $_SESSION['nama'] = $row['nama_lengkap'];
-          $_SESSION['foto'] = $row['foto'];
-          $_SESSION['level'] = "3";
+          $_SESSION['nip'] = $row['nip'];
           header("Location: ../umum/index.php");
         }else if($row['level']=='4'){
-          $_SESSION['username'] = $username;
-          $_SESSION['nama'] = $row['nama_lengkap'];
-          $_SESSION['foto'] = $row['foto'];
-          $_SESSION['level'] = "4";
+          $_SESSION['nip'] = $row['nip'];
           header("Location: ../wadir/index.php");
         }else if($row['level']=='5'){
-          $_SESSION['username'] = $username;
-          $_SESSION['nama'] = $row['nama_lengkap'];
-          $_SESSION['foto'] = $row['foto'];
-          $_SESSION['level'] = "5";
+          $_SESSION['nip'] = $row['nip'];
           header("Location: ../direktur/index.php");
         }    
     }else {

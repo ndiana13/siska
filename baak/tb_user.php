@@ -2,11 +2,11 @@
  include '../login/config.php';
 session_start();
  
-if (!isset($_SESSION['nama'])) {
+if (!isset($_SESSION['nip'])) {
     header("Location: index.php");
 }
 error_reporting();
-require 'function_user.php';
+require 'function.php';
 
 if ( isset($_POST["submit"]))
 {
@@ -67,12 +67,12 @@ if ( isset($_POST["submit"]))
           <div class="col-12">
            <div class="card">
             <div class="card-body">
-            <button type="button" class="btn btn-primary col-md-2" data-toggle="modal" data-target="#modal-default"><i class="fas fa-plus-circle"></i>
+            <button type="button" class="btn btn-primary col-md-2" data-toggle="modal" data-target="#modal-lg"><i class="fas fa-plus-circle"></i>
                   Tambah User
             </button>
             <div><br></div>
-            <div class="modal fade" id="modal-default">
-              <div class="modal-dialog">
+            <div class="modal fade" id="modal-lg">
+              <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                   <div class="modal-header">
                     <h4 class="modal-title">Isi Data User</h4>
@@ -82,57 +82,91 @@ if ( isset($_POST["submit"]))
                   </div>
                   <div class="modal-body">
                     <form method="POST" class="forms-sample" enctype="multipart/form-data">
-                      <div class="form-group">
-                        <label for="">NIP/NPAK</label>
-                        <input type="text" class="form-control" id="nip" name="nip" placeholder="">
-                      </div>
-                      <div class="form-group">
-                        <label for="">Username</label>
-                        <input type="text" class="form-control" id="username" name='username' placeholder="">
-                      </div>
-                      <div class="form-group">
-                        <label for="">Password</label>
-                        <input type="text" class="form-control" id="password" name="password" placeholder="">
-                      </div>
-                      <div class="form-group">
-                        <label for="">Email</label>
-                        <input type="text" class="form-control" id="email" name="email" placeholder="">
-                      </div>
-                      <div class="form-group">
-                        <label for="">Nama Lengkap</label>
-                        <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" placeholder="">
-                      </div>
-                      <div class="form-group">
-                        <label for="">No HP</label>
-                        <input type="text" class="form-control" id="no_hp" name="no_hp" placeholder="">
-                      </div>
-                      <div class="form-group">
-                        <label for="">Level</label>
-                        <div class="form-group">
-                          <select class="form-control" id="level" name="level">
-                            <option value="0">Jurusan</option>
-                            <option value="1">Kajur</option>
-                            <option value="2">BAAK</option>
-                            <option value="3">Bagian Umum</option>
-                            <option value="4">Wakil Direktur I</option>
-                            <option value="5">Direktur</option>
-                          </select>
+                     <div class="row">
+                            <div class="col-lg-6">
+                              <div class="form-group">
+                                <label for="">NIP/NPAK</label>
+                                <input type="text" class="form-control" id="nip" name="nip">
+                              </div>  
+                            </div>
+                            <div class="col-lg-6">
+                              <div class="form-group">
+                                <label for="">Nama Lengkap</label>
+                                <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-lg-6">
+                              <div class="form-group">
+                                <label for="">Username</label>
+                                <input type="text" class="form-control" id="username" name="username">
+                              </div>
+                            </div>
+                            <div class="col-lg-3">
+                              <div class="form-group">
+                                <label for="">Password</label>
+                                <input type="text" class="form-control" id="password" name="password">
+                              </div>
+                            </div>
+                            <div class="col-lg-3">
+                              <div class="form-group">
+                                <label for="">Level</label>
+                                <select class="form-control" name="level" >
+                                  <option value="0">Jurusan</option>
+                                  <option value="1">Kajur</option>
+                                  <option value="2">BAAK</option>
+                                  <option value="3">Bagian Umum</option>
+                                  <option value="4">Wakil Direktur</option>
+                                  <option value="5">Direktur</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-lg-6">
+                              <div class="form-group">
+                               <label for="">Email</label>
+                                <input type="text" class="form-control" id="email" name="email">
+                              </div>
+                            </div>
+                            <div class="col-lg-6">
+                              <div class="form-group">
+                                <label for="">No HP</label>
+                                <input type="text" class="form-control" id="no_hp" name="no_hp">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-lg-6">
+                              <div class="form-group">
+                                <label for="exampleInputFile">Foto</label><br>
+                                <div class="input-group">
+                                  <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="foto" name="foto">
+                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                  </div>  
+                                </div>
+                                <label for="exampleInputFile" style="color: gray;">*ukuran foto max 5MB (4x4)</label>
+                              </div> 
+                            </div>
+                            <div class="col-lg-6">
+                              <div class="form-group">
+                                <label for="exampleInputFile">Tanda Tangan</label><br>
+                                <div class="input-group">
+                                  <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="ttd" name="ttd">
+                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                  </div>  
+                                </div>
+                                <label for="exampleInputFile" style="color: gray;">*ukuran foto max 5MB</label>
+                              </div> 
+                            </div>
+                          </div>
+                        <div class="modal-footer justify-content-between">
+                          <button type="button" class="btn btn-secondary col-md-2" data-dismiss="modal">Close</button>
+                          <button type="submit" class="btn btn-primary col-md-2" id="submit" name="submit" >Save</button>
                         </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="">Foto</label><br>
-                        <input type="file" id="foto" name="foto" placeholder=""><br>
-                       <small style="color:#dc3545;"> Format foto 4x4.jpg, .jpeg atau .png dengan ukuran max 5MB</small>
-                      </div>
-                      <div class="form-group">
-                          <label for="">Tanda Tangan</label><br>
-                          <input type="file" id="ttd" name="ttd" ><br>
-                          <small style="color:#dc3545;"> Format tanda tangan .jpg, .jpeg atau .png dengan ukuran max 5MB</small>          
-                        </div>  
-                      <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-secondary col-md-3" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary col-md-3" id="submit" name="submit" >Simpan</button>
-                      </div>
                     </form>
                   </div>
                 </div>
@@ -154,7 +188,7 @@ if ( isset($_POST["submit"]))
               <tbody><?php
                 if ( isset($_POST["submit1"])) {
                       //cek data berhasil ubah atau tidak
-                  if  (ubah_profil($_POST)>0){
+                  if  (ubah_pengguna($_POST)>0){
                     echo "
                     <script>
                     alert('data berhasil diubah');
@@ -201,12 +235,12 @@ if ( isset($_POST["submit"]))
                 <td class="text-center"><?php echo $d['no_hp']; ?></td>
                 <td class="text-center"><?php echo $t_level ?></td>
                 <td class="text-center">
-                  <a class="btn btn-app" data-toggle="modal" data-target="#myModal<?php echo $d['nip']; ?>"><i class="fas fa-edit"></i> Edit</a>
+                  <a class="btn btn-app" data-toggle="modal" data-target="#modal-lg<?php echo $d['nip']; ?>"><i class="fas fa-edit"></i> Edit</a>
                   <a class="btn btn-app" href="hapus_user.php?nip=<?php echo $d['nip']; ?>" onclick="return confirm('Anda yakin ingin menghapus item ini ?')"><i class="fas fa-trash-alt"></i> Hapus</a>
-                  <a class="btn btn-app" data-toggle="modal" data-target="#lihatModal<?php echo $d['nip']; ?>"><i class="fas fa-edit"></i>Detail</a>
+                  <a class="btn btn-app" data-toggle="modal" data-target="#lihatModal<?php echo $d['nip']; ?>"><i class="fas fa-eye"></i>Detail</a>
                 </td>
-                <div class="modal fade" id="myModal<?php echo $d['nip']; ?>">
-                  <div class="modal-dialog">
+                <div class="modal fade" id="modal-lg<?php echo $d['nip']; ?>">
+                  <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                       <div class="modal-header">
                         <h4 class="modal-title">Edit Data User</h4>
@@ -219,59 +253,95 @@ if ( isset($_POST["submit"]))
                           <input type="hidden" name="nip" value="<?= $d["nip"];?>">
                           <input type="hidden" name="fotoLama" value="<?= $d["foto"];?>">
                           <input type="hidden" name="ttdLama" value="<?= $d["ttd"];?>">
-                          <div class="form-group">
-                            <label for="">NIP/NPAK</label>
-                            <input type="text" class="form-control"  required id="nip_edit" name="nip_edit" value="<?= $d["nip"];?>">
-                          </div>
-                          <div class="form-group">
-                            <label for="">Username</label>
-                            <input type="text" class="form-control"  required id="username" name="username" value="<?= $d["username"];?>">
-                          </div>
-                          <div class="form-group">
-                            <label for="">Password</label>
-                            <input type="text" class="form-control"  required id="password" name="password" value="<?= $d["password"];?>">
-                          </div>
-                          <div class="form-group">
-                            <label for="">Email</label>
-                            <input type="text" class="form-control"  required id="email" name="email" value="<?= $d["email"];?>">
-                          </div>
-                          <div class="form-group">
-                            <label for="">Nama Lengkap</label>
-                            <input type="text" class="form-control"  required id="nama_lengkap" name="nama_lengkap" value="<?= $d["nama_lengkap"];?>">
-                          </div>
-                          <div class="form-group">
-                            <label for="">No HP</label>
-                            <input type="text" class="form-control"  required id="no_hp" name="no_hp" value="<?= $d["no_hp"];?>">
-                          </div>
-                          <div class="form-group">
-                            <label for="">Level</label>
-                            <div class="form-group">
-                              <select class="form-control" name="level" required>
-                                <option hidden selected value="<?= $d['level'];?>"><?= $t_level ?></option>
-                                <option value="0">Jurusan</option>
-                                <option value="1">Kajur</option>
-                                <option value="2">BAAK</option>
-                                <option value="3">Bagian Umum</option>
-                                <option value="4">Wakil Direktur</option>
-                                <option value="5">Direktur</option>
-                              </select>
+                          <div class="row">
+                            <div class="col-lg-6">
+                              <div class="form-group">
+                                <label for="">NIP/NPAK</label>
+                                <input type="text" class="form-control"  required id="nip_edit" name="nip_edit" value="<?= $d["nip"];?>">
+                              </div>  
+                            </div>
+                            <div class="col-lg-6">
+                              <div class="form-group">
+                                <label for="">Nama Lengkap</label>
+                                <input type="text" class="form-control"  required id="nama_lengkap" name="nama_lengkap" value="<?= $d["nama_lengkap"];?>">
+                              </div>
                             </div>
                           </div>
-                          <div class="form-group">
-                            <label for="">Foto</label><br>
-                            <img src="../AdminLTE/dist/img/<?= $d['foto'];?>"  width="100" height="100"><br><br>
-                            <input type="file" name="foto" id="foto">
+                          <div class="row">
+                            <div class="col-lg-6">
+                              <div class="form-group">
+                                <label for="">Username</label>
+                                <input type="text" class="form-control"  required id="username" name="username" value="<?= $d["username"];?>">
+                              </div>
+                            </div>
+                            <div class="col-lg-3">
+                              <div class="form-group">
+                                <label for="">Password</label>
+                                <input type="password" class="form-control"  required id="password" name="password" value="<?= $d["password"];?>">
+                              </div>
+                            </div>
+                            <div class="col-lg-3">
+                              <div class="form-group"> 
+                                <label for="">Level</label>
+                                <select class="form-control" name="level" required>
+                                  <option hidden selected value="<?= $d["level"];?>"><?php echo $t_level ?></option>
+                                  <option value="0">Jurusan</option>
+                                  <option value="1">Kajur</option>
+                                  <option value="2">BAAK</option>
+                                  <option value="3">Bagian Umum</option>
+                                  <option value="4">Wakil Direktur</option>
+                                  <option value="5">Direktur</option>
+                                </select>
+                              </div>
+                            </div>
                           </div>
-                          <div class="form-group">
-                            <label for="">Tanda Tangan</label><br>
-                            <img src="../AdminLTE/dist/img/<?= $d['ttd'];?>"  width="100" height="100"><br><br>
-                            <input type="file" name="ttd" id="ttd">
+                          <div class="row">
+                            <div class="col-lg-6">
+                              <div class="form-group">
+                               <label for="">Email</label>
+                                <input type="text" class="form-control"  required id="email" name="email" value="<?= $d["email"];?>">
+                              </div>
+                            </div>
+                            <div class="col-lg-6">
+                              <div class="form-group">
+                                <label for="">No HP</label>
+                                <input type="text" class="form-control"  required id="no_hp" name="no_hp" value="<?= $d["no_hp"];?>">
+                              </div>
+                            </div>
                           </div>
-                          <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-secondary col-md-3" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary col-md-3" id="submit1" name="submit1" >Simpan</button>
+                          <div class="row">
+                            <div class="col-lg-6">
+                              <div class="form-group">
+                                <label for="exampleInputFile">Foto</label><br>
+                                <img src="../AdminLTE/dist/img/<?= $d['foto'];?>"  width="100" height="100"><br><br>
+                                <div class="input-group">
+                                  <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="foto" name="foto">
+                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                  </div>  
+                                </div>
+                                <label for="exampleInputFile" style="color: gray;">*ukuran foto max 5MB (4x4)</label>
+                              </div> 
+                            </div>
+                            <div class="col-lg-6">
+                              <div class="form-group">
+                                <label for="exampleInputFile">Tanda Tangan</label><br>
+                                <img src="../AdminLTE/dist/img/<?= $d['ttd'];?>"  width="100" height="100"><br><br>
+                                <div class="input-group">
+                                  <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="ttd" name="ttd">
+                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                  </div>  
+                                </div>
+                                <label for="exampleInputFile" style="color: gray;">*ukuran foto max 5MB</label>
+                              </div> 
+                            </div>
                           </div>
-                        </form>
+                        <div class="modal-footer justify-content-between">
+                          <button type="button" class="btn btn-secondary col-md-2" data-dismiss="modal">Close</button>
+                          <button type="submit1" class="btn btn-primary col-md-2" id="submit1" name="submit1" >Save</button>
+                        </div>
+                      </form>
                       </div>
                     </div>
                   </div>

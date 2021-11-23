@@ -386,4 +386,50 @@ function ubah_profil($data){
 	mysqli_query($conn,$query);
 	return mysqli_affected_rows($conn);
 }
+
+function ubah_pengguna($data){
+
+	global $conn;
+
+	$nip 			=htmlspecialchars($data["nip"]);
+	$nip_edit 		=htmlspecialchars($data["nip_edit"]);
+	$username       = htmlspecialchars($data['username']);
+	$password 		= htmlspecialchars($data['password']);
+	$email  		= htmlspecialchars($data['email']);
+	$nama_lengkap   = htmlspecialchars($data['nama_lengkap']);
+	$no_hp         	= htmlspecialchars($data['no_hp']);
+	$level         	= htmlspecialchars($data['level']);
+	$fotoLama       = htmlspecialchars($data['fotoLama']);
+	$ttdLama        = htmlspecialchars($data['ttdLama']);
+		
+	//cek apakah user pilih foto baru atau tidak
+	if($_FILES['foto']['error'] === 4){
+		$foto  = $fotoLama;
+	}else{
+		$foto =upload_foto();
+	}
+	if($_FILES['ttd']['error'] === 4){
+		$ttd  = $ttdLama;
+	}else{
+		$ttd =upload_ttd();
+	}		
+	
+		//insert data
+	$query ="UPDATE tb_pengguna SET
+	
+	nip 		='$nip_edit',
+	username 	='$username',
+	password	='$password',
+	email 		='$email',
+	nama_lengkap ='$nama_lengkap',
+	no_hp 		='$no_hp',
+	level 		='$level',
+	foto 		='$foto',
+	ttd 		='$ttd'
+	
+	WHERE nip= '$nip'
+	";
+	mysqli_query($conn,$query);
+	return mysqli_affected_rows($conn);
+}
 ?>

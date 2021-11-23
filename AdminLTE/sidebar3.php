@@ -1,6 +1,11 @@
  <?php
  include "rel.php";
  include "script.php";
+ include '../login/config.php';
+
+$nip = $_SESSION['nip'];
+$result = mysqli_query($conn, "SELECT * FROM tb_pengguna WHERE nip='$nip'");
+$row  = mysqli_fetch_array($result);
  ?>
  <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -15,10 +20,10 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="../AdminLTE/dist/img/<?= $_SESSION['foto'];?>" class="img-circle elevation-2" alt="User Image">
+          <img src="../AdminLTE/dist/img/<?= $row['foto'];?>" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block"><?php echo $_SESSION["nama"] ?></a>
+          <a href="#" class="d-block"><?php echo $row['nama_lengkap'] ?></a>
         </div>
       </div>
 

@@ -3,7 +3,7 @@ error_reporting(0);
  include '../login/config.php';
 session_start();
  
-if (!isset($_SESSION['nama'])) {
+if (!isset($_SESSION['nip'])) {
     header("Location: index.php");
 }
 include 'function_kajur.php';

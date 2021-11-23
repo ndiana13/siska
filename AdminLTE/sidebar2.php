@@ -1,7 +1,7 @@
  <?php
  include "rel.php";
  include "script.php";
-
+ include '../login/config.php';
 $nip = $_SESSION['nip'];
 $result = mysqli_query($conn, "SELECT * FROM tb_pengguna WHERE nip='$nip'");
 $row  = mysqli_fetch_array($result);
