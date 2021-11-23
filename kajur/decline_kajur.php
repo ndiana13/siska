@@ -14,4 +14,6 @@ if (dec_kajur($id_sp)>0){
 			alert('Data Gagal di Decline');
 			document.location.href='tb_verifikasi.php';
 			</script>
-			";p
+			";
+		}
+?>

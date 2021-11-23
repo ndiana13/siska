@@ -72,16 +72,17 @@ require 'function.php';
                     Status
                   </th>
                   <th>
-                    No SK<br>Lampiran
-                  </th>
-                  <th>
                     Action
                   </th>
                 </tr>
               </thead>
               <tbody>
-              <?php            
-               $pengajuan  = mysqli_query($conn,"SELECT * FROM tb_pengajuan INNER JOIN tb_jurusan ON tb_pengajuan.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_pengajuan.nip = tb_pengguna.nip ORDER BY id_sp");
+              <?php
+              $kajur      = mysqli_query($conn, "SELECT * FROM tb_kajur INNER JOIN tb_pengguna ON tb_kajur.nip = tb_pengguna.nip INNER JOIN tb_jurusan ON tb_kajur.id_jurusan = tb_jurusan.id_jurusan WHERE tb_kajur.nip = '$nip'");
+                $r          = mysqli_fetch_array($kajur);
+                $jurusan    = $r['id_jurusan'];     
+                            
+               $pengajuan  = mysqli_query($conn,"SELECT * FROM tb_pengajuan INNER JOIN tb_jurusan ON tb_pengajuan.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_pengajuan.nip = tb_pengguna.nip WHERE status >=1 AND tb_pengajuan.id_jurusan ='$jurusan' ORDER BY id_sp");
                 $no         = 1;
                 while($d = mysqli_fetch_array($pengajuan)) {
                   if($d['status']=='1'){
@@ -123,7 +124,6 @@ require 'function.php';
                       <td><?php echo $d['nm_jurusan']; ?><br><?php echo $d['thn_akademik']; ?></td>
                       <td><?php echo $d['perihal']; ?></td>
                       <td><?php echo "<a class='badge bg-". $warna."'>". $status."</a>";?><br><?php echo "<a>" .$tgl. "<a>"?>
-                      <td><?php echo $d['no_sk']; ?><br><?php echo $d['lampiran_sp']; ?></td>
                       <td>
                         <a class="btn btn-app" href="timeline.php?id_sp=<?php echo $d['id_sp']; ?>" target="_BLANK">
                           <i class="fas fa-file-download"></i>Timeline</a>
