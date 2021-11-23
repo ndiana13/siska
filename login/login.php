@@ -19,10 +19,7 @@ if (isset($_POST['submit'])) {
           $_SESSION['nip'] = $row['nip'];
           header("Location: ../kajur/index.php");
         }else if($row['level']=='2'){
-          $_SESSION['username'] = $username;
-          $_SESSION['nama'] = $row['nama_lengkap'];
-          $_SESSION['foto'] = $row['foto'];
-          $_SESSION['level'] = "2";
+          $_SESSION['nip'] = $row['nip'];
           header("Location: ../baak/index.php");
         }else if($row['level']=='3'){
           $_SESSION['username'] = $username;

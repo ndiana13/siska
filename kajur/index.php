@@ -16,9 +16,6 @@ $j_sk_mengajar = mysqli_num_rows($sk_mengajar);
 $row_sk_magang = mysqli_query($conn, "SELECT * FROM tb_pengajuan WHERE jns_sp ='skmagang' AND status=0");
 $jumlah_sk_magang = mysqli_num_rows($row_sk_magang);
 
-$row_sk = mysqli_query($conn,"SELECT * FROM tb_pengajuan WHERE status <=3");
-$jumlah_sk = mysqli_num_rows($row_sk);
-
 $sk_magang = mysqli_query($conn, "SELECT * FROM tb_pengajuan WHERE jns_sp ='skmagang' AND status=4");
 $j_sk_magang = mysqli_num_rows($sk_magang);
 
@@ -27,6 +24,9 @@ $jumlah_sk_doswal = mysqli_num_rows($row_sk_doswal);
 
 $sk_doswal = mysqli_query($conn,"SELECT * FROM tb_pengajuan WHERE jns_sp ='skdoswal' AND status=4");
 $j_sk_doswal = mysqli_num_rows($sk_doswal);
+
+$row_sk = mysqli_query($conn,"SELECT * FROM tb_pengajuan WHERE status=0");
+$jumlah_sk = mysqli_num_rows($row_sk);
 
 $sk = mysqli_query($conn,"SELECT * FROM tb_pengajuan WHERE status=4");
 $j_sk = mysqli_num_rows($sk);

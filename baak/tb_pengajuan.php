@@ -4,7 +4,7 @@ session_start();
 include '../login/config.php';
 require 'function.php';
 
-if (!isset($_SESSION['nama'])) {
+if (!isset($_SESSION['nip'])) {
     header("Location: index.php");
 }
 
@@ -146,7 +146,6 @@ if ( isset($_POST["submit1"])) {
                     <td><?php echo $d['no_sk']; ?><br><?php echo $d['lampiran_sp']; ?></td>
                     <td>
                       <a class="btn btn-app" data-toggle="modal" data-target="#myModal<?php echo $d['id_sp']; ?>"><i class="fas fa-edit"></i> Edit</a>
-                      <a class="btn btn-app" href="hapus_pengajuan.php?id_sp=<?php echo $d['id_sp']; ?>"onclick="return confirm('Anda yakin ingin menghapus item ini ?')"><i class="fas fa-trash-alt"></i> Hapus</a>
                       <a class="btn btn-app" href="../baak/lampiran/<?php echo $d['lampiran_sp']; ?>"><i class="fas fa-file-download"></i>Lampiran</a>
                       <a class="btn btn-app" href="cetak_sk_mengajar.php?id_sp=<?php echo $d['id_sp']; ?>"><i class="fas fa-save"></i>SK</a>
                       <a class="btn btn-app" href="cetak_sp.php?id_sp=<?php echo $d['id_sp']; ?>"><i class="fas fa-save"></i>SP</a>
