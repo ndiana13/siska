@@ -61,7 +61,12 @@ error_reporting(0);
 			vertical-align: top!important;
 			text-align: justify;
 			font-size: 17px;
+			font-family:'Times New Roman',serif;
 		}
+		.separator {
+                border-bottom: 2px solid #616161;
+                margin: 0.5rem 0 1.0rem;
+            }
 
 		
 
@@ -73,23 +78,24 @@ error_reporting(0);
 			<tr>
 				<td><img src="../AdminLTE/dist/img/pnc.png" width="80" height="80"></td>
 				<td><center>
-					<font size="4"> KEMENTRIAN PENDIDIKAN, KEBUDAYAAN, RISET, DAN TEKNOLOGI<br></font>
+					<font size="5"> KEMENTRIAN PENDIDIKAN DAN KEBUDAYAAN<br></font>
 					<font size="4"><strong>POLITEKNIK NEGERI CILACAP</strong><br></font>
 					<font size="2">Jalan Dr.Soetomo No.1 Sidakaya-CILACAP 53212 Jawa Tengah<br>
-						Telepon: (0282)533329, Faksimile: (0282)537992<br>
-						Laman: www.politeknikcilacap.ac.id Email: poltec@politeknikcilacap.ac.id</font>
+						Telepon: (0282)533329, Faksimile: (0282)537992<br></font>
+					<font size="2">Laman:</font><font size="2" style="color: blue; text-underline-position: under;" >www.politeknikcilacap.ac.id</font><font size="2"> Email:</font><font size="2" style="color: blue; text-underline-position: under;"> poltec@politeknikcilacap.ac.id</font>
 				</center></td>			
 			</tr>
 			<tr>
-				<td colspan="2"><hr size="3px"></td>
+				<td colspan="2"><div class="separator"></div></td>
+
 			</tr>
 		</table>
 		<table width="700">
 			<tr>
 				<td>
 				<center>
-					<font size="3">KEPUTUSAN DIREKTUR POLITEKNIK NEGERI CILACAP<br>
-						NOMOR : <?php echo $result['no_sk'];?></font>
+					<p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>KEPUTUSAN DIREKTUR POLITEKNIK NEGERI CILACAP<br>
+						NOMOR : <?php echo $result['no_sk'];?></p>
 				</center>
 				</td>			
 			</tr>
@@ -98,17 +104,18 @@ error_reporting(0);
 			<tr>
 				<td>
 				<center>
-					<font size="3">TENTANG</font>
+					<p style='margin-top:0cm;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>TENTANG</p>
 				</center>
 				</td>			
 			</tr>
 		</table>
-		<table width="600">
+		<table width="700">
 			<tr>
 				<td>
 				<center>
-					<font size="3" style="text-transform:uppercase;"><?php echo $result['perihal'];?><br></font>
-					<font size="3"style="text-transform:uppercase;">PADA JURUSAN <?php echo "<a>". $nm_jurusan."</a>";?> SEMESTER <?php echo $result['semester'];?><br>TAHUN AKADEMIK <?php echo $result['thn_akademik'];?><br></font>
+					<p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;text-align:center; text-transform: uppercase;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'><?php echo $result['perihal'];?></span></p>
+					<p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;text-align:center; text-transform: uppercase;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>PADA JURUSAN <?php echo "<a>". $nm_jurusan."</a>";?> SEMESTER <?php echo $result['semester'];?></span></p>
+					<p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;line-height:107%;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:19px;line-height:107%;font-family:"Times New Roman",serif;'>TAHUN AKADEMIK <?php echo $result['thn_akademik'];?></span></p>
 				</center>
 				</td>
 			</tr>
@@ -117,7 +124,7 @@ error_reporting(0);
 			<tr>
 				<td>
 				<center>
-					<font size="3" >DIREKTUR POLITEKNIK NEGERI CILACAP<br></font>
+					<p style='margin-top:12.0pt;margin-right:0cm;margin-bottom:8.0pt;margin-left:0cm;line-height:150%;font-size:15px;font-family:"Calibri",sans-serif;text-align:center;'><span style='font-size:19px;line-height:150%;font-family:"Times New Roman",serif;'>DIREKTUR POLITEKNIK NEGERI CILACAP</span></p>
 				</center>
 				</td>
 			</tr>

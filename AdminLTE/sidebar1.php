@@ -49,33 +49,12 @@ $row  = mysqli_fetch_array($result);
             </a>
           </li>    
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="import_skm.php" class="nav-link">
               <i class="nav-icon fas fa-mail-bulk"></i>
               <p>
                 Import Data
-                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="import_skm.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Lampiran SK Mengajar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/tables/data.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Lampiran SK Magang</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/tables/jsgrid.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p> Lampiran SK Dosen Wali</p>
-                </a>
-              </li>
-            </ul>
           </li>
           <li class="nav-item">
             <a href="tb_jurusan.php" class="nav-link">
@@ -100,9 +79,6 @@ $row  = mysqli_fetch_array($result);
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>Logout</p>
             </a>
-          </li>
-          </li>
-            </ul>
           </li>
       </nav>
   </div>

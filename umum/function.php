@@ -232,7 +232,7 @@ function dec_wadir($id_sk_mengajar) {
 	
 
 		//insert data
-	$query ="UPDATE tb_sk_mengajar SET status = '4' WHERE id_sk_mengajar = $id_sk_mengajar
+	$query ="UPDATE tb_sk_mengajar SET status = '5' WHERE id_sk_mengajar = $id_sk_mengajar
 	";
 
 	mysqli_query($conn,$query);
