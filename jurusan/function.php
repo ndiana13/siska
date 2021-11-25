@@ -46,6 +46,16 @@ function tambah_sp($data){
 	$status  		= htmlspecialchars($data["status"]);
 	$no_sk  		= htmlspecialchars($data["no_sk"]);
 
+	$cek_no_sp = mysqli_query($conn, "SELECT * FROM tb_pengajuan WHERE no_sp = '$no_sp'");
+    if (mysqli_fetch_array($cek_no_sp)) {
+        echo "<script>
+        alert('Nomor Pengajuan Sudah Ada');
+        document.location.href='tb_pengajuan.php';
+        </script>";
+        return false;
+    }
+	
+
 	$query = "INSERT INTO tb_pengajuan VALUES ('$id_sp', '$nip', '$jns_sp', '$no_sp', '$id_jurusan', '$tgl_sp', '$thn_akademik', '$semester', '$perihal', '$lampiran_sp', '$status', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', '$no_sk', '$upload_sk')";
 	mysqli_query($conn,$query);
 	return mysqli_affected_rows($conn);

@@ -70,13 +70,10 @@ if ( isset($_POST["submit1"])) {
                 <tr style="text-align: center;">
                     <th>#</th>
                     <th>
-                      NIP
+                      Nama<br>Tanggal
                     </th>     
                     <th>
                       No Pengajuan
-                    </th>
-                    <th>
-                      Tanggal
                     </th>
                     <th>
                       Jurusan
@@ -86,9 +83,6 @@ if ( isset($_POST["submit1"])) {
                     </th>
                     <th>
                       Status
-                    </th>
-                    <th>
-                      No SK
                     </th>
                     <th>
                       Action
@@ -138,24 +132,25 @@ if ( isset($_POST["submit1"])) {
                     ?>
                     <tr>
                       <td><?php echo $no++; ?></td>
-                      <td><?php echo $d['nip']; ?></td>
+                      <td><?php echo $d['nama_lengkap']; ?><br><?php echo $d['tgl_sp']; ?></td>
                       <td><?php echo $d['no_sp']; ?></td>
-                      <td><?php echo $d['tgl_sp']; ?></td>
                       <td><?php echo $d['nm_jurusan']; ?><br><?php echo $d['thn_akademik']; ?></td>
                       <td><?php echo $d['perihal']; ?></td>
                       <td><?php echo "<a href= 'accept_baak.php?id_sp=".$d['id_sp']."' class='badge bg-". $warna."'>". $status."</a>";?><br><?php echo "<a>" .$tgl. "<a>"?>
-                      <td><?php echo $d['no_sk']; ?></td>
                       <td>
-                        <a class="btn btn-app" data-toggle="modal" data-target="#myModal<?php echo $d['id_sp']; ?>">
-                          <i class="fas fa-edit"></i> Edit</a>
-                        <a class="btn btn-app" href="../baak/lampiran/<?php echo $d['lampiran_sp']; ?>">
-                          <i class="fas fa-file-download"></i>Lampiran</a>
-                        <a class="btn btn-app" href="../baak/sk/<?php echo $d['upload_sk']; ?>">
-                          <i class="fas fa-save"></i>SK</a>
-                        <a class="btn btn-app" href="cetak_sp.php?id_sp=<?php echo $d['id_sp']; ?>" target="_BLANK">
-                          <i class="fas fa-save"></i>SP</a>
-                        <div class="modal fade" id="myModal<?php echo $d['id_sp']; ?>">
-                          <div class="modal-dialog">
+                      <div class="btn-group btn-group-sm">
+                        <a href="accept_kajur.php?id_sp=<?php echo $d['id_sp']; ?>" class="btn btn-info" onclick="return confirm('Anda yakin ingin menerima pengajuan ini ?')"><i class="fas fa-check"></i> Terima</a>
+                        <a href="decline_kajur.php?id_sp=<?php echo $d['id_sp']; ?>" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menolak pengajuan ini ?')"><i class="fas fa-times"></i> Tolak</a>
+                      </div>
+                      </td>
+                      <td>
+                        <div class="btn-group btn-group">
+                          <a data-toggle="modal" data-target="#modal-lg<?php echo $d['id_sp']; ?>" class="btn btn-warning"><i class="fas fa-edit"></i> Edit</a>
+                          <a href="../baak/lampiran/<?php echo $d['lampiran_sp']; ?>" class="btn btn-secondary"><i class="fas fa-download"></i> File</a>
+                          <a href="../baak/sk/<?php echo $d['upload_sk']; ?>" class="btn btn-primary"><i class="fas fa-save"></i> SK</a>
+                        </div>
+                        <div class="modal fade" id="modal-lg<?php echo $d['id_sp']; ?>">
+                          <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                               <div class="modal-header">
                                 <h4 class="modal-title">Edit Surat Pengajuan</h4>
@@ -166,107 +161,137 @@ if ( isset($_POST["submit1"])) {
                               <div class="modal-body">
                                 <form action="" method="POST" class="forms-sample" enctype="multipart/form-data">
                                   <input type="hidden" name="lampiran_sp_lama" value="<?= $d["lampiran_sp"];?>">
-                                  <input type="hidden" name="upload_sk_lama" value="<?= $d["upload_sk"];?>">
-                                  <input type="hidden" name="id_sp" value="<?= $d["id_sp"];?>">
-                                  <div class="form-group" hidden="">
-                                    <label for="">Id Surat</label>
-                                    <input type="text" class="form-control"  required id="id_sp" name="id_sp_edit" value="<?= $d["id_sp"];?>">
-                                  </div>
-                                  <div class="form-group"  hidden="">
-                                    <label for="">NIP</label>
-                                    <input type="text" class="form-control"  required id="nip" name="nip" value="<?= $d["nip"];?>">
-                                  </div>
-                                  <div class="form-group"  hidden="">
-                                    <label for="">Jenis Pengajuan</label>
-                                    <div class="form-group">
-                                    <?php
-                                    if ($d['jns_sp']=='skmengajar'){
-                                    $jns = "Surat Keputusan Mengajar";
-                                    }
-                                    elseif ($d['jns_sp']=='skdoswal'){
-                                    $jns = "Surat Keputusan Dosen Wali";
-                                    }
-                                    elseif ($d['jns_sp']=='skmagang'){
-                                    $jns = "Surat Keputusan Magang";
-                                    }
-                                    ?>
-                                    <select class="form-control" name="jns_sp" required id="jns_sp">
-                                      <option hidden selected value = "<?= $d["jns_sp"];?>"><?= "<a>" .$jns. "</a>"?></option>
-                                      <option value="skmengajar">Surat Keputusan Mengajar</option>
-                                      <option value="skdoswal">Surat Keputusan Dosen Wali</option>
-                                      <option value="skmagang">Surat Keputusan Magang</option>
-                                    </select>
-                                    </div>
-                                  </div>
-                                  <div class="form-group"  hidden="">
-                                    <label for="">No Surat</label>
-                                    <input type="text" class="form-control"  required id="no_sp" name="no_sp" value="<?= $d["no_sp"];?>">
-                                  </div>
-                                  <div class="form-group"  hidden="">
-                                    <label for="">Tanggal Pengajuan</label>
-                                    <input type="date" class="form-control"  required id="tgl_sp" name="tgl_sp" value="<?= $d["tgl_sp"];?>">
-                                  </div>
-                                  <div  hidden="">
-                                    <label for="">Id Jurusan</label>
-                                    <select class="form-control" id="id_jurusan" name="id_jurusan">
-                                      <?php
-                                      $kon = mysqli_connect("localhost",'root',"","siska");
-                                      if (!$kon){
-                                      die("Koneksi database gagal:".mysqli_connect_error());
-                                      }
-                                      $sql="select * from tb_jurusan";
-                                      $hasil=mysqli_query($kon,$sql);
-                                      while ($data = mysqli_fetch_array($hasil)) {
-                                      ?>
-                                      <option hidden selected value="<?= $d["id_jurusan"]; ?>"><?= $d["nm_jurusan"]; ?></option>
-                                      <option value="<?= $data['id_jurusan'];?>"><?php echo $data['nm_jurusan'];?></option>
-                                      <?php
-                                      }
-                                      ?>
-                                    </select>
-                                  </div>
-                                  <div class="form-group"  hidden="">
-                                    <label for="">Tahun Akademik</label>
-                                    <input type="text" class="form-control"  required id="thn_akademik" name="thn_akademik" value="<?= $d["thn_akademik"];?>">
-                                  </div>
-                                  <div class="form-group"  hidden="">
-                                    <label for="">Semester</label>
-                                    <div class="form-group">
-                                      <select class="form-control" name="semester" required id="semester">
-                                        <option hidden selected><?= $d["semester"]; ?></option>
-                                        <option value="Gasal">Gasal</option>
-                                        <option value="Genap">Genap</option>
-                                      </select>
-                                    </div>
-                                  </div>
-                                  <div class="form-group " hidden="">
-                                    <label for="">Perihal</label>
-                                    <input type="text" class="form-control"  required id="perihal" name="perihal" value="<?= $d["perihal"];?>">
-                                  </div>
-                                  <div class="form-group" hidden="">
-                                    <label for="">Status</label>
-                                    <input type="text" class="form-control"  required id="status" name="status" value="<?= $d["status"];?>">
-                                  </div>
-                                  <div class="form-group" hidden="">
-                                    <label for="">NO SK</label>
-                                    <input type="text" class="form-control" name="no_sk" value="<?= $d["no_sk"];?>">
-                                  </div>
-                                  <div class="form-group"  hidden="">
-                                    <label for="">Lampiran</label><br>
-                                    <p><?php echo $d['lampiran_sp'];?></p>
-                                    <input type="file" name="lampiran_sp" value="<?= $d["lampiran_sp"];?>"><br>
-                                    <small style="color:#dc3545;">*Format file yang diperbolehkan adalah (.xls, xlsx,docs) max 50MB!</small>
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="">SK</label><br>
-                                    <p><?php echo $d['upload_sk'];?></p>
-                                    <input type="file" name="upload_sk" value="<?= $d["upload_sk"];?>"><br>
-                                    <small style="color:#dc3545;">*Format file yang diperbolehkan adalah (.pdf, docx) max 50MB!</small>
-                                  </div>
-                                  <div class="modal-footer justify-content-between">
-                                    <button type="button" class="btn btn-secondary col-md-3" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary col-md-3" id="submit1" name="submit1" >Simpan</button>
-                                  </div>
+                                        <input type="hidden" name="upload_sk_lama" value="<?= $d["upload_sk"];?>">
+                                        <input type="hidden" name="id_sp" value="<?= $d["id_sp"];?>">
+                                        <div class="form-group" hidden="">
+                                          <label for="">Id Surat</label>
+                                          <input type="text" class="form-control"  required id="id_sp" name="id_sp_edit" value="<?= $d["id_sp"];?>">
+                                        </div>
+                                        <div class="row">
+                                          <div class="col-lg-6">
+                                            <div class="form-group">
+                                              <label for="">NIP</label>
+                                                <select class="form-control" id="nip" name="nip">
+                                                <option value="<?php echo $d['nip'];?>"><?php echo "<a>" .$d['nip'] ." (" .$d['nama_lengkap'] .")"."</a>";?></option>
+                                              </select> 
+                                            </div>
+                                          </div>
+                                          <div class="col-lg-6">
+                                            <div class="form-group">
+                                              <label for="">Nama Jurusan</label>
+                                              <select class="form-control" id="id_jurusan" name="id_jurusan">
+                                               <?php
+                                                $kon = mysqli_connect("localhost",'root',"","siska");
+                                                if (!$kon){
+                                                    die("Koneksi database gagal:".mysqli_connect_error());
+                                                }
+                                                $sql="select * from tb_jurusan";
+                                                $hasil=mysqli_query($kon,$sql);
+                                                while ($data = mysqli_fetch_array($hasil)) {
+                                               ?>
+                                                <option hidden selected value="<?= $d["id_jurusan"]; ?>"><?= $d["nm_jurusan"]; ?></option>
+                                                <option value="<?= $data['id_jurusan'];?>"><?php echo $data['nm_jurusan'];?></option>
+                                                  <?php 
+                                                      }
+                                                  ?>
+                                              </select>
+                                            </div>
+                                          </div>
+                                          <div class="col-lg-6">
+                                            <div class="form-group">
+                                              <label for="">Jenis Pengajuan</label>
+                                              <div class="form-group">
+                                                <?php
+                                                if ($d['jns_sp']=='skmengajar'){
+                                                  $jns = "Surat Keputusan Mengajar";
+                                                }
+                                                elseif ($d['jns_sp']=='skdoswal'){
+                                                  $jns = "Surat Keputusan Dosen Wali";
+                                                }
+                                                elseif ($d['jns_sp']=='skmagang'){
+                                                  $jns = "Surat Keputusan Magang";
+                                                }
+                                                ?>
+                                                  <select class="form-control" name="jns_sp" required id="jns_sp">
+                                                    <option hidden selected value = "<?= $d["jns_sp"];?>"><?= "<a>" .$jns. "</a>"?></option>
+                                                    <option value="skmengajar">Surat Keputusan Mengajar</option>
+                                                    <option value="skdoswal">Surat Keputusan Dosen Wali</option>
+                                                    <option value="skmagang">Surat Keputusan Magang</option>
+                                                  </select>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                              <div class="form-group">
+                                                <label for="">Tanggal Pengajuan</label>
+                                                <input type="date" class="form-control"  required id="tgl_sp" name="tgl_sp" value="<?= $d["tgl_sp"];?>">
+                                              </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                              <div class="form-group">
+                                                <label for="">No Surat</label>
+                                                <input type="text" class="form-control"  required id="no_sp" name="no_sp" value="<?= $d["no_sp"];?>">
+                                              </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                              <div class="form-group">
+                                                <label for="">Tahun Akademik</label>
+                                                <input type="text" class="form-control"  required id="thn_akademik" name="thn_akademik" value="<?= $d["thn_akademik"];?>">
+                                              </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                              <div class="form-group">
+                                                <label for="">Semester</label>
+                                                <select class="form-control" name="semester" required id="semester">
+                                                  <option hidden selected><?= $d["semester"]; ?></option>
+                                                  <option value="Gasal">Gasal</option>
+                                                  <option value="Genap">Genap</option>
+                                                </select>
+                                              </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                              <div class="form-group">
+                                                <label for="">Perihal</label>
+                                                <textarea  class="form-control"  required id="perihal" name="perihal" value="<?= $d["perihal"];?>"><?php echo $d['perihal'];?></textarea>
+                                              </div>
+                                            </div>
+                                            <div class="col-lg-6" hidden="">
+                                              <div class="form-group">
+                                                <label for="exampleInputFile">Lampiran</label>
+                                                <div class="input-group">
+                                                  <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="lampiran_sp" name="lampiran_sp" value="<?= $d["lampiran_sp"];?>">
+                                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                                  </div>  
+                                                </div>
+                                                <small style="color:#dc3545;">*Format file yang diperbolehkan adalah file berformat *.pdf/docx max 50MB!</small>
+                                              </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                              <div class="form-group">
+                                                <label for="exampleInputFile">Upload SK</label>
+                                                <div class="input-group">
+                                                  <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="upload_sk" name="upload_sk" value="<?= $d["upload_sk"];?>">
+                                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                                  </div>  
+                                                </div>
+                                                <small style="color:#dc3545;">*Format file yang diperbolehkan adalah file berformat *.pdf/docx max 50MB!</small>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        <div class="form-group" hidden="">
+                                          <label for="">Status</label>
+                                          <input type="text" class="form-control"  required id="status" name="status" value="<?= $d["status"];?>">
+                                        </div>
+                                        <div class="form-group" hidden="">
+                                          <label for="">NO SK</label>
+                                          <input type="text" class="form-control" name="no_sk" value="<?= $d["no_sk"];?>">
+                                        </div> 
+                                       <div class="modal-footer justify-content-between">
+                                        <button type="button" class="btn btn-secondary col-md-2" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary col-md-2" id="submit1" name="submit1" >Save</button>
+                                      </div>
                                 </form>
                               </div>
                             </div>

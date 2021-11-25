@@ -174,7 +174,7 @@ function ubah_sp($data){
 		$upload_sk =upload_sk();
 	}
 
-	// VALIDASI NIP
+	// VALIDASI NO SK
     $cek_no_sk = mysqli_query($conn, "SELECT * FROM tb_pengajuan WHERE no_sk = '$no_sk'");
     if (mysqli_fetch_array($cek_no_sk)) {
         echo "<script>

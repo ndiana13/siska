@@ -235,9 +235,11 @@ if ( isset($_POST["submit"]))
                 <td class="text-center"><?php echo $d['no_hp']; ?></td>
                 <td class="text-center"><?php echo $t_level ?></td>
                 <td class="text-center">
-                  <a class="btn btn-app" data-toggle="modal" data-target="#modal-lg<?php echo $d['nip']; ?>"><i class="fas fa-edit"></i> Edit</a>
-                  <a class="btn btn-app" href="hapus_user.php?nip=<?php echo $d['nip']; ?>" onclick="return confirm('Anda yakin ingin menghapus item ini ?')"><i class="fas fa-trash-alt"></i> Hapus</a>
-                  <a class="btn btn-app" data-toggle="modal" data-target="#lihatModal<?php echo $d['nip']; ?>"><i class="fas fa-eye"></i>Detail</a>
+                  <div class="btn-group btn-group">
+                    <a data-toggle="modal" data-target="#modal-lg<?php echo $d['nip']; ?>" class="btn btn-warning"><i class="fas fa-edit"></i> Edit</a>
+                    <a href="hapus_user.php?nip=<?php echo $d['nip']; ?>" onclick="return confirm('Anda yakin ingin menghapus item ini ?')" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Hapus</a>
+                    <a data-toggle="modal" data-target="#lihatModal<?php echo $d['nip']; ?>" class="btn btn-info"><i class="fas fa-eye"></i> Detail</a>
+                  </div>
                 </td>
                 <div class="modal fade" id="modal-lg<?php echo $d['nip']; ?>">
                   <div class="modal-dialog modal-lg">
