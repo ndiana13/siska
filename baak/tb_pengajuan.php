@@ -73,13 +73,10 @@ if ( isset($_POST["submit1"])) {
                     <tr style="text-align: center;">
                       <th>#</th>
                       <th>
-                        NIP
+                        NIP<br>Tanggal
                       </th>     
                       <th>
                         No Pengajuan
-                      </th>
-                      <th>
-                        Tanggal
                       </th>
                       <th>
                         Jurusan
@@ -137,19 +134,17 @@ if ( isset($_POST["submit1"])) {
                   ?>
                   <tr>
                     <td><?php echo $no++; ?></td>
-                    <td><?php echo $d['nip']; ?></td>
+                    <td><?php echo $d['nama_lengkap']; ?><br><?php echo $d['tgl_sp']; ?></td>
                     <td><?php echo $d['no_sp']; ?></td>
-                    <td><?php echo $d['tgl_sp']; ?></td>
                     <td><?php echo $d['nm_jurusan']; ?><br><?php echo $d['thn_akademik']; ?></td>
                     <td><?php echo $d['perihal']; ?></td>
                     <td><?php echo "<a class='badge bg-". $warna."'>". $status."</a>";?><br><?php echo "<a>" .$tgl. "<a>"?>
                     <td><?php echo $d['no_sk']; ?><br><?php echo $d['lampiran_sp']; ?></td>
                     <td>
-                      <a class="btn btn-app" data-toggle="modal" data-target="#myModal<?php echo $d['id_sp']; ?>"><i class="fas fa-edit"></i> Edit</a>
-                      <a class="btn btn-app" href="../baak/lampiran/<?php echo $d['lampiran_sp']; ?>"><i class="fas fa-file-download"></i>Lampiran</a>
-                      <a class="btn btn-app" href="cetak_sk_mengajar.php?id_sp=<?php echo $d['id_sp']; ?>"><i class="fas fa-save"></i>SK</a>
-                      <a class="btn btn-app" href="cetak_sp.php?id_sp=<?php echo $d['id_sp']; ?>"><i class="fas fa-save"></i>SP</a>
-
+                      <div class="btn-group btn-group">
+                        <a href="../baak/lampiran/<?php echo $d['lampiran_sp']; ?>" class="btn btn-secondary"><i class="fas fa-download"></i> File</a>
+                        <a href="cetak_sk_mengajar.php?id_sp=<?php echo $d['id_sp']; ?>" class="btn btn-primary"><i class="fas fa-save"></i> SK</a>
+                      </div>
 
                       <div class="modal fade" id="myModal<?php echo $d['id_sp']; ?>">
                         <div class="modal-dialog">
