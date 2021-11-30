@@ -54,7 +54,7 @@ require 'function.php';
                 <tr style="text-align: center;">
                   <th>#</th>
                   <th>
-                    NIP<br>Tanggal
+                    Nama<br>Tanggal
                   </th>     
                   <th>
                     No Pengajuan
@@ -84,6 +84,35 @@ require 'function.php';
                 $pengajuan  = mysqli_query($conn,"SELECT * FROM tb_pengajuan INNER JOIN tb_jurusan ON tb_pengajuan.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_pengajuan.nip = tb_pengguna.nip WHERE tb_pengajuan.id_jurusan ='$jurusan' AND status=0 ORDER BY id_sp");
                 $no= 1;
                 while($d = mysqli_fetch_array($pengajuan)) {
+                   $t = substr($d['tgl_sp'],0,4);
+                   $b = substr($d['tgl_sp'],5,2);
+                   $h = substr($d['tgl_sp'],8,2);
+
+                   if($b == "01"){
+                       $nm = "Januari";
+                   } elseif($b == "02"){
+                       $nm = "Februari";
+                   } elseif($b == "03"){
+                       $nm = "Maret";
+                   } elseif($b == "04"){
+                       $nm = "April";
+                   } elseif($b == "05"){
+                       $nm = "Mei";
+                   } elseif($b == "06"){
+                       $nm = "Juni";
+                   } elseif($b == "07"){
+                       $nm = "Juli";
+                   } elseif($b == "08"){
+                       $nm = "Agustus";
+                   } elseif($b == "09"){
+                       $nm = "September";
+                   } elseif($b == "10"){
+                       $nm = "Oktober";
+                   } elseif($b == "11"){
+                       $nm = "November";
+                   } elseif($b == "12"){
+                       $nm = "Desember";
+                   }
                   if($d['status']=='1'){
                     $status = 'Diverifikasi Kajur';
                     $warna = 'warning';
@@ -117,7 +146,7 @@ require 'function.php';
                     ?>
                     <tr>
                       <td><?php echo $no++; ?></td>
-                      <td><?php echo $d['nama_lengkap']; ?><br><?php echo $d['tgl_sp']; ?></td>
+                      <td><?php echo $d['nama_lengkap']; ?><br><?php echo  "<a>". $h." ". $nm. " ". $t. "</a>" ?></td>
                       <td><?php echo $d['no_sp']; ?></td>
                       <td><?php echo $d['nm_jurusan']; ?><br><?php echo $d['thn_akademik']; ?></td>
                       <td><?php echo $d['perihal']; ?></td>

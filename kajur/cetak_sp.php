@@ -2,7 +2,7 @@
 include '../login/config.php';
 session_start();
  
-if (!isset($_SESSION['nama'])) {
+if (!isset($_SESSION['nip'])) {
     header("Location: index.php");
 }
 $id_sp = $_GET['id_sp'];
@@ -231,9 +231,7 @@ error_reporting();
 			</tr>
 		</table>
 		<?php
-		}
-		?>
-		<?php  elseif ($result['jns_sp']=='skmagang'){ ?>
+		} elseif ($result['jns_sp']=='skmagang'){ ?>
 		<table>
 			<tr class="text2">
 				<td width="40"></td>

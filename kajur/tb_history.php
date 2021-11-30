@@ -54,22 +54,16 @@ require 'function.php';
                 <tr style="text-align: center;">
                   <th>#</th>
                   <th>
-                    NIP
+                    Nama<br>Tanggal
                   </th>     
                   <th>
                     No Pengajuan
-                  </th>
-                  <th>
-                    Tanggal
                   </th>
                   <th>
                     Jurusan
                   </th>
                   <th>
                     Perihal
-                  </th>
-                  <th>
-                    Status
                   </th>
                   <th>
                     Action
@@ -85,45 +79,42 @@ require 'function.php';
                $pengajuan  = mysqli_query($conn,"SELECT * FROM tb_pengajuan INNER JOIN tb_jurusan ON tb_pengajuan.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_pengajuan.nip = tb_pengguna.nip WHERE status >=1 AND tb_pengajuan.id_jurusan ='$jurusan' ORDER BY id_sp");
                 $no         = 1;
                 while($d = mysqli_fetch_array($pengajuan)) {
-                  if($d['status']=='1'){
-                    $status = 'Diverifikasi Kajur';
-                    $warna = 'warning';
-                    $tgl = $d['tgl_kajur'];
-                    }
-                    elseif ($d['status']=='2'){
-                    $status = 'Diverifikasi BAAK';
-                    $warna = 'primary';
-                    $tgl = $d['tgl_baak'];
-                    }
-                    elseif ($d['status']=='3'){
-                    $status = 'Diverifikasi Wadir';
-                    $warna = 'primary';
-                    $tgl = $d['tgl_wadir'];
-                    }
-                    elseif ($d['status']=='4'){
-                    $status = 'Diverifikasi Direktur';
-                    $warna = 'success';
-                    $tgl = $d['tgl_direktur'];
-                    }
-                    elseif ($d['status']=='5'){
-                    $status = 'Ditolak';
-                    $warna = 'danger';
-                    $tgl = '';
-                    }
-                    else {
-                        $status = 'Belum Diverifikasi';
-                        $warna = 'secondary';
-                        $tgl= '';
-                      }
+                   $t = substr($d['tgl_sp'],0,4);
+                   $b = substr($d['tgl_sp'],5,2);
+                   $h = substr($d['tgl_sp'],8,2);
+
+                   if($b == "01"){
+                       $nm = "Januari";
+                   } elseif($b == "02"){
+                       $nm = "Februari";
+                   } elseif($b == "03"){
+                       $nm = "Maret";
+                   } elseif($b == "04"){
+                       $nm = "April";
+                   } elseif($b == "05"){
+                       $nm = "Mei";
+                   } elseif($b == "06"){
+                       $nm = "Juni";
+                   } elseif($b == "07"){
+                       $nm = "Juli";
+                   } elseif($b == "08"){
+                       $nm = "Agustus";
+                   } elseif($b == "09"){
+                       $nm = "September";
+                   } elseif($b == "10"){
+                       $nm = "Oktober";
+                   } elseif($b == "11"){
+                       $nm = "November";
+                   } elseif($b == "12"){
+                       $nm = "Desember";
+                   }
                     ?>
                     <tr>
                       <td><?php echo $no++; ?></td>
-                      <td><?php echo $d['nip']; ?></td>
+                      <td><?php echo $d['nama_lengkap']; ?><br><?php echo  "<a>". $h." ". $nm. " ". $t. "</a>" ?></td>
                       <td><?php echo $d['no_sp']; ?></td>
-                      <td><?php echo $d['tgl_sp']; ?></td>
-                      <td><?php echo $d['nm_jurusan']; ?><br><?php echo $d['thn_akademik']; ?></td>
-                      <td><?php echo $d['perihal']; ?></td>
-                      <td><?php echo "<a class='badge bg-". $warna."'>". $status."</a>";?><br><?php echo "<a>" .$tgl. "<a>"?>
+                      
+                      <td><?php echo $d['perihal']; ?></td><td><?php echo $d['nm_jurusan']; ?><br><?php echo $d['thn_akademik']; ?></td>
                       <td>
                         <a class="btn btn-app" href="timeline.php?id_sp=<?php echo $d['id_sp']; ?>" target="_BLANK">
                           <i class="fas fa-file-download"></i>Timeline</a>
