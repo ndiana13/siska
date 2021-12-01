@@ -132,7 +132,7 @@ $j_sk = mysqli_num_rows($sk);
             <div class="info-box">
               <span class="info-box-icon bg-warning"><i class="far fa-envelope"></i></span>
               <div class="info-box-content">
-                <span class="info-box-text">SK Dosen Wali Yang Sudah Diverifikasi</span>
+                <span class="info-box-text">SK DosWal Yang Sudah Diverifikasi</span>
                 <span class="info-box-number"><?php echo $j_sk_doswal; ?></span>
               </div>
             </div>

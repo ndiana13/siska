@@ -60,12 +60,12 @@ if ($r['status']==5){
             <div class="timeline">
               <!-- timeline time label -->
               <div class="time-label">
-                <span class="bg-green"><?php echo $r['tgl_direktur'];?></span>
+                <span class="bg-blue"><?php echo $r['tgl_direktur'];?></span>
               </div>
               <!-- /.timeline-label -->
               <!-- timeline item -->
               <div>
-                <i class="fas fa-envelope bg-blue"></i>
+                <i class="fas fa-envelope bg-secondary"></i>
                 <div class="timeline-item">
                   <h3 class="timeline-header no-border"><a href="#">Direktur</a> <?php echo $ket;?></h3>
                 </div>
@@ -73,12 +73,12 @@ if ($r['status']==5){
               <!-- END timeline item -->
               <!-- timeline time label -->
               <div class="time-label">
-                <span class="bg-blue"><?php echo $r['tgl_wadir'] ?></span>
+                <span class="bg-primary"><?php echo $r['tgl_wadir'] ?></span>
               </div>
               <!-- /.timeline-label -->
               <!-- timeline item -->
               <div>
-                <i class="fas fa-envelope bg-blue"></i>
+                <i class="fas fa-envelope bg-secondary"></i>
                 <div class="timeline-item">
                   <h3 class="timeline-header no-border"><a href="#">Wakil Direktur I</a> <?php echo $ket;?></h3>
                 </div>
@@ -86,35 +86,35 @@ if ($r['status']==5){
               <!-- END timeline item -->
               <!-- timeline item -->
               <div class="time-label">
-                <span class="bg-purple"><?php echo $r['tgl_baak'] ?></span>
+                <span class="bg-primary"><?php echo $r['tgl_baak'] ?></span>
               </div>
               <!-- /.timeline-label -->
               <!-- timeline item -->
               <div>
-                <i class="fas fa-envelope bg-blue"></i>
+                <i class="fas fa-envelope bg-secondary"></i>
                 <div class="timeline-item">
                   <h3 class="timeline-header no-border"><a href="#">BAAK</a> <?php echo $ket ;?></h3>
                 </div>
               </div>
               <div class="time-label">
-                <span class="bg-yellow"><?php echo $r['tgl_kajur'] ?></span>
+                <span class="bg-primary"><?php echo $r['tgl_kajur'] ?></span>
               </div>
               <!-- /.timeline-label -->
               <!-- timeline item -->
               <div>
-                <i class="fas fa-envelope bg-blue"></i>
+                <i class="fas fa-envelope bg-secondary"></i>
                 <div class="timeline-item">
                   <h3 class="timeline-header no-border"><a href="#">Kepala Jurusan <?php echo $r['nm_jurusan'];?></a> <?php echo $ket;?></h3>
 
                 </div>
               </div>
               <div class="time-label">
-                <span class="bg-pink"><?php echo $r['tgl_sp'] ?></span>
+                <span class="bg-primary"><?php echo $r['tgl_sp'] ?></span>
               </div>
               <!-- /.timeline-label -->
               <!-- timeline item -->
               <div>
-                <i class="fas fa-envelope bg-blue"></i>
+                <i class="fas fa-envelope bg-secondary"></i>
                 <div class="timeline-item">
                   <h3 class="timeline-header no-border"><a href="#"><?php echo $r['nama_lengkap'];?></a> request an SK</h3>
                 </div>

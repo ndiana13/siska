@@ -144,7 +144,7 @@ if ( isset($_POST["submit1"])) {
                       </div>
                       </td>
                       <td>
-                        <div class="btn-group btn-group">
+                        <div class="btn-group btn-group-sm">
                           <a data-toggle="modal" data-target="#modal-lg<?php echo $d['id_sp']; ?>" class="btn btn-warning"><i class="fas fa-edit"></i> Edit</a>
                           <a href="../baak/lampiran/<?php echo $d['lampiran_sp']; ?>" class="btn btn-secondary"><i class="fas fa-download"></i> File</a>
                           <a href="../baak/sk/<?php echo $d['upload_sk']; ?>" class="btn btn-primary"><i class="fas fa-save"></i> SK</a>

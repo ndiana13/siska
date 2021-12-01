@@ -172,10 +172,10 @@ if ( isset($_POST["submit"]))
                     <td><?php echo $d['nama_lengkap']; ?></td>
                     <td><?php echo $d['nm_jurusan']; ?></td>
                     <td class="text-center">
-                      <div class="btn-group btn-group">
+                      <div class="btn-group btn-group-sm">
                         <a data-toggle="modal" data-target="#myModal<?php echo $d['id_kajur']; ?>" class="btn btn-warning"><i class="fas fa-edit"></i> Edit</a>
                         <a href="hapus_kajur.php?id_kajur=<?php echo $d['id_kajur']; ?>" onclick="return confirm('Anda yakin ingin menghapus item ini ?')" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Hapus</a> 
-                    </div>
+                      </div>
                     </td>
                   </tr>
                   <div class="modal fade" id="myModal<?php echo $d['id_kajur']; ?>">
