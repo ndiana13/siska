@@ -56,10 +56,10 @@ if (isset($_POST['submit'])) {
 <body class="hold-transition login-page">
 <div class="login-box">
   <!-- /.login-logo -->
-  <div class="card card-outline card-secondary">
+  <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="login.php" class="h1"><img src="../AdminLTE/dist/img/pnc.png" style="width: 50px;"></a><br>
-      <h1><b>S I S K A</b></h1>
+      <a href="login.php" class="h1"><img src="../AdminLTE/dist/img/pnc.png" style="width: 100px;"></a><br>
+      <h2><b>Log In SISKA</b></h2>
     </div>
     <div class="card-body">
       <p class="login-box-msg">Sign in untuk masuk SISKA.</p>
@@ -81,9 +81,16 @@ if (isset($_POST['submit'])) {
             </div>
           </div>
         </div>
-        <div class="position-relative">
-            <button type="submit" class="btn btn-primary btn-block" name="submit">Sign In</button>     
+        <div class="row">
+          <div class="col-8">
+            <p class="mb-1">
+              <a href="forgot_password.php">I forgot my password</a>
+            </p>
           </div>
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block" name="submit" >Sign In</button>     
+          </div>
+        </div>
           <!-- /.col -->
         </div>
       </form>

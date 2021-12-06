@@ -217,7 +217,7 @@ if ( isset($_POST["submit1"])) {
                           <td><?php echo $d['perihal']; ?></td>
                           <td><?php echo "<a a href= '#' class='badge bg-". $warna."'>". $status."</a>";?><br><?php echo "<a>" .$tgl. "<a>"?></td>
                           <td>
-                            <div class="btn-group btn-group">
+                            <div class="btn-group btn-group-sm center">
                               <a href="../baak/sk/<?php echo $d['upload_sk']; ?>" class="btn btn-primary"><i class="fas fa-download"></i> Print SK</a>    
                             </div>
                           </td> 

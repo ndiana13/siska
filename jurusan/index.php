@@ -245,22 +245,22 @@ $j_sk = mysqli_num_rows($sk);
                           </div>
                           <div class="col-lg-6">
                             <div class="form-group">
-                              <label for="">Password</label>
-                              <input type="password" class="form-control"  required id="password" name="password" value="<?= $row["password"];?>">
+                             <label for="">Email</label>
+                              <input type="text" class="form-control"  required id="email" name="email" value="<?= $row["email"];?>">
                             </div>
-                          </div>
+                          </div>  
                         </div>
                         <div class="row">
                           <div class="col-lg-6">
                             <div class="form-group">
-                             <label for="">Email</label>
-                              <input type="text" class="form-control"  required id="email" name="email" value="<?= $row["email"];?>">
+                              <label for="">No HP</label>
+                              <input type="text" class="form-control"  required id="no_hp" name="no_hp" value="<?= $row["no_hp"];?>">
                             </div>
                           </div>
                           <div class="col-lg-6">
                             <div class="form-group">
-                              <label for="">No HP</label>
-                              <input type="text" class="form-control"  required id="no_hp" name="no_hp" value="<?= $row["no_hp"];?>">
+                              <label for="">Password</label>
+                              <input type="password" class="form-control"  required id="password" name="password" value="<?= $row["password"];?>">
                             </div>
                           </div>
                         </div>

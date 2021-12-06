@@ -12,7 +12,7 @@ if (!$conn) {
 }
 session_start();
  
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['nip'])) {
     header("Location: index.php");
 }
 
