@@ -116,7 +116,7 @@ if ( isset($_POST["submit1"])) {
                   <tbody>
                   <?php                 
                     $connection = mysqli_connect("localhost",'root',"","siska");
-                    $sql = "SELECT * FROM tb_pengajuan INNER JOIN tb_jurusan ON tb_pengajuan.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_pengajuan.nip = tb_pengguna.nip WHERE tb_pengajuan.nip='$nip' AND status=4 ORDER BY id_sp DESC";
+                    $sql = "SELECT * FROM tb_pengajuan INNER JOIN tb_jurusan ON tb_pengajuan.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_pengajuan.nip = tb_pengguna.nip WHERE tb_pengajuan.nip='$nip' AND no_sk != ' ' ORDER BY id_sp DESC";
                     $result = mysqli_query($connection,$sql);
                     $no= 1;
                     while($d = mysqli_fetch_array($result)) {
@@ -215,7 +215,7 @@ if ( isset($_POST["submit1"])) {
                           <td><?php echo $d['no_sp']; ?><br><hr><?php echo $d['no_sk']; ?></td>
                           <td><?php echo $d['nm_jurusan']; ?><br><?php echo $d['thn_akademik']; ?></td>
                           <td><?php echo $d['perihal']; ?></td>
-                          <td><?php echo "<a a href= '#' class='badge bg-". $warna."'>". $status."</a>";?><br><?php echo "<a>" .$tgl. "<a>"?></td>
+                          <td><?php echo "<a href='timeline.php?id_sp=".$d['id_sp']."' class='badge bg-". $warna."'>". $status."</a>";?><br><?php echo "<a>" .$tgl. "<a>"?></td>
                           <td>
                             <div class="btn-group btn-group-sm center">
                               <a href="../baak/sk/<?php echo $d['upload_sk']; ?>" class="btn btn-primary"><i class="fas fa-download"></i> Print SK</a>    

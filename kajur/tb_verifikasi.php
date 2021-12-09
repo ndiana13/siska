@@ -152,19 +152,18 @@ require 'function.php';
                       <td><?php echo $d['perihal']; ?></td>
                       <td><?php echo "<a  class='badge bg-". $warna."'>". $status."</a>";?><br><?php echo "<a>" .$tgl. "<a>"?></td>
                       <td>
-                      <div class="btn-group btn-group-sm">
-                        <a href="accept_kajur.php?id_sp=<?php echo $d['id_sp']; ?>" class="btn btn-info" onclick="return confirm('Anda yakin ingin menerima pengajuan ini ?')"><i class="fas fa-check"></i> Terima</a>
-                        <a href="decline_kajur.php?id_sp=<?php echo $d['id_sp']; ?>" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menolak pengajuan ini ?')"><i class="fas fa-times"></i>Tolak</a>
-                      </div>
-                    </td>
+                        <div class="btn-group btn-group-sm">
+                          <a href="accept_kajur.php?id_sp=<?php echo $d['id_sp']; ?>" class="btn btn-info" onclick="return confirm('Anda yakin ingin menerima pengajuan ini ?')"><i class="fas fa-check"></i> Terima</a>
+                          <a href="decline_kajur.php?id_sp=<?php echo $d['id_sp']; ?>" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menolak pengajuan ini ?')"><i class="fas fa-times"></i>Tolak</a>
+                        </div>
+                      </td>
                       <td>
                         <div class="btn-group btn-group">
                           <a href="../baak/lampiran/<?php echo $d['lampiran_sp']; ?>" class="btn btn-secondary"><i class="fas fa-download"></i> File</a>
                           <a href="cetak_sp.php?id_sp=<?php echo $d['id_sp']; ?>" class="btn btn-primary"><i class="fas fa-save"></i> SP</a>
                         </div>
-
                       </td>
-                      </tr>
+                    </tr>
                       <?php
                         }
                       ?>

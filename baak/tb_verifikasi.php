@@ -99,25 +99,141 @@ if ( isset($_POST["submit1"])) {
                 $result = mysqli_query($connection,$sql);
                 $no= 1;
                 while($d = mysqli_fetch_array($result)) {
-                  if($d['status']=='1'){
+                   if($d['status']=='1'){
                     $status = 'Diverifikasi Kajur';
                     $warna = 'warning';
-                    $tgl = $d['tgl_kajur'];
+                    $t = substr($d['tgl_kajur'],0,4);
+                    $b = substr($d['tgl_kajur'],5,2);
+                    $h = substr($d['tgl_kajur'],8,2);
+
+                     if($b == "01"){
+                         $nm = "Januari";
+                     } elseif($b == "02"){
+                         $nm = "Februari";
+                     } elseif($b == "03"){
+                         $nm = "Maret";
+                     } elseif($b == "04"){
+                         $nm = "April";
+                     } elseif($b == "05"){
+                         $nm = "Mei";
+                     } elseif($b == "06"){
+                         $nm = "Juni";
+                     } elseif($b == "07"){
+                         $nm = "Juli";
+                     } elseif($b == "08"){
+                         $nm = "Agustus";
+                     } elseif($b == "09"){
+                         $nm = "September";
+                     } elseif($b == "10"){
+                         $nm = "Oktober";
+                     } elseif($b == "11"){
+                         $nm = "November";
+                     } elseif($b == "12"){
+                         $nm = "Desember";
+                     }
+                    $tgl = "<a>". $h." ". $nm. " ". $t. "</a>";
                     }
                     elseif ($d['status']=='2'){
                     $status = 'Diverifikasi BAAK';
                     $warna = 'primary';
-                    $tgl = $d['tgl_baak'];
+                    $t = substr($d['tgl_baak'],0,4);
+                    $b = substr($d['tgl_baak'],5,2);
+                    $h = substr($d['tgl_baak'],8,2);
+
+                     if($b == "01"){
+                         $nm = "Januari";
+                     } elseif($b == "02"){
+                         $nm = "Februari";
+                     } elseif($b == "03"){
+                         $nm = "Maret";
+                     } elseif($b == "04"){
+                         $nm = "April";
+                     } elseif($b == "05"){
+                         $nm = "Mei";
+                     } elseif($b == "06"){
+                         $nm = "Juni";
+                     } elseif($b == "07"){
+                         $nm = "Juli";
+                     } elseif($b == "08"){
+                         $nm = "Agustus";
+                     } elseif($b == "09"){
+                         $nm = "September";
+                     } elseif($b == "10"){
+                         $nm = "Oktober";
+                     } elseif($b == "11"){
+                         $nm = "November";
+                     } elseif($b == "12"){
+                         $nm = "Desember";
+                     }
+                    $tgl = "<a>". $h." ". $nm. " ". $t. "</a>";
                     }
                     elseif ($d['status']=='3'){
                     $status = 'Diverifikasi Wadir';
                     $warna = 'primary';
-                    $tgl = $d['tgl_wadir'];
+                    $t = substr($d['tgl_wadir'],0,4);
+                    $b = substr($d['tgl_wadir'],5,2);
+                    $h = substr($d['tgl_wadir'],8,2);
+
+                     if($b == "01"){
+                         $nm = "Januari";
+                     } elseif($b == "02"){
+                         $nm = "Februari";
+                     } elseif($b == "03"){
+                         $nm = "Maret";
+                     } elseif($b == "04"){
+                         $nm = "April";
+                     } elseif($b == "05"){
+                         $nm = "Mei";
+                     } elseif($b == "06"){
+                         $nm = "Juni";
+                     } elseif($b == "07"){
+                         $nm = "Juli";
+                     } elseif($b == "08"){
+                         $nm = "Agustus";
+                     } elseif($b == "09"){
+                         $nm = "September";
+                     } elseif($b == "10"){
+                         $nm = "Oktober";
+                     } elseif($b == "11"){
+                         $nm = "November";
+                     } elseif($b == "12"){
+                         $nm = "Desember";
+                     }
+                    $tgl = "<a>". $h." ". $nm. " ". $t. "</a>";
                     }
                     elseif ($d['status']=='4'){
                     $status = 'Diverifikasi Direktur';
                     $warna = 'success';
-                    $tgl = $d['tgl_direktur'];
+                    $t = substr($d['tgl_direktur'],0,4);
+                    $b = substr($d['tgl_direktur'],5,2);
+                    $h = substr($d['tgl_direktur'],8,2);
+
+                     if($b == "01"){
+                         $nm = "Januari";
+                     } elseif($b == "02"){
+                         $nm = "Februari";
+                     } elseif($b == "03"){
+                         $nm = "Maret";
+                     } elseif($b == "04"){
+                         $nm = "April";
+                     } elseif($b == "05"){
+                         $nm = "Mei";
+                     } elseif($b == "06"){
+                         $nm = "Juni";
+                     } elseif($b == "07"){
+                         $nm = "Juli";
+                     } elseif($b == "08"){
+                         $nm = "Agustus";
+                     } elseif($b == "09"){
+                         $nm = "September";
+                     } elseif($b == "10"){
+                         $nm = "Oktober";
+                     } elseif($b == "11"){
+                         $nm = "November";
+                     } elseif($b == "12"){
+                         $nm = "Desember";
+                     }
+                    $tgl = "<a>". $h." ". $nm. " ". $t. "</a>";
                     }
                     elseif ($d['status']=='5'){
                     $status = 'Ditolak';
@@ -129,18 +245,48 @@ if ( isset($_POST["submit1"])) {
                         $warna = 'secondary';
                         $tgl= '';
                       }
-                    ?>
+
+                   $t = substr($d['tgl_sp'],0,4);
+                   $b = substr($d['tgl_sp'],5,2);
+                   $h = substr($d['tgl_sp'],8,2);
+
+                   if($b == "01"){
+                       $nm = "Januari";
+                   } elseif($b == "02"){
+                       $nm = "Februari";
+                   } elseif($b == "03"){
+                       $nm = "Maret";
+                   } elseif($b == "04"){
+                       $nm = "April";
+                   } elseif($b == "05"){
+                       $nm = "Mei";
+                   } elseif($b == "06"){
+                       $nm = "Juni";
+                   } elseif($b == "07"){
+                       $nm = "Juli";
+                   } elseif($b == "08"){
+                       $nm = "Agustus";
+                   } elseif($b == "09"){
+                       $nm = "September";
+                   } elseif($b == "10"){
+                       $nm = "Oktober";
+                   } elseif($b == "11"){
+                       $nm = "November";
+                   } elseif($b == "12"){
+                       $nm = "Desember";
+                   }
+                   ?>
                     <tr>
                       <td><?php echo $no++; ?></td>
-                      <td><?php echo $d['nama_lengkap']; ?><br><?php echo $d['tgl_sp']; ?></td>
+                      <td><?php echo $d['nama_lengkap']; ?><br><?php echo  "<a>". $h." ". $nm. " ". $t. "</a>" ?></td>
                       <td><?php echo $d['no_sp']; ?></td>
                       <td><?php echo $d['nm_jurusan']; ?><br><?php echo $d['thn_akademik']; ?></td>
                       <td><?php echo $d['perihal']; ?></td>
                       <td><?php echo "<a href= 'accept_baak.php?id_sp=".$d['id_sp']."' class='badge bg-". $warna."'>". $status."</a>";?><br><?php echo "<a>" .$tgl. "<a>"?>
                       <td>
                       <div class="btn-group btn-group-sm">
-                        <a href="accept_kajur.php?id_sp=<?php echo $d['id_sp']; ?>" class="btn btn-info" onclick="return confirm('Anda yakin ingin menerima pengajuan ini ?')"><i class="fas fa-check"></i> Terima</a>
-                        <a href="decline_kajur.php?id_sp=<?php echo $d['id_sp']; ?>" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menolak pengajuan ini ?')"><i class="fas fa-times"></i> Tolak</a>
+                        <a href="accept_baak.php?id_sp=<?php echo $d['id_sp']; ?>" class="btn btn-info" onclick="return confirm('Anda yakin ingin menerima pengajuan ini ?')"><i class="fas fa-check"></i> Terima</a>
+                        <a href="decline_baak.php?id_sp=<?php echo $d['id_sp']; ?>" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menolak pengajuan ini ?')"><i class="fas fa-times"></i> Tolak</a>
                       </div>
                       </td>
                       <td>

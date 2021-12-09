@@ -1,7 +1,7 @@
 <?php
 require 'function.php';
-$id_sk_mengajar =$_GET["id_sk_mengajar"];
-if (dec_wadir($id_sk_mengajar)>0){
+$id_sp =$_GET["id_sp"];
+if (dec_wadir($id_sp)>0){
 		echo "
 			<script>
 			alert('Data Berhasil di Decline');

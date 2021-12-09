@@ -133,13 +133,6 @@ function ubah($data){
 	return mysqli_affected_rows($conn);
 }
 
-function hapus($id_sk_mengajar) {
-	global $conn;
-	mysqli_query($conn,"DELETE FROM tb_sk_mengajar WHERE id_sk_mengajar = $id_sk_mengajar");
-	
-	return mysqli_affected_rows($conn);
-}
-
 function acc_wadir($id_sp) {
 	global $conn;	
 	$tgl = date('Y-m-d');
