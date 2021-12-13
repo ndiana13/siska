@@ -169,8 +169,13 @@ error_reporting();
 				$kajur 	= "SELECT * FROM tb_kajur INNER JOIN tb_jurusan ON tb_kajur.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_kajur.nip = tb_pengguna.nip WHERE tb_kajur.id_jurusan='$jur'";
 				$sql    = mysqli_query($kon,$kajur);
 				$row    = mysqli_fetch_array($sql);
+				if ($result['status']>='1') {
+					echo "<img src='../AdminLTE/dist/img/".$row['ttd']."' width='120' height='90'>";
+				}
+				else{
+					echo '<br><br><br>';
+				}
 				?>
-				<img src="../AdminLTE/dist/img/<?= $row['ttd'];?>" width="120" height="90">
 			</tr>
 			<tr class="text2">
 				<td width="420"></td>
@@ -258,7 +263,7 @@ error_reporting();
 				$kajur 	= "SELECT * FROM tb_kajur INNER JOIN tb_jurusan ON tb_kajur.id_jurusan = tb_jurusan.id_jurusan INNER JOIN tb_pengguna ON tb_kajur.nip = tb_pengguna.nip WHERE tb_kajur.id_jurusan='$jur'";
 				$sql    = mysqli_query($kon,$kajur);
 				$row    = mysqli_fetch_array($sql);
-				if ($result['status']>='1') {
+				if (($result['status']>=1) AND ($result['status']<=4)) {
 					echo "<img src='../AdminLTE/dist/img/".$row['ttd']."' width='120' height='90'>";
 				}
 				else{

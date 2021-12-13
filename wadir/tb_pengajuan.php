@@ -305,7 +305,7 @@ if ( isset($_POST["submit1"])) {
                         <td><?php echo $d['no_sp']; ?><br><hr><?php echo $d['no_sk']; ?></td>
                         <td><?php echo $d['nm_jurusan']; ?><br><?php echo $d['thn_akademik']; ?></td>
                         <td><?php echo $d['perihal']; ?></td>
-                        <td><?php echo "<a href='../jurusan/timeline.php?id_sp=".$d['id_sp']."' class='badge bg-". $warna."'>". $status."</a>";?><br><?php echo "<a>" .$tgl. "<a>"?>
+                        <td><?php echo "<a href='../jurusan/timeline.php?id_sp=".$d['id_sp']."' class='badge bg-". $warna."'>". $status."</a>";?><br><?php echo "<a>" .$tgl. "<a>"?></td>
                         <td>
                           <div class="btn-group btn-group-sm">
                             <a href="../baak/lampiran/<?php echo $d['lampiran_sp']; ?>" class="btn btn-secondary"><i class="fas fa-download"></i> File</a>

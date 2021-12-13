@@ -57,34 +57,7 @@ if ( isset($_POST["submit1"])) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SISKA | Dashboard</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/fontawesome-free/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Tempusdominus Bootstrap 4 -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <!-- JQVMap -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/jqvmap/jqvmap.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../AdminLTE/dist/css/adminlte.min.css">
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-  <!-- Daterange picker -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/daterangepicker/daterangepicker.css">
-  <!-- summernote -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/summernote/summernote-bs4.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/fontawesome-free/css/all.min.css">
-  <!-- DataTables -->
-  <link rel="stylesheet" href="../AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="../AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-  <link rel="stylesheet" href="../AdminLTE/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../AdminLTE/dist/css/adminlte.min.css">
+
   <!-- Theme style -->
 </head>
 
@@ -92,7 +65,7 @@ if ( isset($_POST["submit1"])) {
 <div class="wrapper">
 
       <?php    include "../AdminLTE/header.php"; ?>
-      <?php    include "../AdminLTE/sidebar2.php"; ?>
+      <?php    include "../AdminLTE/sidebar3.php"; ?>
       
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -124,13 +97,10 @@ if ( isset($_POST["submit1"])) {
                   <tr style="text-align: center;">
                     <th>#</th>
                     <th>
-                      NIP
+                      Nama<br>Tanggal
                     </th>     
                     <th>
-                      No Pengajuan
-                    </th>
-                    <th>
-                      Tanggal
+                      No Pengajuan<br>No SK
                     </th>
                     <th>
                       Jurusan
@@ -140,9 +110,6 @@ if ( isset($_POST["submit1"])) {
                     </th>
                     <th>
                       Status
-                    </th>
-                    <th>
-                      No SK
                     </th>
                     <th>
                       Action
@@ -160,22 +127,138 @@ if ( isset($_POST["submit1"])) {
                   if($d['status']=='1'){
                     $status = 'Diverifikasi Kajur';
                     $warna = 'warning';
-                    $tgl = $d['tgl_kajur'];
+                    $t = substr($d['tgl_kajur'],0,4);
+                    $b = substr($d['tgl_kajur'],5,2);
+                    $h = substr($d['tgl_kajur'],8,2);
+
+                     if($b == "01"){
+                         $nm = "Januari";
+                     } elseif($b == "02"){
+                         $nm = "Februari";
+                     } elseif($b == "03"){
+                         $nm = "Maret";
+                     } elseif($b == "04"){
+                         $nm = "April";
+                     } elseif($b == "05"){
+                         $nm = "Mei";
+                     } elseif($b == "06"){
+                         $nm = "Juni";
+                     } elseif($b == "07"){
+                         $nm = "Juli";
+                     } elseif($b == "08"){
+                         $nm = "Agustus";
+                     } elseif($b == "09"){
+                         $nm = "September";
+                     } elseif($b == "10"){
+                         $nm = "Oktober";
+                     } elseif($b == "11"){
+                         $nm = "November";
+                     } elseif($b == "12"){
+                         $nm = "Desember";
+                     }
+                    $tgl = "<a>". $h." ". $nm. " ". $t. "</a>";
                     }
                     elseif ($d['status']=='2'){
                     $status = 'Diverifikasi BAAK';
                     $warna = 'primary';
-                    $tgl = $d['tgl_baak'];
+                    $t = substr($d['tgl_baak'],0,4);
+                    $b = substr($d['tgl_baak'],5,2);
+                    $h = substr($d['tgl_baak'],8,2);
+
+                     if($b == "01"){
+                         $nm = "Januari";
+                     } elseif($b == "02"){
+                         $nm = "Februari";
+                     } elseif($b == "03"){
+                         $nm = "Maret";
+                     } elseif($b == "04"){
+                         $nm = "April";
+                     } elseif($b == "05"){
+                         $nm = "Mei";
+                     } elseif($b == "06"){
+                         $nm = "Juni";
+                     } elseif($b == "07"){
+                         $nm = "Juli";
+                     } elseif($b == "08"){
+                         $nm = "Agustus";
+                     } elseif($b == "09"){
+                         $nm = "September";
+                     } elseif($b == "10"){
+                         $nm = "Oktober";
+                     } elseif($b == "11"){
+                         $nm = "November";
+                     } elseif($b == "12"){
+                         $nm = "Desember";
+                     }
+                    $tgl = "<a>". $h." ". $nm. " ". $t. "</a>";
                     }
                     elseif ($d['status']=='3'){
                     $status = 'Diverifikasi Wadir';
-                    $warna = 'info';
-                    $tgl = $d['tgl_wadir'];
+                    $warna = 'primary';
+                    $t = substr($d['tgl_wadir'],0,4);
+                    $b = substr($d['tgl_wadir'],5,2);
+                    $h = substr($d['tgl_wadir'],8,2);
+
+                     if($b == "01"){
+                         $nm = "Januari";
+                     } elseif($b == "02"){
+                         $nm = "Februari";
+                     } elseif($b == "03"){
+                         $nm = "Maret";
+                     } elseif($b == "04"){
+                         $nm = "April";
+                     } elseif($b == "05"){
+                         $nm = "Mei";
+                     } elseif($b == "06"){
+                         $nm = "Juni";
+                     } elseif($b == "07"){
+                         $nm = "Juli";
+                     } elseif($b == "08"){
+                         $nm = "Agustus";
+                     } elseif($b == "09"){
+                         $nm = "September";
+                     } elseif($b == "10"){
+                         $nm = "Oktober";
+                     } elseif($b == "11"){
+                         $nm = "November";
+                     } elseif($b == "12"){
+                         $nm = "Desember";
+                     }
+                    $tgl = "<a>". $h." ". $nm. " ". $t. "</a>";
                     }
                     elseif ($d['status']=='4'){
                     $status = 'Diverifikasi Direktur';
                     $warna = 'success';
-                    $tgl = $d['tgl_direktur'];
+                    $t = substr($d['tgl_direktur'],0,4);
+                    $b = substr($d['tgl_direktur'],5,2);
+                    $h = substr($d['tgl_direktur'],8,2);
+
+                     if($b == "01"){
+                         $nm = "Januari";
+                     } elseif($b == "02"){
+                         $nm = "Februari";
+                     } elseif($b == "03"){
+                         $nm = "Maret";
+                     } elseif($b == "04"){
+                         $nm = "April";
+                     } elseif($b == "05"){
+                         $nm = "Mei";
+                     } elseif($b == "06"){
+                         $nm = "Juni";
+                     } elseif($b == "07"){
+                         $nm = "Juli";
+                     } elseif($b == "08"){
+                         $nm = "Agustus";
+                     } elseif($b == "09"){
+                         $nm = "September";
+                     } elseif($b == "10"){
+                         $nm = "Oktober";
+                     } elseif($b == "11"){
+                         $nm = "November";
+                     } elseif($b == "12"){
+                         $nm = "Desember";
+                     }
+                    $tgl = "<a>". $h." ". $nm. " ". $t. "</a>";
                     }
                     elseif ($d['status']=='5'){
                     $status = 'Ditolak';
@@ -187,18 +270,48 @@ if ( isset($_POST["submit1"])) {
                         $warna = 'secondary';
                         $tgl= '';
                       }
+
+                   $t = substr($d['tgl_sp'],0,4);
+                   $b = substr($d['tgl_sp'],5,2);
+                   $h = substr($d['tgl_sp'],8,2);
+
+                   if($b == "01"){
+                       $nm = "Januari";
+                   } elseif($b == "02"){
+                       $nm = "Februari";
+                   } elseif($b == "03"){
+                       $nm = "Maret";
+                   } elseif($b == "04"){
+                       $nm = "April";
+                   } elseif($b == "05"){
+                       $nm = "Mei";
+                   } elseif($b == "06"){
+                       $nm = "Juni";
+                   } elseif($b == "07"){
+                       $nm = "Juli";
+                   } elseif($b == "08"){
+                       $nm = "Agustus";
+                   } elseif($b == "09"){
+                       $nm = "September";
+                   } elseif($b == "10"){
+                       $nm = "Oktober";
+                   } elseif($b == "11"){
+                       $nm = "November";
+                   } elseif($b == "12"){
+                       $nm = "Desember";
+                   }
+
+                      
                     ?>
                     <tr>
                       <td><?php echo $no++; ?></td>
-                      <td><?php echo $d['nip']; ?></td>
-                      <td><?php echo $d['no_sp']; ?></td>
-                      <td><?php echo $d['tgl_sp']; ?></td>
+                      <td><?php echo $d['nama_lengkap']; ?><br><?php echo  "<a>". $h." ". $nm. " ". $t. "</a>" ?></td>
+                      <td><?php echo $d['no_sp']; ?><br><hr><?php echo $d['no_sk']; ?></td>
                       <td><?php echo $d['nm_jurusan']; ?><br><?php echo $d['thn_akademik']; ?></td>
                       <td><?php echo $d['perihal']; ?></td>
-                      <td><?php echo "<a class='badge bg-". $warna."'>". $status."</a>";?><br><?php echo "<a>" .$tgl. "<a>"?>
-                      <td><?php echo $d['no_sk']; ?><br><?php echo $d['lampiran_sp']; ?></td>
+                      <td><?php echo "<a href='../jurusan/timeline.php?id_sp=".$d['id_sp']."' class='badge bg-". $warna."'>". $status."</a>";?><br><?php echo "<a>" .$tgl. "<a>"?></td>
                       <td>
-                        <a class="btn btn-app" href="../baak/lampiran/<?php echo $d['lampiran_sp']; ?>">
+                        <a class="btn btn-app" href="../baak/lampiran/<?php echo $d['lampiran_sp']; ?>" >
                           <i class="fas fa-file-download"></i>Lampiran</a>
                         <a class="btn btn-app" href="../baak/cetak_sk_mengajar.php?id_sp=<?php echo $d['id_sp']; ?>">
                           <i class="fas fa-save"></i>SK</a>
