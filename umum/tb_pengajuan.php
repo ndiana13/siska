@@ -300,7 +300,6 @@ if ( isset($_POST["submit1"])) {
                    } elseif($b == "12"){
                        $nm = "Desember";
                    }
-
                       
                     ?>
                     <tr>
@@ -311,25 +310,24 @@ if ( isset($_POST["submit1"])) {
                       <td><?php echo $d['perihal']; ?></td>
                       <td><?php echo "<a href='../jurusan/timeline.php?id_sp=".$d['id_sp']."' class='badge bg-". $warna."'>". $status."</a>";?><br><?php echo "<a>" .$tgl. "<a>"?></td>
                       <td>
-                        <a class="btn btn-app" href="../baak/lampiran/<?php echo $d['lampiran_sp']; ?>" >
-                          <i class="fas fa-file-download"></i>Lampiran</a>
-                        <a class="btn btn-app" href="../baak/cetak_sk_mengajar.php?id_sp=<?php echo $d['id_sp']; ?>">
-                          <i class="fas fa-save"></i>SK</a>
-                        <a class="btn btn-app" href="../baak/cetak_sp.php?id_sp=<?php echo $d['id_sp']; ?>">
-                          <i class="fas fa-save"></i>SP</a>
-                            </td>
-                          </tr>
-                          <?php
-                            }
-                          ?>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
+                        <div class="btn-group btn-group-sm">
+                            <a href="../baak/lampiran/<?php echo $d['lampiran_sp']; ?>" class="btn btn-secondary"><i class="fas fa-download"></i> File</a>
+                            <a href="cetak_sp.php?id_sp=<?php echo $d['id_sp']; ?>" class="btn btn-primary"><i class="fas fa-save"></i> SP</a>
+                            <a href="../baak/sk/<?php echo $d['upload_sk']; ?>" class="btn btn-success"><i class="fas fa-file-alt"></i> SK</a>    
+                        </div>
+                      </td>
+                    </tr>
+                    <?php
+                      }
+                    ?>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
-        </section>
+        </div>
+       </div>
+    </section>
     <!-- Main content -->
    
           <!-- right col -->
@@ -347,37 +345,6 @@ if ( isset($_POST["submit1"])) {
   </aside>
   <!-- /.control-sidebar -->
 
-<!-- ./wrapper -->
-
-<script src="../AdminLTE/plugins/jquery/jquery.min.js"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="../AdminLTE/plugins/jquery-ui/jquery-ui.min.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button)
-</script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="../AdminLTE/dist/js/pages/dashboard.js"></script>
-<script src="../AdminLTE/plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="../AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- DataTables  & Plugins -->
-<script src="../AdminLTE/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="../AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="../AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="../AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="../AdminLTE/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="../AdminLTE/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="../AdminLTE/plugins/jszip/jszip.min.js"></script>
-<script src="../AdminLTE/plugins/pdfmake/pdfmake.min.js"></script>
-<script src="../AdminLTE/plugins/pdfmake/vfs_fonts.js"></script>
-<script src="../AdminLTE/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="../AdminLTE/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="../AdminLTE/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../AdminLTE/dist/js/adminlte.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../AdminLTE/dist/js/demo.js"></script>
 <script>
   $(function () {
     $("#example1").DataTable({
